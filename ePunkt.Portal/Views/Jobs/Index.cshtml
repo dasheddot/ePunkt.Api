@@ -1,0 +1,19 @@
+﻿@model ePunkt.Portal.Models.Jobs.IndexViewModel
+
+<h2>@Html.Loc("Title")</h2>
+
+<p>@Html.Loc("Introduction", Model.TotalJobsCount.ToString("N0"))</p>
+
+@if (Model.DisplayRegionFilter && !Model.MoveFilterToBottom)
+{
+    <text>
+    @Html.Partial("JobsFilter")
+    </text>
+}
+@Html.Partial("JobsList")
+@if (Model.DisplayRegionFilter && Model.MoveFilterToBottom)
+{
+    <text>
+    @Html.Partial("JobsFilter")
+    </text>
+}

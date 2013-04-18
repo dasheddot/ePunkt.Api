@@ -1,0 +1,5 @@
+﻿@model string
+
+<h1>@Html.Loc("Title", Model)</h1>
+<p>@Html.Loc("Text", Model)</p>
+<p>@Html.ActionLink(Html.Loc("Login_Link").ToString(), "Login", "Account")</p>

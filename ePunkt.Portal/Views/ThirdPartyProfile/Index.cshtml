@@ -1,0 +1,50 @@
+﻿@model ePunkt.Portal.Models.ThirdPartyProfile.IndexViewModel
+
+<h1>@Html.Loc("Title")</h1>
+<p>@Html.Loc("Text")</p>
+<table id="linkThirdPartyProfilesTable">
+    <tr>
+        <td>
+            <img src="~/Content/Xing.png" alt="@Html.Loc("Alt_Xing")" class="@(Model.IsXingLinked ? null : "grayed")" /></td>
+        <td>@if (Model.IsXingLinked)
+            {
+            <a href="@Model.XingUrl">@Html.Loc("Go_to_Xing")</a>
+            }</td>
+        <td>
+            @if (Model.IsXingLinked)
+            {
+                <text>
+                @Html.ActionLink(Html.Loc("Unlink_Xing").ToString(), "UnlinkXing")
+                </text>
+            }
+            else
+            {
+                <text>
+                @Html.ActionLink(Html.Loc("Link_Xing").ToString(), "Xing")
+                </text>
+            }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="~/Content/LinkedIn.png" alt="@Html.Loc("Alt_LinkedIn")" class="@(Model.IsLinkedInLinked ? null : "grayed")" /></td>
+        <td>@if (Model.IsLinkedInLinked)
+            {
+            <a href="@Model.LinkedInUrl">@Html.Loc("Go_to_LinkedIn")</a>
+            }</td>
+        <td>
+            @if (Model.IsLinkedInLinked)
+            {
+                <text>
+                @Html.ActionLink(Html.Loc("Unlink_LinkedIn").ToString(), "UnlinkLinkedIn")
+                </text>
+            }
+            else
+            {
+                <text>
+                @Html.ActionLink(Html.Loc("Link_LinkedIn").ToString(), "LinkedIn")
+                </text>
+            }
+        </td>
+    </tr>
+</table>

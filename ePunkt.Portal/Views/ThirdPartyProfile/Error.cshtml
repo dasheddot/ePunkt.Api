@@ -1,0 +1,5 @@
+﻿@model ePunkt.Portal.Models.ThirdPartyProfile.ErrorViewModel
+
+<h1>@Html.Loc("Title", Model.Reason)</h1>
+<p>@Html.Loc("Text", Model.Reason)</p>
+<p>@Html.ActionLink(Html.Loc("Login_Link").ToString(), "Login", "Account")</p>

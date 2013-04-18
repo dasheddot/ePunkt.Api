@@ -1,0 +1,177 @@
+﻿@using ePunkt.Api
+@using ePunkt.Utilities
+@model ePunkt.Portal.Models.Jobs.IndexViewModel
+@helper RenderRegionRecursive(IEnumerable<Region> regions)
+{
+    foreach (var region in regions)
+    {
+    <div>
+        <input type="checkbox" name="@region.Name" id="@region.Name" value="true" checked="@(Model.FilteredRegions.Contains(region.Name) ? "checked" : null)" /><label for="@region.Name">@region.Name</label>
+        <div style="margin-left: 10px;">
+            @RenderRegionRecursive(region.Regions)
+        </div>
+    </div>
+    }
+}
+
+@using (Html.SwitchLocSource("~/Views/Jobs/JobsFilter.cshtml"))
+{
+    <text>
+
+    @{
+    var regionsText = Model.FilteredRegions.Aggregate("", (seed, current) => seed + ", " + current).Trim(',', ' ');
+    if (regionsText.IsNoE())
+    {
+        regionsText = Html.Loc("All_Regions").ToString();
+    }
+
+    var jobProfilesText = Model.FilteredJobProfiles.Aggregate("", (seed, current) => seed + ", " + current).Trim(',', ' ');
+    if (jobProfilesText.IsNoE())
+    {
+        jobProfilesText = Html.Loc("All_JobProfiles").ToString();
+    }
+    }
+
+    @using (Html.BeginForm())
+    {
+        <table style="width: 100%;" class="jobsFilter">
+            @if (Model.DisplayRegionFilter)
+            {
+                <tr>
+                    <th>@Html.Loc("Regions")</th>
+                    <td id="regionsText">@regionsText</td>
+                    <td>
+                        <input type="button" value="@Html.Loc("Edit")" id="regionsButton" /></td>
+                </tr>
+            }
+            @if (Model.DisplayJobProfileFilter)
+            {
+                <tr>
+                    <th>@Html.Loc("JobProfiles")</th>
+                    <td id="jobProfilesText">@jobProfilesText</td>
+                    <td>
+                        <input type="button" value="@Html.Loc("Edit")" id="jobProfilesButton" /></td>
+                </tr>
+            }
+            <tr>
+                <th>
+                    @Html.Loc("SearchPhrase")
+                </th>
+                <td>
+                    <input type="text" placeholder="@Html.Loc("Filter_Hint")" name="filter" value="@Model.FilteredText" />
+                </td>
+                <td>
+                    <input type="submit" value="@Html.Loc("Search")" id="submitJobsFilter" /></td>
+            </tr>
+        </table>
+
+        <div id="regionsDialog" style="display: none;" title="@Html.Loc("Regions_DialogTitle")">
+            <p>@Html.Loc("Regions_DialogText")</p>
+
+            <div style="height: 300px; overflow: auto;">
+                @RenderRegionRecursive(Model.AvailableRegions)
+            </div>
+        </div>
+            
+        <div id="jobProfilesDialog" style="display: none;" title="@Html.Loc("JobProfiles_DialogTitle")">
+            <p>@Html.Loc("JobProfiles_DialogText")</p>
+
+            <div style="height: 300px; overflow: auto;">
+                @foreach (var jobProfile in Model.AvailableJobProfiles)
+                {
+                    <div>
+                        <input type="checkbox" name="@jobProfile" id="@jobProfile" value="true" checked="@(Model.FilteredJobProfiles.Contains(jobProfile) ? "checked" : null)" /><label for="@jobProfile">@jobProfile</label>
+                    </div>
+                }
+            </div>
+        </div>
+        
+        
+        <script>
+            $(document).ready(function () {
+                var form = $(".jobsFilter").closest("form");
+
+                function showRegionsDialog() {
+                    $("#regionsDialog").dialog({
+                        modal: true,
+                        width: 500,
+                        close: function () {
+                            $(this).hide().appendTo(form).dialog("destroy");
+                        },
+                        buttons: [{
+                            text: "@Html.Loc("Remove_Filter")",
+                            click: function () {
+                                $(this).find("input[type=checkbox]").attr("checked", false);
+                                $(this).dialog("close");
+                                form.submit();
+                            }
+                        },
+                            {
+                                text: "@Html.Loc("Search")",
+                                click: function () {
+                                    $(this).dialog("close");
+                                    form.submit();
+                                }
+                            }]
+                    });
+                }
+
+                function showJobProfilesDialog() {
+                    $("#jobProfilesDialog").dialog({
+                        modal: true,
+                        width: 500,
+                        close: function () {
+                            $(this).hide().appendTo(form).dialog("destroy");
+                        },
+                        buttons: [{
+                            text: "@Html.Loc("Remove_Filter")",
+                            click: function () {
+                                $(this).find("input[type=checkbox]").attr("checked", false);
+                                $(this).dialog("close");
+                                form.submit();
+                            }
+                        },
+                            {
+                                text: "@Html.Loc("Search")",
+                                click: function () {
+                                    $(this).dialog("close");
+                                    form.submit();
+                                }
+                            }]
+                    });
+                }
+
+                $("#regionsButton").click(function () {
+                    showRegionsDialog();
+                });
+                $("#regionsText").click(function () {
+                    showRegionsDialog();
+                });
+
+                $("#jobProfilesButton").click(function () {
+                    showJobProfilesDialog();
+                });
+                $("#jobProfilesText").click(function () {
+                    showJobProfilesDialog();
+                });
+
+                $("#regionsDialog input[type=checkbox]").change(function() {
+                    var isChecked = $(this).is(":checked");
+
+                    //select all children
+                    var childDiv = $(this).next().next();
+                    var childCheckboxes = childDiv.find("input[type=checkbox]");
+                    childCheckboxes.prop("checked", isChecked);
+
+                    //de-select parent
+                    if (!isChecked) {
+                        var parentCheckbox = $(this).parent().parent().prev().prev();
+                        parentCheckbox.prop("checked", false);
+                    }
+                });
+            });
+        </script> 
+    }
+
+    </text>
+}

@@ -1,0 +1,43 @@
+﻿@Html.ValidationSummary()
+
+
+<div id="loginWithThirdPartyAccount">
+    <h1>@Html.Loc("ThirdPartyAccount_Title")</h1>
+    <ul>
+        <li><a href="@Url.Action("Xing", "ThirdPartyProfile")">
+            <img src="~/Content/Xing.png" alt="@Html.Loc("Alt_Xing")" title="@Html.Loc("Alt_Xing")" id="xing"/></a></li>
+        <li><a href="@Url.Action("LinkedIn", "ThirdPartyProfile")">
+            <img src="~/Content/LinkedIn.png" alt="@Html.Loc("Alt_LinkedIn")" title="@Html.Loc("Alt_LinkedIn")" id="linkedIn"/></a></li>
+    </ul>
+    <p>
+        @Html.Loc("ThirdPartyAccount_Text")
+    </p>
+</div>
+
+<div id="loginWithCredentials">
+    <h1>@Html.Loc("Credentials_Title")</h1>
+
+    @using (Html.BeginForm())
+    {
+        <table>
+            <tr>
+                <td>@Html.Loc("Email_Label")</td>
+                <td>@Html.TextBox("username", null, new { placeholder = Html.Loc("Email_Placeholder").ToString(), type = "Email" })</td>
+            </tr>
+            <tr>
+                <td>@Html.Loc("Password_Label")</td>
+                <td>@Html.Password("password")</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="@Html.Loc("LoginButton_Label")" />
+                </td>
+            </tr>
+        </table>
+    }
+    <p>@Html.Loc("Credentials_Text")</p>
+    <p>@Html.Loc("CreateProfile_Link")</p>
+    <p>@Html.Loc("ForgotPassword_Link")</p>
+</div>
+

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Create a  settings file in the root a custom folder to configure the necessary API settings -->
+
+<appSettings>
+  <add key="MandatorId" value="YOUR_MANDATOR_ID" />
+  <add key="ApiEndpoint" value="YOUR_API_ENDPOINT" />
+  <add key="ApiKey" value="YOUR_API_KEY" />  
+</appSettings>

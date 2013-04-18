@@ -1,0 +1,9 @@
+del *.nupkg
+
+.nuget\NuGet.exe SetApiKey <Your API Key here>
+
+call package.cmd
+
+for %%i in (*.nupkg) do (
+	.nuget\NuGet.exe push %%i
+)

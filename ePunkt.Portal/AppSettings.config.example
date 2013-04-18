@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!-- the actual AppSettings.config file is not published to the Repository, because it could contain real API keys that shouldn't be published -->
+
+<appSettings>
+  <add key="webpages:Version" value="2.0.0.0" />
+  <add key="webpages:Enabled" value="false" />
+  <add key="PreserveLoginUrl" value="true" />
+  <add key="ClientValidationEnabled" value="true" />
+  <add key="UnobtrusiveJavaScriptEnabled" value="true" />
+
+  <!-- These settings specify the corresponding custom folder for each host/domain -->
+  <add key="CustomFolder_localhost" value="CUSTOM_FOLDER_FOR_CUSTOMIZATIONS_FOR_HOST_localhost" />
+  <add key="CustomFolder_jobs.epunkt.net" value="CUSTOM_FOLDER_FOR_CUSTOMIZATIONS_FOR_HOST_jobs.epunkt.net" />
+
+  <!-- These are only the default values and can be overwritten by specifying a Settings.config file in a custom folder -->
+  <add key="MandatorId" value="YOUR_MANDATOR_ID" />
+  <add key="ApiEndpoint" value="YOUR_API_ENDPOINT" />
+  <add key="ApiKey" value="YOUR_API_KEY" />
+</appSettings>

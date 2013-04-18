@@ -1,0 +1,16 @@
+﻿@using (Html.SwitchLocSource("~/Views/Shared/ContainerHeader.cshtml"))
+{
+    <nav>
+        <ul>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li>@Html.ActionLink(@Html.Loc("ThirdPartyProfiles_Link").ToString(), "Index", "ThirdPartyProfile")</li>
+                <li>@Html.ActionLink(@Html.Loc("Logoff_Link").ToString(), "Logoff", "Account")</li>
+            }
+            else
+            {
+                <li>@Html.ActionLink(@Html.Loc("Login_Link").ToString(), "Login", "Account")</li>
+            }
+        </ul>
+    </nav>
+}
