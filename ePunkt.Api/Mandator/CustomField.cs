@@ -1,15 +1,9 @@
-﻿using System;
-
+﻿
 namespace ePunkt.Api
 {
-    public class CustomField
+    public class CustomField : CustomFieldCreateUpdateParameter
     {
         public string Name { get; set; }
-        public string InternalName { get; set; }
-        public string StringValue { get; set; }
-        public bool? BoolValue { get; set; }
-        public decimal? NumberValue { get; set; }
-        public DateTime? DateValue { get; set; }
         public CustomFieldType Type { get; set; }
         public bool IsPublic { get; set; }
     }

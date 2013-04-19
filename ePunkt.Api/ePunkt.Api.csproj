@@ -46,10 +46,12 @@
     <Compile Include="Applicant\Applicant.cs" />
     <Compile Include="Applicant\ApplicantCreateParameter.cs" />
     <Compile Include="Applicant\ApplicantUpdateParameter.cs" />
-    <Compile Include="CustomField.cs" />
+    <Compile Include="Mandator\CustomField.cs" />
     <Compile Include="Job\JobSalaryImageResponse.cs" />
     <Compile Include="Job\Job.cs" />
     <Compile Include="Job\JobsResponse.cs" />
+    <Compile Include="Mandator\CustomFieldCreateUpdateParameter.cs" />
+    <Compile Include="Mandator\DocumentContent.cs" />
     <Compile Include="Mandator\Mandator.cs" />
     <Compile Include="Mandator\PortalSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

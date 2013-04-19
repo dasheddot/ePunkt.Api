@@ -26,7 +26,7 @@ namespace ePunkt.Api
 
         public IEnumerable<string> JobProfiles { get; set; }
         public IEnumerable<string> Regions { get; set; }
-        public IEnumerable<CustomField> CustomFields { get; set; }
+        public IEnumerable<JobCustomField> CustomFields { get; set; }
         public IEnumerable<string> OccupationTypes { get; set; }
         public IEnumerable<string> CareerLevels { get; set; }
         public IEnumerable<string> Tags { get; set; }
@@ -45,4 +45,6 @@ namespace ePunkt.Api
         public string Block4 { get; set; }
         public int? QuestionnaireId { get; set; }
     }
+
+    public class JobCustomField : CustomField { }
 }
