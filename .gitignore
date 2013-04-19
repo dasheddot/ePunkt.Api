@@ -2,6 +2,7 @@
 package & push.cmd
 AppSettings.config
 ePunkt.Portal/Custom/**/*
+PublishProfiles
 
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
 [Bb]in/

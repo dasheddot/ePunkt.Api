@@ -261,8 +261,9 @@
     <Content Include="Custom\_ViewStart.cshtml" />
     <None Include="AppSettings.config" />
     <None Include="AppSettings.config.example" />
-    <Content Include="Custom\Dev\Settings.config" />
+    <None Include="Custom\Dev\Settings.config" />
     <None Include="Custom\Settings.config.example" />
+    <None Include="Properties\PublishProfiles\FileSystem.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
