@@ -259,7 +259,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Custom\Web.config" />
     <Content Include="Custom\_ViewStart.cshtml" />
-    <Content Include="AppSettings.config" />
+    <None Include="AppSettings.config" />
     <None Include="AppSettings.config.example" />
     <Content Include="Custom\Dev\Settings.config" />
     <None Include="Custom\Settings.config.example" />
