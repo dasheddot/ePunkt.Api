@@ -1,6 +1,8 @@
 ﻿using ePunkt.Api;
 using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
+using ePunkt.Api.Models;
+using ePunkt.Api.Responses;
 using ePunkt.Portal.Models.Jobs;
 using ePunkt.Utilities;
 using System;

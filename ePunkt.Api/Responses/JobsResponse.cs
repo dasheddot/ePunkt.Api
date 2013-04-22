@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using ePunkt.Api.Models;
 
-namespace ePunkt.Api
+namespace ePunkt.Api.Responses
 {
     public class JobsResponse
     {

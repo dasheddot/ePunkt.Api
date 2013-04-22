@@ -302,6 +302,10 @@
     <Content Include="Views\ThirdPartyProfile\Index.cshtml" />
     <Content Include="Views\ThirdPartyProfile\Error.cshtml" />
     <Content Include="Views\ThirdPartyProfile\EmailAlreadyInUse.cshtml" />
+    <Content Include="Views\Account\RetreivePasswordStep1.cshtml" />
+    <Content Include="Views\Account\RetreivePasswordStep1Success.cshtml" />
+    <Content Include="Views\Account\RetreivePasswordStep2.cshtml" />
+    <Content Include="Views\Account\RetreivePasswordStep2Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -348,6 +352,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\App_LocalResources\Login.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\RetreivePasswordStep1.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\RetreivePasswordStep1Success.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\RetreivePasswordStep2.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\RetreivePasswordStep2Success.cshtml.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

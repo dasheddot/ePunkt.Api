@@ -1,9 +1,9 @@
-﻿using ePunkt.Api;
-using ePunkt.Api.Client;
+﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
+using ePunkt.Api.Models;
+using ePunkt.Api.Responses;
 using ePunkt.Utilities;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ePunkt.Portal

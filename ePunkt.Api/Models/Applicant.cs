@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using ePunkt.Api.Parameters;
 
-namespace ePunkt.Api
+namespace ePunkt.Api.Models
 {
     public class Applicant : ApplicantUpdateParameter
     {

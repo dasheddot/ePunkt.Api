@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ePunkt.Api
+namespace ePunkt.Api.Parameters
 {
     public class ApplicantUpdateParameter : ApplicantCreateParameter
     {

@@ -1,12 +1,12 @@
-﻿using System.Linq;
-using ePunkt.Api;
+﻿using ePunkt.Api.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ePunkt.Portal.Models.Jobs
 {
     public class IndexViewModel
     {
-        public void BuildJobs(IEnumerable<Api.Job> jobs)
+        public void BuildJobs(IEnumerable<Api.Models.Job> jobs)
         {
             var result = jobs.Select(job => new Job
                 {

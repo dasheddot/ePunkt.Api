@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ePunkt.Api.Models;
 
 namespace ePunkt.Api.Client
 {

@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System.Net.Http.Formatting;
+using ePunkt.Api.Parameters;
 
 namespace ePunkt.Api.Client.Requests
 {

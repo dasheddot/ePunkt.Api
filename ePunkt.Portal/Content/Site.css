@@ -2,33 +2,33 @@
     body input[type=checkbox] { margin-right: 3px; vertical-align: bottom; margin-bottom: 2px; }
     body > #container { width: 940px; margin-left: auto; margin-right: auto; }
 
-    body > #container > nav { height: 50px; }
-        body > #container > nav ul { float: right; list-style-type: none; }
-            body > #container > nav ul li { margin-right: 5px; padding-right: 5px; border-right: 1px solid silver; float: left; }
-                body > #container > nav ul li:last-child { border-right: 0; padding-right: 0; margin-right: 0; }
+        body > #container > nav { height: 50px; }
+            body > #container > nav ul { float: right; list-style-type: none; }
+                body > #container > nav ul li { margin-right: 5px; padding-right: 5px; border-right: 1px solid silver; float: left; }
+                    body > #container > nav ul li:last-child { border-right: 0; padding-right: 0; margin-right: 0; }
 
-            body > #container > #content .jobsList .jobTitle { font-weight: bold; }
-            body > #container > #content .jobsFilter { margin-bottom: 20px; }
-                body > #container > #content .jobsFilter th { text-align: left; width: 125px; }
-                body > #container > #content .jobsFilter td input[type=text] { width: 200px; }
-                body > #container > #content .jobsFilter td#jobProfilesText { cursor: pointer; }
-                body > #container > #content .jobsFilter td#regionsText { cursor: pointer; }
-                body > #container > #content .jobsFilter td input[type=submit] { float: right; width: 100px; }
-                body > #container > #content .jobsFilter td input[type=button] { float: right; width: 70px; }
-            body > #container > #content #backToJobsLink { display: block; margin-top: 10px; text-align: right; }
+        body > #container > #content .jobsList .jobTitle { font-weight: bold; }
+        body > #container > #content .jobsFilter { margin-bottom: 20px; }
+            body > #container > #content .jobsFilter th { text-align: left; width: 125px; }
+            body > #container > #content .jobsFilter td input[type=text] { width: 200px; }
+            body > #container > #content .jobsFilter td#jobProfilesText { cursor: pointer; }
+            body > #container > #content .jobsFilter td#regionsText { cursor: pointer; }
+            body > #container > #content .jobsFilter td input[type=submit] { float: right; width: 100px; }
+            body > #container > #content .jobsFilter td input[type=button] { float: right; width: 70px; }
+        body > #container > #content #backToJobsLink { display: block; margin-top: 10px; text-align: right; }
 
-            body > #container > #content #loginWithThirdPartyAccount { width: 45%; float: left; }
-                body > #container > #content #loginWithThirdPartyAccount ul { list-style-type: none;padding: 0; }
-                    body > #container > #content #loginWithThirdPartyAccount ul li { float: left;width: 50%; height: 100px; }
+        body > #container > #content #loginWithThirdPartyAccount { width: 45%; float: left; }
+            body > #container > #content #loginWithThirdPartyAccount ul { list-style-type: none; padding: 0; }
+                body > #container > #content #loginWithThirdPartyAccount ul li { float: left; width: 50%; height: 100px; }
                     body > #container > #content #loginWithThirdPartyAccount ul li #linkedIn { margin-top: 17px; }
-            body > #container > #content #loginWithCredentials { width: 45%; float: right; }
-                        body > #container > #content #loginWithCredentials table tr td:first-child { padding-right: 5px; }
+        body > #container > #content #loginWithCredentials { width: 45%; float: right; }
+            body > #container > #content #loginWithCredentials table tr td:first-child { padding-right: 5px; }
 
-            body > #container > #content #linkThirdPartyProfilesTable { width: 100%; }
-                body > #container > #content #linkThirdPartyProfilesTable tr td:first-child { width: 170px; padding: 30px 0; }
-                body > #container > #content #linkThirdPartyProfilesTable tr td:last-child { text-align: right; }
+        body > #container > #content #linkThirdPartyProfilesTable { width: 100%; }
+            body > #container > #content #linkThirdPartyProfilesTable tr td:first-child { width: 170px; padding: 30px 0; }
+            body > #container > #content #linkThirdPartyProfilesTable tr td:last-child { text-align: right; }
 
-
+        body > #container > #content #retreivePasswordTable td { padding-left: 3px; }
 
 
 img.grayed { opacity: 0.4; filter: grayscale(100%); -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -o-filter: grayscale(100%); -ms-filter: grayscale(100%); }

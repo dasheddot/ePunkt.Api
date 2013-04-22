@@ -1,5 +1,5 @@
 ﻿
-namespace ePunkt.Api
+namespace ePunkt.Api.Parameters
 {
     public class ApplicantCreateParameter
     {

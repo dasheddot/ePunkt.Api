@@ -1,14 +1,14 @@
-﻿using System;
+﻿using ePunkt.Api.Client;
+using ePunkt.Api.Client.Requests;
+using ePunkt.Api.Models;
+using ePunkt.Api.Parameters;
+using ePunkt.SocialConnector;
+using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
-using ePunkt.Api;
-using ePunkt.Api.Client;
-using ePunkt.Api.Client.Requests;
-using ePunkt.SocialConnector;
 using System.Net.Http;
 using System.Threading.Tasks;
-using ePunkt.Utilities;
 
 namespace ePunkt.Portal
 {

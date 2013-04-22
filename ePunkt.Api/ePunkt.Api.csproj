@@ -41,24 +41,27 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiKey.cs" />
-    <Compile Include="ApiToken.cs" />
-    <Compile Include="Applicant\Applicant.cs" />
-    <Compile Include="Applicant\ApplicantCreateParameter.cs" />
-    <Compile Include="Applicant\ApplicantUpdateParameter.cs" />
-    <Compile Include="Mandator\CustomField.cs" />
-    <Compile Include="Job\JobSalaryImageResponse.cs" />
-    <Compile Include="Job\Job.cs" />
-    <Compile Include="Job\JobsResponse.cs" />
-    <Compile Include="Mandator\CustomFieldCreateUpdateParameter.cs" />
-    <Compile Include="Mandator\DocumentContent.cs" />
-    <Compile Include="Mandator\Mandator.cs" />
-    <Compile Include="Mandator\PortalSettings.cs" />
+    <Compile Include="Parameters\SetPasswordAfterRetreiveParameter.cs" />
+    <Compile Include="Models\ApiKey.cs" />
+    <Compile Include="Models\ApiToken.cs" />
+    <Compile Include="Models\Applicant.cs" />
+    <Compile Include="Parameters\ApplicantCreateParameter.cs" />
+    <Compile Include="Responses\ApplicantSetPasswordResponse.cs" />
+    <Compile Include="Parameters\ApplicantUpdateParameter.cs" />
+    <Compile Include="Models\CustomField.cs" />
+    <Compile Include="Responses\JobSalaryImageResponse.cs" />
+    <Compile Include="Models\Job.cs" />
+    <Compile Include="Responses\JobsResponse.cs" />
+    <Compile Include="Parameters\CustomFieldCreateUpdateParameter.cs" />
+    <Compile Include="Models\DocumentContent.cs" />
+    <Compile Include="Models\Mandator.cs" />
+    <Compile Include="Models\PortalSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

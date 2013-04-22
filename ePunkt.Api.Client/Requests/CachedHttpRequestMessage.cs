@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace ePunkt.Api.Client
+namespace ePunkt.Api.Client.Requests
 {
     public abstract class CachedHttpRequestMessage : HttpRequestMessage
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ePunkt.Api
+namespace ePunkt.Api.Models
 {
     public class Job
     {

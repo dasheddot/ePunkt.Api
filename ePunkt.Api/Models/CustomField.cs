@@ -1,5 +1,6 @@
-﻿
-namespace ePunkt.Api
+﻿using ePunkt.Api.Parameters;
+
+namespace ePunkt.Api.Models
 {
     public class CustomField : CustomFieldCreateUpdateParameter
     {

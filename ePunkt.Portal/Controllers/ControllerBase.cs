@@ -1,9 +1,8 @@
-﻿using System;
-using JetBrains.Annotations;
-using ePunkt.Api;
-using ePunkt.Api.Client;
+﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
+using ePunkt.Api.Models;
 using ePunkt.Utilities;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;

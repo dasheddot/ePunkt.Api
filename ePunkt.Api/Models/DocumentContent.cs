@@ -1,5 +1,4 @@
-﻿
-namespace ePunkt.Api
+﻿namespace ePunkt.Api.Models
 {
     public class DocumentContent
     {

@@ -4,6 +4,9 @@ using System.Net.Http;
 using System.Runtime.Caching;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using Newtonsoft.Json;
+using ePunkt.Api.Client.Requests;
+using ePunkt.Api.Models;
 
 namespace ePunkt.Api.Client
 {
@@ -30,7 +33,17 @@ namespace ePunkt.Api.Client
             }
             var request = await SendAsync(requestMessage);
             LastReceivedContent = await request.Content.ReadAsStringAsync();
-            var result = await request.Content.ReadAsAsync<T>();
+
+            T result;
+            try
+            {
+                result = await request.Content.ReadAsAsync<T>();
+            }
+            catch (JsonReaderException ex)
+            {
+                throw new ApplicationException("Unable to parse result: " + ex.Message + ". The result was: " + request.Content.ReadAsStringAsync().Result);
+            }
+
             if (runTimer)
             {
                 _watch.Stop();

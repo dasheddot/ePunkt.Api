@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ePunkt.Api
+namespace ePunkt.Api.Models
 {
     public class ApiToken
     {

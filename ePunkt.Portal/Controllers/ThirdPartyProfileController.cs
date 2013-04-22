@@ -2,6 +2,7 @@
 using ePunkt.Api;
 using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
+using ePunkt.Api.Models;
 using ePunkt.Portal.Models.ThirdPartyProfile;
 using ePunkt.SocialConnector;
 using ePunkt.SocialConnector.Linkedin;
@@ -69,14 +70,14 @@ namespace ePunkt.Portal.Controllers
         [Authorize]
         public async Task<ActionResult> UnlinkXing()
         {
-            var applicant = await ApiClient.SendAndReadAsync<Applicant>(new UnlinkXingRequest(GetApplicantId()));
+            await ApiClient.SendAndReadAsync<Applicant>(new UnlinkXingRequest(GetApplicantId()));
             return RedirectToAction("Index");
         }
 
         [Authorize]
         public async Task<ActionResult> UnlinkLinkedIn()
         {
-            var applicant = await ApiClient.SendAndReadAsync<Applicant>(new UnlinkLinkedInRequest(GetApplicantId()));
+            await ApiClient.SendAndReadAsync<Applicant>(new UnlinkLinkedInRequest(GetApplicantId()));
             return RedirectToAction("Index");
         }
 

@@ -2,12 +2,14 @@
 using ePunkt.Api.Client.Requests;
 using System;
 using System.Linq;
+using ePunkt.Api.Models;
+using ePunkt.Api.Responses;
 
 namespace ePunkt.Api.CommandLineClient
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        private static void Main()
         {
             var apiKey = new ApiKey
                 {

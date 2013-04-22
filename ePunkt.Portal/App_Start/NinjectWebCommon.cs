@@ -1,5 +1,6 @@
 using ePunkt.Api;
 using ePunkt.Api.Client;
+using ePunkt.Api.Models;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(ePunkt.Portal.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(ePunkt.Portal.NinjectWebCommon), "Stop")]
@@ -21,8 +22,8 @@ namespace ePunkt.Portal
         /// </summary>
         public static void Start()
         {
-            DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
-            DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
+            DynamicModuleUtility.RegisterModule(typeof (OnePerRequestHttpModule));
+            DynamicModuleUtility.RegisterModule(typeof (NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
 
@@ -82,12 +83,11 @@ namespace ePunkt.Portal
             if (customSettings == null)
                 throw new Exception("No custom settings found.");
             return new ApiKey
-            {
-                ClientInfo = "ePunkt.Portal v" + typeof(NinjectWebCommon).Assembly.GetName().Version,
-                Key = customSettings.ApiKey,
-                MandatorId = customSettings.MandatorId
-            };
-
+                {
+                    ClientInfo = "ePunkt.Portal v" + typeof (NinjectWebCommon).Assembly.GetName().Version,
+                    Key = customSettings.ApiKey,
+                    MandatorId = customSettings.MandatorId
+                };
         }
     }
 }
