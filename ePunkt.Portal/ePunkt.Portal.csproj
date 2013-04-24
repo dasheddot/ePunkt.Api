@@ -302,10 +302,12 @@
     <Content Include="Views\ThirdPartyProfile\Index.cshtml" />
     <Content Include="Views\ThirdPartyProfile\Error.cshtml" />
     <Content Include="Views\ThirdPartyProfile\EmailAlreadyInUse.cshtml" />
-    <Content Include="Views\Account\RetreivePasswordStep1.cshtml" />
-    <Content Include="Views\Account\RetreivePasswordStep1Success.cshtml" />
-    <Content Include="Views\Account\RetreivePasswordStep2.cshtml" />
-    <Content Include="Views\Account\RetreivePasswordStep2Success.cshtml" />
+    <Content Include="Views\Account\RequestPasswordStep1.cshtml" />
+    <Content Include="Views\Account\RequestPasswordStep1Success.cshtml" />
+    <Content Include="Views\Account\RequestPasswordStep2.cshtml" />
+    <Content Include="Views\Account\RequestPasswordStep2Success.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -354,16 +356,22 @@
     <Content Include="Views\Account\App_LocalResources\Login.cshtml.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Account\App_LocalResources\RetreivePasswordStep1.cshtml.resx" />
+    <Content Include="Views\Account\App_LocalResources\RequestPasswordStep1.cshtml.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Account\App_LocalResources\RetreivePasswordStep1Success.cshtml.resx" />
+    <Content Include="Views\Account\App_LocalResources\RequestPasswordStep1Success.cshtml.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Account\App_LocalResources\RetreivePasswordStep2.cshtml.resx" />
+    <Content Include="Views\Account\App_LocalResources\RequestPasswordStep2.cshtml.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Account\App_LocalResources\RetreivePasswordStep2Success.cshtml.resx" />
+    <Content Include="Views\Account\App_LocalResources\RequestPasswordStep2Success.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\ChangePassword.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\ChangePasswordSuccess.cshtml.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

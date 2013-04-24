@@ -41,7 +41,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parameters\SetPasswordAfterRetreiveParameter.cs" />
+    <Compile Include="Parameters\SetPasswordParameter.cs" />
+    <Compile Include="Parameters\SetPasswordAfterRequestParameter.cs" />
     <Compile Include="Models\ApiKey.cs" />
     <Compile Include="Models\ApiToken.cs" />
     <Compile Include="Models\Applicant.cs" />

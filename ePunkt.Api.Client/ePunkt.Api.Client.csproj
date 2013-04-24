@@ -59,8 +59,9 @@
     <Compile Include="AuthorizationHandler.cs" />
     <Compile Include="PostJsonHttpRequestMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\Account\ConfirmRequestPasswordRequest.cs" />
     <Compile Include="Requests\Account\SetPasswordRequest.cs" />
-    <Compile Include="Requests\Account\RetreivePasswordRequest.cs" />
+    <Compile Include="Requests\Account\RequestPasswordRequest.cs" />
     <Compile Include="Requests\Applicants\ApplicantRequest.cs" />
     <Compile Include="Requests\Applicants\ApplicantsRequest.cs" />
     <Compile Include="Requests\ThirdPartyProfile\UnlinkLinkedInRequest.cs" />

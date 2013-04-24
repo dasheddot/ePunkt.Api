@@ -1,5 +1,4 @@
-﻿using ePunkt.Api;
-using ePunkt.Api.Client;
+﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
 using ePunkt.Api.Models;
 using ePunkt.Api.Parameters;
@@ -44,22 +43,62 @@ namespace ePunkt.Portal.Controllers
             return RedirectToAction("Index", "Jobs");
         }
 
-        [HttpGet]
-        public ActionResult RetreivePassword(string email, string code)
-        {
-            if (code.IsNoE())
-                return View("RetreivePasswordStep1");
+        #region ChangePassword
 
-            return View("RetreivePasswordStep2");
+        [Authorize]
+        public ActionResult ChangePassword()
+        {
+            return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> RetreivePassword(string email, string code, string password1, string password2)
+        [Authorize]
+        public async Task<ActionResult> ChangePassword(string oldPassword, string password1, string password2)
+        {
+            if (password1.IsNoE())
+                ModelState.AddModelError("password1", "Error-PasswordIsEmpty");
+            if (password1 != password2)
+                ModelState.AddModelError("password2", "Error-PasswordsDontMatch");
+
+            if (ModelState.IsValid)
+            {
+                var requestParam = new SetPasswordParameter(oldPassword, password1, Request.Url);
+                var result = await ApiClient.SendAndReadAsync<ApplicantSetPasswordResponse>(new SetPasswordRequest(GetApplicantId(), requestParam));
+                if (result.Errors != null)
+                    foreach (var error in result.Errors)
+                        ModelState.AddModelError("password1", "Error-" + error);
+
+                if (ModelState.IsValid)
+                    return View("ChangePasswordSuccess");
+            }
+
+            return View();
+        }
+        #endregion
+
+        #region RequestPassword
+
+        [HttpGet]
+        public async Task<ActionResult> RequestPassword(string email, string code)
+        {
+            if (code.IsNoE())
+                return View("RequestPasswordStep1");
+
+            //check if the code really works, to display an early error message if not
+            var applicant = await ApiClient.SendAndReadAsync<Applicant>(new ConfirmRequestPasswordRequest(email, code));
+            if (applicant == null || applicant.Id <= 0)
+                ModelState.AddModelError("password1", "Error-InvalidCode");
+
+            return View("RequestPasswordStep2");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> RequestPassword(string email, string code, string password1, string password2)
         {
             if (code.IsNoE())
             {
-                await ApiClient.SendAndReadAsync<Applicant>(new RetreivePasswordRequest(email, Request.Url));
-                return View("RetreivePasswordStep1Success");
+                await ApiClient.SendAndReadAsync<string>(new RequestPasswordRequest(email, Request.Url));
+                return View("RequestPasswordStep1Success");
             }
 
             if (password1.IsNoE())
@@ -69,27 +108,18 @@ namespace ePunkt.Portal.Controllers
 
             if (ModelState.IsValid)
             {
-                var requestParam = new SetPasswordAfterRetreiveParameter
-                    {
-                        Code = code,
-                        Email = email,
-                        NewPassword = password1,
-                        Url = Request.Url
-                    };
+                var requestParam = new SetPasswordAfterRequestParameter(email, code, password1, Request.Url);
                 var result = await ApiClient.SendAndReadAsync<ApplicantSetPasswordResponse>(new SetPasswordRequest(requestParam));
                 if (result.Errors != null)
                     foreach (var error in result.Errors)
                         ModelState.AddModelError("password1", "Error-" + error);
 
-                if (result.Applicant == null)
-                    ModelState.AddModelError("password1", "Error-InvalidCode");
-
                 if (ModelState.IsValid)
-                    return View("RetreivePasswordStep2Success");
-
+                    return View("RequestPasswordStep2Success");
             }
 
-            return View("RetreivePasswordStep2");
+            return View("RequestPasswordStep2");
         }
+        #endregion
     }
 }
