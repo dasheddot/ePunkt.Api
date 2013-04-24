@@ -1,12 +1,26 @@
 ﻿using ePunkt.Utilities;
 using System;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 
 namespace ePunkt.Portal
 {
     public static class HtmlExtensionMethods
     {
+        public static MvcHtmlString TranslatedValidationSummary(this HtmlHelper helper)
+        {
+            foreach (var modelState in helper.ViewData.ModelState)
+            {
+                var newErrors = modelState.Value.Errors.Select(x => new ModelError(Loc(helper, x.ErrorMessage).ToString())).ToList();
+                modelState.Value.Errors.Clear();
+                foreach (var newError in newErrors)
+                    modelState.Value.Errors.Add(newError);
+            }
+            return helper.ValidationSummary();
+        }
+
         public static MvcHtmlString Loc(this HtmlHelper helper, string key, params object[] values)
         {
             var controller = (Controllers.ControllerBase)helper.ViewContext.Controller;

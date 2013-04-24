@@ -1,5 +1,4 @@
-﻿using ePunkt.Api;
-using ePunkt.Api.Client;
+﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
 using ePunkt.Api.Models;
 using ePunkt.Api.Responses;
@@ -62,10 +61,9 @@ namespace ePunkt.Portal.Controllers
             var selectedRegions = BuildSelectedRegionsString(mandator.Regions);
             selectedRegions = selectedRegions.Trim('|');
 
-            var selectedJobProfiles = "";
-            foreach (var jobProfile in mandator.JobProfiles)
-                if (Request.Form[jobProfile].Is(true))
-                    selectedJobProfiles += jobProfile + "|";
+            var selectedJobProfiles = mandator.JobProfiles
+                .Where(jobProfile => Request.Form[jobProfile].Is(true))
+                .Aggregate("", (current, jobProfile) => current + (jobProfile + "|"));
             selectedJobProfiles = selectedJobProfiles.Trim('|');
 
             return RedirectToAction("Index",
@@ -112,7 +110,9 @@ namespace ePunkt.Portal.Controllers
                 if (response != null && response.Image != null)
                     return new FileContentResult(Convert.FromBase64String(response.Image), MimeMapping.GetMimeMapping("JobSalaryImage" + id + ".jpg"));
             }
-            catch
+            // ReSharper disable EmptyGeneralCatchClause
+            catch (Exception)
+            // ReSharper restore EmptyGeneralCatchClause
             {
                 //do nothing here
             }

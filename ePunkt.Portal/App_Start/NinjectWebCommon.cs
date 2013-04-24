@@ -1,4 +1,3 @@
-using ePunkt.Api;
 using ePunkt.Api.Client;
 using ePunkt.Api.Models;
 
@@ -15,7 +14,7 @@ namespace ePunkt.Portal
 
     public static class NinjectWebCommon
     {
-        private static readonly Bootstrapper bootstrapper = new Bootstrapper();
+        private static readonly Bootstrapper Bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
@@ -24,7 +23,7 @@ namespace ePunkt.Portal
         {
             DynamicModuleUtility.RegisterModule(typeof (OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof (NinjectHttpModule));
-            bootstrapper.Initialize(CreateKernel);
+            Bootstrapper.Initialize(CreateKernel);
         }
 
         /// <summary>
@@ -32,7 +31,7 @@ namespace ePunkt.Portal
         /// </summary>
         public static void Stop()
         {
-            bootstrapper.ShutDown();
+            Bootstrapper.ShutDown();
         }
 
         /// <summary>
@@ -62,7 +61,7 @@ namespace ePunkt.Portal
         private static ApiHttpClient GetHttpClient()
         {
             var customSettings = LoadCustomSettings();
-            var apiClient = new ApiHttpClient(new Uri(customSettings.ApiEndpoint), LoadApiKey, () => _tokenCache)
+            var apiClient = new ApiHttpClient(new Uri(customSettings.ApiEndpoint), LoadApiKey, () => TokenCache)
                 {
                     Timeout = TimeSpan.FromSeconds(500) //increase the timeout significantly to 500s (default is 100s), to compensate for our lame staging server upstream
                 };
@@ -70,7 +69,7 @@ namespace ePunkt.Portal
             return apiClient;
         }
 
-        private static readonly ApiTokenCache _tokenCache = new ApiTokenCache();
+        private static readonly ApiTokenCache TokenCache = new ApiTokenCache();
 
         private static CustomSettings LoadCustomSettings()
         {

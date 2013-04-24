@@ -31,8 +31,16 @@
         body > #container > #content #retreivePasswordTable td { padding-left: 3px; }
 
 
+/* ReSharper disable CssNotResolved */
+/* ReSharper disable InvalidValue */
 img.grayed { opacity: 0.4; filter: grayscale(100%); -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -o-filter: grayscale(100%); -ms-filter: grayscale(100%); }
+/* ReSharper restore InvalidValue */
+/* ReSharper restore CssNotResolved */
 
 
-/* jQuery UI styles*/
+/* jQuery UI styles */
 .ui-widget { font-size: .85em; font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif; color: #232323; }
+
+/* ASP.NET MVC styles */
+.validation-summary-errors { background-color: red; color: white; padding: 5px 0 5px 0; }
+.field-validation-error { color: red; }

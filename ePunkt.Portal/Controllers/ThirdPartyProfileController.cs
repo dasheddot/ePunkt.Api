@@ -1,6 +1,4 @@
-﻿using System;
-using ePunkt.Api;
-using ePunkt.Api.Client;
+﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
 using ePunkt.Api.Models;
 using ePunkt.Portal.Models.ThirdPartyProfile;
@@ -8,6 +6,7 @@ using ePunkt.SocialConnector;
 using ePunkt.SocialConnector.Linkedin;
 using ePunkt.SocialConnector.Xing;
 using ePunkt.Utilities;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;

@@ -1,4 +1,5 @@
-﻿using ePunkt.Api.Models;
+﻿using System.Linq;
+using ePunkt.Api.Models;
 using ePunkt.Utilities;
 using System;
 using System.Text.RegularExpressions;
@@ -24,9 +25,7 @@ namespace ePunkt.Portal
 
         public string ReplaceUrlsWithCurrent(string html, Uri currentRequestUri)
         {
-            foreach (var url in _mandator.Urls)
-                html = Replace(html, url, currentRequestUri);
-            return html;
+            return _mandator.Urls.Aggregate(html, (current, url) => Replace(current, url, currentRequestUri));
         }
 
         private string Replace(string html, string urlToReplace, Uri currentRequestUri)
@@ -34,7 +33,7 @@ namespace ePunkt.Portal
             if (urlToReplace.IsNoW())
                 return html;
 
-            var relativeUrlsToLookFor = new[] { "/\\?Job=", "/Resources/JobSalaryImage"};
+            var relativeUrlsToLookFor = new[] { "/\\?Job=", "/Resources/JobSalaryImage" };
 
             foreach (var relativeUrl in relativeUrlsToLookFor)
             {

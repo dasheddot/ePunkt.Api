@@ -33,7 +33,7 @@ namespace ePunkt.Portal.Controllers
                 return RedirectToAction("Index", "Applicant");
             }
 
-            ModelState.AddModelError("username", "Username or password is invalid.");
+            ModelState.AddModelError("username", @"Error-InvalidUsernameOrPassword");
             return View();
         }
 
@@ -56,9 +56,9 @@ namespace ePunkt.Portal.Controllers
         public async Task<ActionResult> ChangePassword(string oldPassword, string password1, string password2)
         {
             if (password1.IsNoE())
-                ModelState.AddModelError("password1", "Error-PasswordIsEmpty");
+                ModelState.AddModelError("password1", @"Error-PasswordIsEmpty");
             if (password1 != password2)
-                ModelState.AddModelError("password2", "Error-PasswordsDontMatch");
+                ModelState.AddModelError("password2", @"Error-PasswordsDontMatch");
 
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace ePunkt.Portal.Controllers
                 var result = await ApiClient.SendAndReadAsync<ApplicantSetPasswordResponse>(new SetPasswordRequest(GetApplicantId(), requestParam));
                 if (result.Errors != null)
                     foreach (var error in result.Errors)
-                        ModelState.AddModelError("password1", "Error-" + error);
+                        ModelState.AddModelError("password1", @"Error-" + error);
 
                 if (ModelState.IsValid)
                     return View("ChangePasswordSuccess");
@@ -87,7 +87,7 @@ namespace ePunkt.Portal.Controllers
             //check if the code really works, to display an early error message if not
             var applicant = await ApiClient.SendAndReadAsync<Applicant>(new ConfirmRequestPasswordRequest(email, code));
             if (applicant == null || applicant.Id <= 0)
-                ModelState.AddModelError("password1", "Error-InvalidCode");
+                ModelState.AddModelError("password1", @"Error-InvalidCode");
 
             return View("RequestPasswordStep2");
         }
@@ -102,9 +102,9 @@ namespace ePunkt.Portal.Controllers
             }
 
             if (password1.IsNoE())
-                ModelState.AddModelError("password1", "Error-PasswordIsEmpty");
+                ModelState.AddModelError("password1", @"Error-PasswordIsEmpty");
             if (password1 != password2)
-                ModelState.AddModelError("password2", "Error-PasswordsDontMatch");
+                ModelState.AddModelError("password2", @"Error-PasswordsDontMatch");
 
             if (ModelState.IsValid)
             {
@@ -112,7 +112,7 @@ namespace ePunkt.Portal.Controllers
                 var result = await ApiClient.SendAndReadAsync<ApplicantSetPasswordResponse>(new SetPasswordRequest(requestParam));
                 if (result.Errors != null)
                     foreach (var error in result.Errors)
-                        ModelState.AddModelError("password1", "Error-" + error);
+                        ModelState.AddModelError("password1", @"Error-" + error);
 
                 if (ModelState.IsValid)
                     return View("RequestPasswordStep2Success");

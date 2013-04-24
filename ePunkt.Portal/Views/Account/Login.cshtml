@@ -1,4 +1,4 @@
-﻿@Html.ValidationSummary()
+﻿@Html.TranslatedValidationSummary()
 
 
 <div id="loginWithThirdPartyAccount">
@@ -22,11 +22,17 @@
         <table>
             <tr>
                 <td>@Html.Loc("Email_Label")</td>
-                <td>@Html.TextBox("username", null, new { placeholder = Html.Loc("Email_Placeholder").ToString(), type = "Email" })</td>
+                <td>
+                    <input type="email" name="username" required="true" placeholder="@Html.Loc("Email_Placeholder")" />
+                    @Html.ValidationMessage("username")
+                </td>
             </tr>
             <tr>
                 <td>@Html.Loc("Password_Label")</td>
-                <td>@Html.Password("password")</td>
+                <td>
+                    <input type="password" name="password" required="true" />
+                    @Html.ValidationMessage("password")
+                </td>
             </tr>
             <tr>
                 <td></td>
@@ -40,4 +46,10 @@
     <p>@Html.Loc("CreateProfile_Link")</p>
     <p>@Html.ActionLink(Html.Loc("ForgotPassword_Link").ToString(), "RequestPassword", "Account")</p>
 </div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
 

@@ -11,39 +11,39 @@ namespace ePunkt.Portal
 
             #region Legacy Routes
             routes.MapRoute(
-               name: "Legacy_Images",
-               url: "Resources/Image/{*id}",
-               defaults: new { controller = "Content", action = "File" }
+               "Legacy_Images",
+               "Resources/Image/{*id}",
+               new { controller = "Content", action = "File" }
             );
             routes.MapRoute(
-               name: "Legacy_JobSalaryImage",
-               url: "Resources/JobSalaryImage/{id}",
-               defaults: new { controller = "Jobs", action = "SalaryImage" }
+               "Legacy_JobSalaryImage",
+               "Resources/JobSalaryImage/{id}",
+               new { controller = "Jobs", action = "SalaryImage" }
             );
             #endregion
 
             routes.MapRoute(
-                name: "Favicon",
-                url: "favicon.ico",
-                defaults: new { controller = "Content", action = "File", id = "favicon.ico" }
+                "Favicon",
+                "favicon.ico",
+                new { controller = "Content", action = "File", id = "favicon.ico" }
                 );
 
             routes.MapRoute(
-               name: "Content",
-               url: "Content/{*id}",
-               defaults: new { controller = "Content", action = "File" }
+               "Content",
+               "Content/{*id}",
+               new { controller = "Content", action = "File" }
                );
 
             routes.MapRoute(
-                name: "Job Detail Page",
-                url: "Job/{id}",
-                defaults: new { controller = "Jobs", action = "Job" }
+                "Job Detail Page",
+                "Job/{id}",
+                new { controller = "Jobs", action = "Job" }
                 );
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                "Default",
+                "{controller}/{action}/{id}",
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
                 );
         }
     }

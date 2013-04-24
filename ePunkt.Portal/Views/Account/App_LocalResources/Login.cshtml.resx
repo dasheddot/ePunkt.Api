@@ -138,6 +138,9 @@
   <data name="Email_Placeholder" xml:space="preserve">
     <value>Your e-mail address</value>
   </data>
+  <data name="Error-InvalidUsernameOrPassword" xml:space="preserve">
+    <value>Please check your e-mail and your password.</value>
+  </data>
   <data name="ForgotPassword_Link" xml:space="preserve">
     <value>I forgot the password to my applicant profile</value>
   </data>

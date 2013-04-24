@@ -35,7 +35,9 @@ namespace ePunkt.Portal
                 }
                 catch (CultureNotFoundException)
                 {
-                    filterContext.HttpContext.Response.Cookies[CookieKey].Expires = DateTime.Now.AddYears(-1);
+                    var cookie = filterContext.HttpContext.Response.Cookies[CookieKey];
+                    if (cookie != null)
+                        cookie.Expires = DateTime.Now.AddYears(-1);
                 }
             }
         }
