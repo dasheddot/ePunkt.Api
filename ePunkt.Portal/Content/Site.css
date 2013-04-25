@@ -1,11 +1,14 @@
 ﻿body { font-size: .85em; font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif; color: #232323; background-color: #fff; }
-    body input[type=checkbox] { margin-right: 3px; vertical-align: bottom; margin-bottom: 2px; }
+    body input[type=checkbox] { margin-right: 5px; vertical-align: bottom; margin-bottom: 3px; }
+
     body > #container { width: 940px; margin-left: auto; margin-right: auto; }
 
-        body > #container > nav { height: 50px; }
-            body > #container > nav ul { float: right; list-style-type: none; }
-                body > #container > nav ul li { margin-right: 5px; padding-right: 5px; border-right: 1px solid silver; float: left; }
-                    body > #container > nav ul li:last-child { border-right: 0; padding-right: 0; margin-right: 0; }
+        body > #container > nav { height: 30px; margin-top: 10px; }
+            body > #container > nav > ul { list-style-type: none; padding: 0; margin: 0; float: left; }
+                body > #container > nav > ul li { margin-right: 5px; padding-right: 5px; border-right: 1px solid silver; float: left; }
+                    body > #container > nav > ul li:last-child { border-right: 0; }
+                body > #container > nav > ul + ul { float: right; }
+                    body > #container > nav > ul + ul li:last-child { padding-right: 0; margin-right: 0; }
 
         body > #container > #content .jobsList .jobTitle { font-weight: bold; }
         body > #container > #content .jobsFilter { margin-bottom: 20px; }
@@ -29,6 +32,16 @@
             body > #container > #content #linkThirdPartyProfilesTable tr td:last-child { text-align: right; }
 
         body > #container > #content #retreivePasswordTable td { padding-left: 3px; }
+
+        body > #container > #content #applicantCompleteness > p { margin: 5px 0; padding: 10px; }
+            body > #container > #content #applicantCompleteness > p > span { float: right; }
+            body > #container > #content #applicantCompleteness > p.complete { background-color: lightgreen; }
+            body > #container > #content #applicantCompleteness > p.incomplete { background-color: lightcoral; }
+
+        body > #container > #content #applicantAdditionalSettings { margin-top: 30px; }
+            body > #container > #content #applicantAdditionalSettings > p { margin: 0; padding: 5px 0; }
+                body > #container > #content #applicantAdditionalSettings > p > label { font-weight: bold; }
+                body > #container > #content #applicantAdditionalSettings > p > span { display: block; }
 
 
 /* ReSharper disable CssNotResolved */

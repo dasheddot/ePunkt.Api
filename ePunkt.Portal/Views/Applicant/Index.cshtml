@@ -1,6 +1,33 @@
-﻿@model ePunkt.Api.Models.Applicant
+﻿@model ePunkt.Portal.Models.Applicant.IndexViewModel
 
+<h1>@Html.Loc("Title")</h1>
+<p>@Html.Loc("Description")</p>
 
-<p>
-    Welcome, @Model.FirstName @Model.LastName, you are now logged in.
-</p>
+<div id="applicantCompleteness">
+    <p class="@(Model.Completeness.PersonalInformation >= 100 ? "complete" : "incomplete")">
+        @Html.ActionLink(Html.Loc("PersonalInformation").ToString(), "PersonalInformation")
+        <span>@Html.Loc("Placeholder_Percent_Complete", Model.Completeness.PersonalInformation)</span>
+    </p>
+    <p class="@(Model.Completeness.Files >= 100 ? "complete" : "incomplete")">
+        @Html.ActionLink(Html.Loc("Files").ToString(), "Files")
+        <span>@Html.Loc("Placeholder_Percent_Complete", Model.Completeness.Files)</span>
+    </p>
+</div>
+@using (Html.BeginForm())
+{
+    <div id="applicantAdditionalSettings">
+        <p>
+            @Html.CheckBox("active", Model.Applicant.IsActive)@Html.Label("active", Html.Loc("Active_Label").ToString())
+            <span>@Html.Loc("Active_Description")</span>
+        </p>
+        <p>
+            @Html.CheckBox("matchingJobs", Model.Applicant.EnableMatchingJobsAutoMail)@Html.Label("matchingJobs", Html.Loc("MatchingJobs_Label").ToString())
+            <span>@Html.Loc("MatchingJobs_Description")</span>
+        </p>
+        <p>
+            @Html.CheckBox("newsletter", Model.Applicant.EnableNewsletter)@Html.Label("newsletter", Html.Loc("Newsletter_Label").ToString())
+            <span>@Html.Loc("Newsletter_Description")</span>
+        </p>
+        <input type="submit" value="@Html.Loc("Save")" />
+    </div>
+}

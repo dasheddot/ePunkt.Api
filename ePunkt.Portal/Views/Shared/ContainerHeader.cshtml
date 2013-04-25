@@ -1,17 +1,28 @@
 ﻿@using (Html.SwitchLocSource("~/Views/Shared/ContainerHeader.cshtml"))
 {
     <nav>
-        <ul>
-            @if (User.Identity.IsAuthenticated)
-            {
+        @if (User.Identity.IsAuthenticated)
+        {
+            <ul>
+                <li>@Html.ActionLink(@Html.Loc("Profile_Link").ToString(), "Index", "Applicant")</li>
+                <li>@Html.ActionLink(@Html.Loc("Jobs_Link").ToString(), "Index", "Jobs")</li>
+            </ul>
+
+            <ul>
+
                 <li>@Html.ActionLink(@Html.Loc("ChangePassword_Link").ToString(), "ChangePassword", "Account")</li>
                 <li>@Html.ActionLink(@Html.Loc("ThirdPartyProfiles_Link").ToString(), "Index", "ThirdPartyProfile")</li>
                 <li>@Html.ActionLink(@Html.Loc("Logoff_Link").ToString(), "Logoff", "Account")</li>
-            }
-            else
-            {
+            </ul>
+        }
+        else
+        {
+            <ul>
+                <li>@Html.ActionLink(@Html.Loc("Jobs_Link").ToString(), "Index", "Jobs")</li>
+            </ul>
+            <ul>
                 <li>@Html.ActionLink(@Html.Loc("Login_Link").ToString(), "Login", "Account")</li>
-            }
-        </ul>
+            </ul>
+        }
     </nav>
 }

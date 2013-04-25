@@ -17,5 +17,9 @@ namespace ePunkt.Api.Parameters
 
         public string Phone { get; set; }
         public string MobilePhone { get; set; }
+
+        public bool IsActive { get; set; }
+        public bool EnableNewsletter { get; set; }
+        public bool EnableMatchingJobsAutoMail { get; set; }
     }
 }

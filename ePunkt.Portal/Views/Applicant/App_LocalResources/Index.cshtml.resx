@@ -117,22 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ChangePassword_Link" xml:space="preserve">
-    <value>Change password</value>
+  <data name="Active_Description" xml:space="preserve">
+    <value>I want to be notified by e-mail or phone about jobs that could be of interest for me.</value>
   </data>
-  <data name="Jobs_Link" xml:space="preserve">
-    <value>Open jobs</value>
+  <data name="Active_Label" xml:space="preserve">
+    <value>I want to receive job offers from HR consultants</value>
   </data>
-  <data name="Login_Link" xml:space="preserve">
-    <value>Log in</value>
+  <data name="Description" xml:space="preserve">
+    <value>The more information you provide us about yourself, the more suitable job offers we can send you.</value>
   </data>
-  <data name="Logoff_Link" xml:space="preserve">
-    <value>Log off</value>
+  <data name="Files" xml:space="preserve">
+    <value>File attachments</value>
   </data>
-  <data name="Profile_Link" xml:space="preserve">
+  <data name="MatchingJobs_Description" xml:space="preserve">
+    <value>These e-mails use your job profiles and regions to find jobs that could be of interest for me.</value>
+  </data>
+  <data name="MatchingJobs_Label" xml:space="preserve">
+    <value>I want to receive automatically generated e-mails with job offers that match my applicant profile</value>
+  </data>
+  <data name="Newsletter_Description" xml:space="preserve">
+    <value>These newsletters contain general information about the company.</value>
+  </data>
+  <data name="Newsletter_Label" xml:space="preserve">
+    <value>I want to receive the company newsletter</value>
+  </data>
+  <data name="PersonalInformation" xml:space="preserve">
+    <value>Personal information</value>
+  </data>
+  <data name="Placeholder_Percent_Complete" xml:space="preserve">
+    <value>{0} % complete</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Title" xml:space="preserve">
     <value>My applicant profile</value>
-  </data>
-  <data name="ThirdPartyProfiles_Link" xml:space="preserve">
-    <value>Linked accounts</value>
   </data>
 </root>
