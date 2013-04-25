@@ -3,8 +3,6 @@ using ePunkt.Api.Client.Requests;
 using ePunkt.Api.Models;
 using ePunkt.Utilities;
 using System;
-using System.Globalization;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -48,25 +46,9 @@ namespace ePunkt.Portal.Controllers
 
         public string TlT(string originalText)
         {
-            var allTranslations = GetMandator().Result.Translations;
-            var matchingEntry = allTranslations.FirstOrDefault(x => x.Texts.Any(y => y.Text.Is(originalText)));
-            if (matchingEntry != null)
-            {
-                var currentCulture = CultureInfo.CurrentCulture.Name;
-
-                //check for identical culture
-                var matchingTranslation = matchingEntry.Texts.FirstOrDefault(x => x.Culture.Is(currentCulture));
-
-                //check for similar culture
-                matchingTranslation = matchingTranslation ?? matchingEntry.Texts.FirstOrDefault(x => x.Culture.Substring(0, 2).Is(currentCulture.Substring(0, 2)));
-
-                //fallback to english
-                matchingTranslation = matchingTranslation ?? matchingEntry.Texts.FirstOrDefault(x => x.Culture.Substring(0, 2).Is("en"));
-
-                if (matchingTranslation != null)
-                    return matchingTranslation.Text;
-            }
-            return originalText;
+            return Translations.TlT(GetMandator().Result, originalText);
         }
+
+
     }
 }

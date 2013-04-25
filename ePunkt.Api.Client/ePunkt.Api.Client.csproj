@@ -64,6 +64,9 @@
     <Compile Include="Requests\Account\RequestPasswordRequest.cs" />
     <Compile Include="Requests\Applicants\ApplicantRequest.cs" />
     <Compile Include="Requests\Applicants\ApplicantsRequest.cs" />
+    <Compile Include="Requests\Applicants\ApplicantDocumentGetRequest.cs" />
+    <Compile Include="Requests\Applicants\ApplicantDocumentDeleteRequest.cs" />
+    <Compile Include="Requests\Applicants\ApplicantDocumentPostRequest.cs" />
     <Compile Include="Requests\ThirdPartyProfile\UnlinkLinkedInRequest.cs" />
     <Compile Include="Requests\ThirdPartyProfile\UnlinkXingRequest.cs" />
     <Compile Include="Requests\ThirdPartyProfile\LinkLinkedInRequest.cs" />

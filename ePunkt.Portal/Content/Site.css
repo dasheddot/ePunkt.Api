@@ -44,6 +44,16 @@
                 body > #container > #content #applicantAdditionalSettings > p > span { display: block; }
 
 
+        body > #container > #content #applicantFiles > div { padding: 10px 0; }
+            body > #container > #content #applicantFiles > div > form { display: inline; background-color: blue; }
+            body > #container > #content #applicantFiles > div > span { color: gray; margin-left: 5px; }
+                body > #container > #content #applicantFiles > div > span:before { content: "("; }
+                body > #container > #content #applicantFiles > div > span:after { content: ")"; }
+            body > #container > #content #applicantFiles > div input { float: right; }
+        body > #container > #content #applicantFilesUpload { margin-top: 30px; }
+            body > #container > #content #applicantFilesUpload input[type=submit] { float: right; }
+
+
 /* ReSharper disable CssNotResolved */
 /* ReSharper disable InvalidValue */
 img.grayed { opacity: 0.4; filter: grayscale(100%); -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -o-filter: grayscale(100%); -ms-filter: grayscale(100%); }

@@ -24,6 +24,7 @@ namespace ePunkt.Portal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(bool? active, bool? newsletter, bool? matchingJobs)
         {
             var applicant = await GetApplicant();

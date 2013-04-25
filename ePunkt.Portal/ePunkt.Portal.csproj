@@ -170,11 +170,14 @@
     <Compile Include="Code\LoadJobsService.cs" />
     <Compile Include="Code\ReferrerService.cs" />
     <Compile Include="Code\SyndicationService.cs" />
+    <Compile Include="Code\Translations.cs" />
     <Compile Include="Code\UrlBuilderService.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\ApplicantController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicantFilesController.cs" />
+    <Compile Include="Controllers\ApplicantPersonalInformationController.cs" />
     <Compile Include="Controllers\ThirdPartyProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
@@ -183,6 +186,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ApplicantCompleteness.cs" />
+    <Compile Include="Models\ApplicantFiles\IndexViewModel.cs" />
+    <Compile Include="Models\ApplicantPersonalInformation\IndexViewModel.cs" />
     <Compile Include="Models\Applicant\IndexViewModel.cs" />
     <Compile Include="Models\Jobs\JobModel.cs" />
     <Compile Include="Models\Jobs\IndexViewModel.cs" />
@@ -310,6 +315,8 @@
     <Content Include="Views\Account\RequestPasswordStep2Success.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
+    <Content Include="Views\ApplicantFiles\Index.cshtml" />
+    <Content Include="Views\ApplicantPersonalInformation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -377,6 +384,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Applicant\App_LocalResources\Index.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicantFiles\App_LocalResources\Index.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicantPersonalInformation\App_LocalResources\Index.cshtml.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

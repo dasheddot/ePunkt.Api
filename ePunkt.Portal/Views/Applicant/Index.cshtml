@@ -5,16 +5,17 @@
 
 <div id="applicantCompleteness">
     <p class="@(Model.Completeness.PersonalInformation >= 100 ? "complete" : "incomplete")">
-        @Html.ActionLink(Html.Loc("PersonalInformation").ToString(), "PersonalInformation")
+        @Html.ActionLink(Html.Loc("PersonalInformation").ToString(), "Index", "ApplicantPersonalInformation")
         <span>@Html.Loc("Placeholder_Percent_Complete", Model.Completeness.PersonalInformation)</span>
     </p>
     <p class="@(Model.Completeness.Files >= 100 ? "complete" : "incomplete")">
-        @Html.ActionLink(Html.Loc("Files").ToString(), "Files")
+        @Html.ActionLink(Html.Loc("Files").ToString(), "Index", "ApplicantFiles")
         <span>@Html.Loc("Placeholder_Percent_Complete", Model.Completeness.Files)</span>
     </p>
 </div>
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     <div id="applicantAdditionalSettings">
         <p>
             @Html.CheckBox("active", Model.Applicant.IsActive)@Html.Label("active", Html.Loc("Active_Label").ToString())

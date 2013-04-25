@@ -24,6 +24,7 @@ namespace ePunkt.Portal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(string username, string password)
         {
             var applicant = await ApiClient.SendAndReadAsync<Applicant>(new ApplicantRequest(username, password));
@@ -53,6 +54,7 @@ namespace ePunkt.Portal.Controllers
 
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(string oldPassword, string password1, string password2)
         {
             if (password1.IsNoE())
@@ -93,6 +95,7 @@ namespace ePunkt.Portal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> RequestPassword(string email, string code, string password1, string password2)
         {
             if (code.IsNoE())

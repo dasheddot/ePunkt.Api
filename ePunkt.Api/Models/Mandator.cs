@@ -11,6 +11,9 @@ namespace ePunkt.Api.Models
         public IEnumerable<string> JobProfiles { get; set; }
         public IEnumerable<Region> Regions { get; set; }
         public IEnumerable<string> Urls { get; set; }
+        public IEnumerable<string> ApplicantDocumentTypes { get; set; }
+        public IEnumerable<Title> TitlesBeforeName { get; set; }
+        public IEnumerable<Title> TitlesAfterName { get; set; }
     }
 
     public class Translation
@@ -29,5 +32,12 @@ namespace ePunkt.Api.Models
     {
         public string Name { get; set; }
         public IEnumerable<Region> Regions { get; set; }
+    }
+
+    public class Title
+    {
+        public string Name { get; set; }
+        public IEnumerable<string> CultureFilter { get; set; }
+        public string Group { get; set; }
     }
 }

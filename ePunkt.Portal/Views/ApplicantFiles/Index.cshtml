@@ -1,0 +1,80 @@
+﻿@model ePunkt.Portal.Models.ApplicantFiles.IndexViewModel
+
+@helper GetTranslatedType(string type)
+{ 
+    @(Model.AvailableDocumentTypes.Any(x => x.Value.Is(type)) ? Model.AvailableDocumentTypes.First(x => x.Value.Is(type)).Text : type)
+}
+
+@{
+    var availableTypes = Model.AvailableDocumentTypes.ToList();
+    availableTypes.Insert(0, new SelectListItem
+        {
+            Text = Html.Loc("Cv").ToString(),
+            Value = "CV"
+        });
+    availableTypes.Insert(1, new SelectListItem
+    {
+        Text = Html.Loc("Photo").ToString(),
+        Value = "Photo"
+    });
+}
+
+@Html.TranslatedValidationSummary()
+
+<h1>@Html.Loc("Title")</h1>
+<p>@Html.Loc("Description")</p>
+
+<div id="applicantFiles">
+    @foreach (var f in Model.Applicant.Documents)
+    {       
+        <div>
+            @if (f.Type.Is("CV") || f.Type.Is("Photo"))
+            {
+                <text>
+                @Html.Loc(f.Name)
+                </text>
+            }
+            else
+            {
+                <text>
+                @f.Name<span>@GetTranslatedType(f.Type)</span>
+                </text>
+            }
+            @using (Html.BeginForm("Download", "ApplicantFiles"))
+            {
+                <text>
+                @Html.AntiForgeryToken()
+                @Html.Hidden("name", f.Name)@Html.Hidden("type", f.Type)
+                <input type="submit" value="@Html.Loc("Download")" />
+                </text>
+            }
+
+            @using (Html.BeginForm("Delete", "ApplicantFiles"))
+            {
+                <text>
+                @Html.AntiForgeryToken()
+                @Html.Hidden("name", f.Name)@Html.Hidden("type", f.Type)
+                <input type="submit" value="@Html.Loc("Delete")" />
+                </text>
+            }
+        </div>
+    }
+</div>
+
+<div id="applicantFilesUpload">
+    @using (Html.BeginForm("Index", "ApplicantFiles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <text>
+        @Html.AntiForgeryToken()
+        <p>
+            @Html.Loc("Upload_Description")
+        </p>
+        <p>
+            @Html.Loc("Choose_File")
+            <input type="file" name="upload" />
+            @Html.DropDownList("type", availableTypes)
+            <input type="submit" value="@Html.Loc("Upload")" />
+        </p>
+        </text>
+    }
+</div>

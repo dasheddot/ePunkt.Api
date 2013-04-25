@@ -19,6 +19,7 @@
 
     @using (Html.BeginForm())
     {
+        @Html.AntiForgeryToken()
         <table>
             <tr>
                 <td>@Html.Loc("Email_Label")</td>
