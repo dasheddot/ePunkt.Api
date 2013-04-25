@@ -1,4 +1,7 @@
-﻿using ePunkt.Utilities;
+﻿using System.Collections.Generic;
+using System.Text;
+using System.Web.Routing;
+using ePunkt.Utilities;
 using System;
 using System.Linq;
 using System.Web;
@@ -24,7 +27,7 @@ namespace ePunkt.Portal
         public static MvcHtmlString Loc(this HtmlHelper helper, string key, params object[] values)
         {
             var controller = (Controllers.ControllerBase)helper.ViewContext.Controller;
-            var view =  ((RazorView) helper.ViewContext.View);
+            var view = ((RazorView)helper.ViewContext.View);
 
             var pathToView = controller.ViewBag.__LocSource ?? view.ViewPath;
             var customPathToView = controller.Settings.CustomFolder + "/" + pathToView.TrimStart('~', '/');
@@ -46,9 +49,44 @@ namespace ePunkt.Portal
             return new MvcHtmlString(string.Format(resource, values));
         }
 
+        public static MvcHtmlString DropDownList(this HtmlHelper helper, string name, IEnumerable<GroupedSelectListItem> items, object htmlAttributes = null)
+        {
+
+            var optionsHtml = new StringBuilder();
+            string lastOptGroup = null;
+            foreach (var item in items.OrderBy(x => x.Group))
+            {
+                var currentGroup = item.Group.HasValue() ? item.Group : null;
+
+                if (currentGroup != lastOptGroup)
+                {
+                    if (lastOptGroup.HasValue())
+                        optionsHtml.AppendLine("</optgroup");
+                    optionsHtml.AppendLine("<optgroup label=\"" + currentGroup + "\"" + (item.Selected ? " selected=\"selected\"" : "") + ">");
+                    lastOptGroup = currentGroup;
+                }
+                optionsHtml.Append("<option value=\"" + item.Value + "\">" + item.Text + "</option>");
+            }
+
+            var tagBuilder = new TagBuilder("select")
+            {
+                InnerHtml = optionsHtml.ToString()
+            };
+            tagBuilder.MergeAttributes(new RouteValueDictionary(htmlAttributes));
+            tagBuilder.MergeAttribute("name", name, true);
+            tagBuilder.GenerateId(name);
+
+            return new MvcHtmlString(tagBuilder.ToString());
+        }
+
+        public class GroupedSelectListItem : SelectListItem
+        {
+            public string Group { get; set; }
+        }
+
         public static MvcHtmlString TlT(this HtmlHelper helper, string originalText)
         {
-            var controller = (Controllers.ControllerBase) helper.ViewContext.Controller;
+            var controller = (Controllers.ControllerBase)helper.ViewContext.Controller;
             return new MvcHtmlString(controller.TlT(originalText));
         }
 
@@ -73,7 +111,7 @@ namespace ePunkt.Portal
 
         public static LocSourceSwitcher SwitchLocSource(this HtmlHelper helper, string viewPath)
         {
-            var controller = (Controllers.ControllerBase) helper.ViewContext.Controller;
+            var controller = (Controllers.ControllerBase)helper.ViewContext.Controller;
             return new LocSourceSwitcher(controller.ViewBag, viewPath);
         }
 
@@ -92,5 +130,7 @@ namespace ePunkt.Portal
                 _viewBag.__LocSource = null;
             }
         }
+
+
     }
 }

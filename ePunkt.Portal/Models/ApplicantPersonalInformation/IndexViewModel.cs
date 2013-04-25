@@ -12,17 +12,19 @@ namespace ePunkt.Portal.Models.ApplicantPersonalInformation
         public IndexViewModel(Api.Models.Mandator mandator, Api.Models.Applicant applicant)
         {
             Applicant = applicant;
-            TitlesBeforeName = FilterTitles(mandator.TitlesBeforeName).Select(x => new SelectListItem
+            TitlesBeforeName = FilterTitles(mandator.TitlesBeforeName).Select(x => new HtmlExtensionMethods.GroupedSelectListItem
                 {
                     Value = x.Name,
                     Text = Translations.TlT(mandator, x.Name),
-                    Selected = applicant.TitleBeforeName.Is(x.Name)
+                    Selected = applicant.TitleBeforeName.Is(x.Name),
+                    Group = x.Group
                 });
-            TitlesAfterName = FilterTitles(mandator.TitlesAfterName).Select(x => new SelectListItem
+            TitlesAfterName = FilterTitles(mandator.TitlesAfterName).Select(x => new HtmlExtensionMethods.GroupedSelectListItem
             {
                 Value = x.Name,
                 Text = Translations.TlT(mandator, x.Name),
-                Selected = applicant.TitleAfterName.Is(x.Name)
+                Selected = applicant.TitleAfterName.Is(x.Name),
+                Group = x.Group
             });
         }
 
@@ -33,7 +35,7 @@ namespace ePunkt.Portal.Models.ApplicantPersonalInformation
         }
 
         public Api.Models.Applicant Applicant { get; set; }
-        public IEnumerable<SelectListItem> TitlesBeforeName { get; set; }
-        public IEnumerable<SelectListItem> TitlesAfterName { get; set; }
+        public IEnumerable<HtmlExtensionMethods.GroupedSelectListItem> TitlesBeforeName { get; set; }
+        public IEnumerable<HtmlExtensionMethods.GroupedSelectListItem> TitlesAfterName { get; set; }
     }
 }
