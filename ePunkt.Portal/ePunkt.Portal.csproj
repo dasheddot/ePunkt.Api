@@ -276,7 +276,6 @@
     <Content Include="Custom\_ViewStart.cshtml" />
     <None Include="AppSettings.config" />
     <None Include="AppSettings.config.example" />
-    <None Include="Custom\Dev\Settings.config" />
     <None Include="Custom\Settings.config.example" />
     <None Include="Properties\PublishProfiles\FileSystem.pubxml" />
     <Content Include="Scripts\jquery-ui-1.10.1.js" />
