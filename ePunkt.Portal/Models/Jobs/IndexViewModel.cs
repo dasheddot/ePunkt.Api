@@ -6,6 +6,7 @@ namespace ePunkt.Portal.Models.Jobs
 {
     public class IndexViewModel
     {
+
         public void BuildJobs(IEnumerable<Api.Models.Job> jobs)
         {
             var result = jobs.Select(job => new Job

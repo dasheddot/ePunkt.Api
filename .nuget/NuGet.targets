@@ -18,7 +18,6 @@
     
     <ItemGroup Condition=" '$(PackageSources)' == '' ">
 	    <PackageSource Include="https://nuget.org/api/v2/" />
-        <PackageSource Include="http://teamcity.dotnetopenauth.net:82/guestAuth/app/nuget/v1/FeedService.svc/" />
 	
         <!-- Package sources used to restore packages. By default, registered sources under %APPDATA%\NuGet\NuGet.Config will be used -->
         <!-- The official NuGet package source (https://nuget.org/api/v2/) will be excluded if package sources are specified and it does not appear in the list -->

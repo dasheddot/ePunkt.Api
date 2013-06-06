@@ -35,7 +35,7 @@ namespace ePunkt.Portal
             if (profile == null)
                 throw new ArgumentNullException("profile");
 
-            var applicant = loggedInApplicant ?? await apiClient.SendAndReadAsync<Applicant>(new ApplicantRequest(profile.Identifier, thirdParty));
+            var applicant = loggedInApplicant ?? await apiClient.SendAndReadAsync<Applicant>(new ApplicantRequest(profile.Id, thirdParty));
 
             //we don't have an applicant that is logged in or has a matching profile
             //so, lets create a new applicant
@@ -64,8 +64,8 @@ namespace ePunkt.Portal
 
             //now link the profile
             var linkRequest = thirdParty == ThirdParty.Xing
-                                  ? new LinkXingRequest(applicant.Id, profile.Identifier, profile.Url)
-                                  : (HttpRequestMessage) new LinkLinkedInRequest(applicant.Id, profile.Identifier, profile.Url);
+                                  ? new LinkXingRequest(applicant.Id, profile.Id, profile.Url)
+                                  : (HttpRequestMessage) new LinkLinkedInRequest(applicant.Id, profile.Id, profile.Url);
             applicant = await apiClient.SendAndReadAsync<Applicant>(linkRequest);
 
             return applicant;
