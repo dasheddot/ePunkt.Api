@@ -43,6 +43,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parameters\Application\ApplicationCreateParameter.cs" />
     <Compile Include="Parameters\SetPasswordParameter.cs" />
     <Compile Include="Parameters\SetPasswordAfterRequestParameter.cs" />
     <Compile Include="Models\ApiKey.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Responses\ApplicantSetPasswordResponse.cs" />
     <Compile Include="Parameters\ApplicantUpdateParameter.cs" />
     <Compile Include="Models\CustomField.cs" />
+    <Compile Include="Responses\Application\ApplicationCreateResponse.cs" />
     <Compile Include="Responses\JobSalaryImageResponse.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Responses\JobsResponse.cs" />
