@@ -106,7 +106,7 @@ namespace ePunkt.Portal.Controllers
                     //the applicant is null when the e-mail already exists for another applicant
                     if (applicant == null)
                         return RedirectToAction("EmailAlreadyInUse", "Account", new EmailAlreadyInUseViewModel { Email = profile.Email, JobId = job });
-                    onSuccessRedirectTo = job.HasValue ? RedirectToAction("Index", "Application", new { job }) : RedirectToAction("Index", "Applicant");
+                    onSuccessRedirectTo = job.HasValue ? RedirectToAction("Index", "Application", new { job }) : RedirectToAction("RegisterSuccess", "Account");
                 }
                 else
                 {

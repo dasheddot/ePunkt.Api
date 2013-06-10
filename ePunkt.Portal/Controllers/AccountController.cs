@@ -85,21 +85,43 @@ namespace ePunkt.Portal.Controllers
                         return RedirectToAction("EmailAlreadyInUse", "Account", new { job, email = model.Email });
                 }
 
-                var parameter = new ApplicantCreateParameter
+                //create the applicant
+                var createParameter = new ApplicantCreateParameter
                 {
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Gender = model.Gender
                 };
-                var applicant = await ApiClient.SendAndReadAsync<Applicant>(new ApplicantRequest(parameter));
+                var applicant = await ApiClient.SendAndReadAsync<Applicant>(new ApplicantRequest(createParameter));
 
+                //set the remaining applicant data by updating it
+                var updateParameter = new ApplicantUpdateParameter(applicant)
+                    {
+                        BirthDate = model.BirthDate,
+                        City = model.City,
+                        Country = model.Country,
+                        Nationality = model.Nationality,
+                        Phone = model.Phone,
+                        Street = model.Street,
+                        TitleBeforeName = model.TitleBeforeName,
+                        TitleAfterName = model.TitleAfterName,
+                        ZipCode = model.ZipCode
+                    };
+                applicant = await ApiClient.SendAndReadAsync<Applicant>(new ApplicantRequest(applicant.Id, updateParameter));
+
+                //log the applicant in and redirect either to the applicant profile or the application page
                 FormsAuthentication.SetAuthCookie(applicant.Id.ToString(CultureInfo.InvariantCulture), false);
                 if (job.HasValue)
                     return RedirectToAction("Index", "Application", new { job });
-                return RedirectToAction("Index", "Applicant");
+                return RedirectToAction("RegisterSuccess");
             }
             return View(model);
+        }
+
+        public ActionResult RegisterSuccess()
+        {
+            return View();
         }
 
         public ActionResult EmailAlreadyInUse(string email, int? job)

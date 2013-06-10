@@ -331,6 +331,7 @@
     <Content Include="Views\Application\JobIsClosed.cshtml" />
     <Content Include="Views\Application\Refresh.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\RegisterSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -416,6 +417,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\App_LocalResources\Register.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\RegisterSuccess.cshtml.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

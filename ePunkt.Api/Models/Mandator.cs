@@ -14,6 +14,7 @@ namespace ePunkt.Api.Models
         public IEnumerable<string> ApplicantDocumentTypes { get; set; }
         public IEnumerable<Title> TitlesBeforeName { get; set; }
         public IEnumerable<Title> TitlesAfterName { get; set; }
+        public IEnumerable<string> Countries { get; set; }
     }
 
     public class Translation
