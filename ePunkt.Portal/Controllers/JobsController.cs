@@ -85,9 +85,7 @@ namespace ePunkt.Portal.Controllers
         public async Task<ActionResult> Job(int id)
         {
             var mandator = await GetMandator();
-            var jobsResponse = await _jobsService.LoadJobsForCurrentPortal(Request.Url, mandator);
-
-            var job = jobsResponse.Jobs.FirstOrDefault(x => x.Id == id);
+            var job = await GetJob(mandator, _jobsService, id);
             if (job == null)
                 return RedirectToAction("Index");
 

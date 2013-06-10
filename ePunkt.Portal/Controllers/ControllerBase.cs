@@ -3,6 +3,7 @@ using ePunkt.Api.Client.Requests;
 using ePunkt.Api.Models;
 using ePunkt.Utilities;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -35,6 +36,17 @@ namespace ePunkt.Portal.Controllers
             if (applicant == null || applicant.Id <= 0)
                 return null;
             return applicant;
+        }
+
+        protected async Task<Job> GetJob(LoadJobsService jobsService, int jobId)
+        {
+            return await GetJob(await GetMandator(), jobsService, jobId);
+        }
+
+        protected async Task<Job> GetJob(Mandator mandator, LoadJobsService jobsService, int jobId)
+        {
+            var jobsResponse = await jobsService.LoadJobsForCurrentPortal(Request.Url, mandator);
+            return jobsResponse.Jobs.FirstOrDefault(x => x.Id == jobId);
         }
 
         protected int GetApplicantId()

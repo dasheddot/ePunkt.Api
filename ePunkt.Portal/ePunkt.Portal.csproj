@@ -166,7 +166,7 @@
     <Compile Include="Code\ActionResults\RssActionResult.cs" />
     <Compile Include="Code\ActionResults\XmlActionResult.cs" />
     <Compile Include="Code\InMemoryTokenManager.cs" />
-    <Compile Include="Code\LinkThirdPartyProfileService.cs" />
+    <Compile Include="Code\Services\LinkThirdPartyProfileService.cs" />
     <Compile Include="Code\Settings\CombinePortalAndCustomSettingsService.cs" />
     <Compile Include="Code\Settings\CustomSettings.cs" />
     <Compile Include="Code\Settings\CustomSettingsService.cs" />
@@ -174,18 +174,19 @@
     <Compile Include="Code\ExtensionMethods\FilterExtensionMethods.cs" />
     <Compile Include="Code\ExtensionMethods\HtmlExtensionMethods.cs" />
     <Compile Include="Code\ActionFilters\RequireRouteValueAttribute.cs" />
-    <Compile Include="Code\FixJobAdUrlsService.cs" />
-    <Compile Include="Code\LoadJobsService.cs" />
-    <Compile Include="Code\ReferrerService.cs" />
-    <Compile Include="Code\SyndicationService.cs" />
+    <Compile Include="Code\Services\FixJobAdUrlsService.cs" />
+    <Compile Include="Code\Services\LoadJobsService.cs" />
+    <Compile Include="Code\Services\ReferrerService.cs" />
+    <Compile Include="Code\Services\SyndicationService.cs" />
     <Compile Include="Code\Translations.cs" />
-    <Compile Include="Code\UrlBuilderService.cs" />
+    <Compile Include="Code\Services\UrlBuilderService.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\ApplicantController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicantFilesController.cs" />
     <Compile Include="Controllers\ApplicantPersonalInformationController.cs" />
+    <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\ThirdPartyProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
@@ -193,12 +194,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account\EmailAlreadyInUseViewModel.cs" />
+    <Compile Include="Models\Account\IndexViewModel.cs" />
     <Compile Include="Models\ApplicantCompleteness.cs" />
     <Compile Include="Models\ApplicantFiles\IndexViewModel.cs" />
     <Compile Include="Models\ApplicantPersonalInformation\IndexViewModel.cs" />
     <Compile Include="Models\Applicant\IndexViewModel.cs" />
+    <Compile Include="Models\Application\JobIsClosedViewModel.cs" />
+    <Compile Include="Models\Application\RefreshViewModel.cs" />
+    <Compile Include="Models\Application\IndexViewModel.cs" />
     <Compile Include="Models\Jobs\JobModel.cs" />
     <Compile Include="Models\Jobs\IndexViewModel.cs" />
+    <Compile Include="Models\Account\RegisterViewModel.cs" />
     <Compile Include="Models\ThirdPartyProfile\ErrorViewModel.cs" />
     <Compile Include="Models\ThirdPartyProfile\IndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -311,7 +318,7 @@
     <Content Include="Views\Shared\ContentFooter.cshtml" />
     <Content Include="Views\ThirdPartyProfile\Index.cshtml" />
     <Content Include="Views\ThirdPartyProfile\Error.cshtml" />
-    <Content Include="Views\ThirdPartyProfile\EmailAlreadyInUse.cshtml" />
+    <Content Include="Views\Account\EmailAlreadyInUse.cshtml" />
     <Content Include="Views\Account\RequestPasswordStep1.cshtml" />
     <Content Include="Views\Account\RequestPasswordStep1Success.cshtml" />
     <Content Include="Views\Account\RequestPasswordStep2.cshtml" />
@@ -320,6 +327,10 @@
     <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
     <Content Include="Views\ApplicantFiles\Index.cshtml" />
     <Content Include="Views\ApplicantPersonalInformation\Index.cshtml" />
+    <Content Include="Views\Application\Index.cshtml" />
+    <Content Include="Views\Application\JobIsClosed.cshtml" />
+    <Content Include="Views\Application\Refresh.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -356,7 +367,7 @@
     <Content Include="Views\ThirdPartyProfile\App_LocalResources\Error.cshtml.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\ThirdPartyProfile\App_LocalResources\EmailAlreadyInUse.cshtml.resx" />
+    <Content Include="Views\Account\App_LocalResources\EmailAlreadyInUse.cshtml.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ThirdPartyProfile\App_LocalResources\Index.cshtml.resx" />
@@ -393,6 +404,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ApplicantPersonalInformation\App_LocalResources\Index.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Application\App_LocalResources\Index.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Application\App_LocalResources\JobIsClosed.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Application\App_LocalResources\Refresh.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\Register.cshtml.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

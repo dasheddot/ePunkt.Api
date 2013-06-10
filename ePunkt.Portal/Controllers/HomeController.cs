@@ -1,8 +1,6 @@
-﻿using System.Text;
-using ePunkt.Api.Client;
-using ePunkt.Api.Client.Requests;
+﻿using ePunkt.Api.Client;
 using System;
-using System.Diagnostics;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -16,16 +14,13 @@ namespace ePunkt.Portal.Controllers
         {
         }
 
-        public async Task<ActionResult> Index()
+        public ActionResult Index(int? job)
         {
-            try
+            if (job.HasValue)
             {
-                var pingResponse = await ApiClient.SendAndReadAsync<string>(new PingRequest());
-                Debug.WriteLine(pingResponse + " (" + ApiClient.ElapsedMillisecondsInLastCall + "ms)");
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("Unable to ping API endpoint", ex);
+                if (User.Identity.IsAuthenticated)
+                    return RedirectToAction("Index", "Application", new {job});
+                return RedirectToAction("Login", "Account", new {job});
             }
 
             return RedirectToAction("Index", "Jobs");

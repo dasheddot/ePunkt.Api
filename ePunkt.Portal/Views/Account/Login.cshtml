@@ -1,12 +1,13 @@
-﻿@Html.TranslatedValidationSummary()
+﻿@model ePunkt.Portal.Models.Account.IndexViewModel
 
+@Html.TranslatedValidationSummary()
 
 <div id="loginWithThirdPartyAccount">
     <h1>@Html.Loc("ThirdPartyAccount_Title")</h1>
     <ul>
-        <li><a href="@Url.Action("Xing", "ThirdPartyProfile")">
+        <li><a href="@Url.Action("Xing", "ThirdPartyProfile", new { job = Model.JobId })">
             <img src="~/Content/Xing.png" alt="@Html.Loc("Alt_Xing")" title="@Html.Loc("Alt_Xing")" id="xing"/></a></li>
-        <li><a href="@Url.Action("LinkedIn", "ThirdPartyProfile")">
+        <li><a href="@Url.Action("LinkedIn", "ThirdPartyProfile", new { job = Model.JobId })">
             <img src="~/Content/LinkedIn.png" alt="@Html.Loc("Alt_LinkedIn")" title="@Html.Loc("Alt_LinkedIn")" id="linkedIn"/></a></li>
     </ul>
     <p>
@@ -17,21 +18,21 @@
 <div id="loginWithCredentials">
     <h1>@Html.Loc("Credentials_Title")</h1>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm(new { job = Model.JobId }))
     {
         @Html.AntiForgeryToken()
         <table>
             <tr>
                 <td>@Html.Loc("Email_Label")</td>
                 <td>
-                    <input type="email" name="username" required="true" placeholder="@Html.Loc("Email_Placeholder")" />
+                    <input type="email" name="username" required placeholder="@Html.Loc("Email_Placeholder")" />
                     @Html.ValidationMessage("username")
                 </td>
             </tr>
             <tr>
                 <td>@Html.Loc("Password_Label")</td>
                 <td>
-                    <input type="password" name="password" required="true" />
+                    <input type="password" name="password" required />
                     @Html.ValidationMessage("password")
                 </td>
             </tr>
@@ -44,8 +45,8 @@
         </table>
     }
     <p>@Html.Loc("Credentials_Text")</p>
-    <p>@Html.Loc("CreateProfile_Link")</p>
-    <p>@Html.ActionLink(Html.Loc("ForgotPassword_Link").ToString(), "RequestPassword", "Account")</p>
+    <p>@Html.ActionLink(Html.Loc("CreateProfile_Link").ToString(), "Register", "Account", new { job = Model.JobId }, null)</p>
+    <p>@Html.ActionLink(Html.Loc("ForgotPassword_Link").ToString(), "RequestPassword", "Account", new { job = Model.JobId }, null)</p>
 </div>
 
 @section scripts

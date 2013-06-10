@@ -47,6 +47,8 @@ namespace ePunkt.Portal
                 html = Regex.Replace(html, "https://" + oldValue, "https://" + newValue, RegexOptions.IgnoreCase);
             }
 
+            html = Regex.Replace(html, "target=\"_blank\"", "", RegexOptions.IgnoreCase);
+
             return html;
         }
     }

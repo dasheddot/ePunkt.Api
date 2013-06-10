@@ -1,0 +1,15 @@
+﻿@model ePunkt.Portal.Models.Application.IndexViewModel
+
+@Html.TranslatedValidationSummary()
+
+<h1>@Html.Loc("Title")</h1>
+<p>@Html.Loc("Description")</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+
+        <input type="submit" value="@Html.Loc("Save")" />
+    </div>
+}

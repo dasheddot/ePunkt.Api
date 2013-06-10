@@ -1,6 +1,7 @@
 ﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
 using ePunkt.Api.Models;
+using ePunkt.Portal.Models.Account;
 using ePunkt.Portal.Models.ThirdPartyProfile;
 using ePunkt.SocialConnector;
 using ePunkt.SocialConnector.Linkedin;
@@ -12,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Security;
+using IndexViewModel = ePunkt.Portal.Models.ThirdPartyProfile.IndexViewModel;
 
 namespace ePunkt.Portal.Controllers
 {
@@ -43,27 +45,22 @@ namespace ePunkt.Portal.Controllers
             return View(model);
         }
 
-        public ActionResult EmailAlreadyInUse(string email)
-        {
-            return View((object)email);
-        }
-
-        public async Task<ActionResult> Xing()
+        public async Task<ActionResult> Xing(int? job)
         {
             var mandator = await GetMandator();
             var tokenManager = new InMemoryTokenManager(mandator.Settings.XingConsumerKey, mandator.Settings.XingConsumerSecret);
             var xingConsumer = new XingConsumer(tokenManager);
 
-            return await Link(xingConsumer, ThirdParty.Xing);
+            return await Link(xingConsumer, ThirdParty.Xing, job);
         }
 
-        public async Task<ActionResult> LinkedIn()
+        public async Task<ActionResult> LinkedIn(int? job)
         {
             var mandator = await GetMandator();
             var tokenManager = new InMemoryTokenManager(mandator.Settings.LinkedinConsumerKey, mandator.Settings.LinkedinConsumerSecret);
             var linkedinConsumer = new LinkedinConsumer(tokenManager);
 
-            return await Link(linkedinConsumer, ThirdParty.LinkedIn);
+            return await Link(linkedinConsumer, ThirdParty.LinkedIn, job);
         }
 
         [Authorize]
@@ -80,7 +77,7 @@ namespace ePunkt.Portal.Controllers
             return RedirectToAction("Index");
         }
 
-        private async Task<ActionResult> Link(IConsumer consumer, ThirdParty thirdParty)
+        private async Task<ActionResult> Link(IConsumer consumer, ThirdParty thirdParty, int? job)
         {
             string accessToken;
             ActionResult result;
@@ -91,7 +88,7 @@ namespace ePunkt.Portal.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error", new ErrorViewModel {Reason = ex.Message});
+                return View("Error", new ErrorViewModel { Reason = ex.Message });
             }
 
             if (accessToken.HasValue())
@@ -108,9 +105,8 @@ namespace ePunkt.Portal.Controllers
 
                     //the applicant is null when the e-mail already exists for another applicant
                     if (applicant == null)
-                        return RedirectToAction("EmailAlreadyInUse", new {email = profile.Email});
-
-                    onSuccessRedirectTo = RedirectToAction("Index", "Applicant");
+                        return RedirectToAction("EmailAlreadyInUse", "Account", new EmailAlreadyInUseViewModel { Email = profile.Email, JobId = job });
+                    onSuccessRedirectTo = job.HasValue ? RedirectToAction("Index", "Application", new { job }) : RedirectToAction("Index", "Applicant");
                 }
                 else
                 {

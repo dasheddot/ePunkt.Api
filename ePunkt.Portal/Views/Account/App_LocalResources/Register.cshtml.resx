@@ -117,13 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Login_Link" xml:space="preserve">
-    <value>Log in</value>
+  <data name="Description" xml:space="preserve">
+    <value>Please fill the form below. If you already have a profile, please &lt;a href="{0}"&gt;log in&lt;/a&gt;.</value>
   </data>
-  <data name="Text" xml:space="preserve">
-    <value>The e-mail address &lt;code&gt;{0}&lt;/code&gt; is already in use. Please log in to your existing profile; you can link any third party account there to use it to log in to your applicant profile in the future.</value>
+  <data name="Email" xml:space="preserve">
+    <value>Email address:</value>
+  </data>
+  <data name="EmptySelection" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="Error-Email" xml:space="preserve">
+    <value>Please enter your e-mail address.</value>
+  </data>
+  <data name="Error-FirstName" xml:space="preserve">
+    <value>Please enter your first name.</value>
+  </data>
+  <data name="Error-LastName" xml:space="preserve">
+    <value>Please enter your last name.</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First name(s):</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender:</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last name(s):</value>
+  </data>
+  <data name="Mr." xml:space="preserve">
+    <value>Mr.</value>
+  </data>
+  <data name="Mrs." xml:space="preserve">
+    <value>Mrs./Ms.</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Your e-mail address is already in use</value>
+    <value>Create a new applicant profile</value>
+  </data>
+  <data name="Titles" xml:space="preserve">
+    <value>Title(s):</value>
   </data>
 </root>

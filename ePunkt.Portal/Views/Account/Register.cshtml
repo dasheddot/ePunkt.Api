@@ -1,0 +1,60 @@
+﻿@model ePunkt.Portal.Models.Account.RegisterViewModel
+
+@{
+    var genders = new List<SelectListItem>
+        {
+            new SelectListItem { Text = Html.Loc("Mrs.").ToString(), Value = "False" }, 
+            new SelectListItem { Text = Html.Loc("Mr.").ToString(), Value = "True" }
+        };
+    if (Model.AllowEmptyGender)
+    {
+        genders.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
+    }
+
+    var titlesBeforeName = Model.AvailableTitlesBeforeName.ToList();
+    titlesBeforeName.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
+    var titlesAfterName = Model.AvailableTitlesAfterName.ToList();
+    titlesAfterName.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
+}
+
+@Html.TranslatedValidationSummary()
+
+<h1>@Html.Loc("Title")</h1>
+<p>@Html.Loc("Description", Url.Action("Login", "Account", new { job = Model.JobId }))</p>
+
+@using (Html.BeginForm(new { job = Model.JobId }))
+{
+    @Html.AntiForgeryToken()
+
+    <table id="accountRegisterTable">
+        <tr>
+            <td>@Html.Loc("Gender")</td>
+            <td>@Html.DropDownListFor(x => x.Gender, genders)</td>
+            <td>@Html.Loc("Titles")</td>
+            <td>@Html.DropDownListFor(x => x.TitleBeforeName, titlesBeforeName)
+                @Html.DropDownListFor(x => x.TitleAfterName, titlesAfterName)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.Loc("FirstName")</td>
+            <td>@Html.TextBoxFor(x => x.FirstName, new { })</td>
+            <td>@Html.Loc("LastName")</td>
+            <td>@Html.TextBoxFor(x => x.LastName, new { required = "required" })</td>
+        </tr>
+        <tr>
+            <td>@Html.Loc("Email")</td>
+            <td>@Html.TextBoxFor(x => x.Email, new { required = "required", type = "email" })</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    
+    <p>
+        <input type="submit" value="@Html.Loc("Save")" />
+    </p>
+
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

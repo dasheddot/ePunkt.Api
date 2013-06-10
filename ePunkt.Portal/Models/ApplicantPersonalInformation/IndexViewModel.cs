@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using ePunkt.Api.Models;
+using ePunkt.Utilities;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Web.Mvc;
-using ePunkt.Api.Models;
-using ePunkt.Utilities;
 
 namespace ePunkt.Portal.Models.ApplicantPersonalInformation
 {
     public class IndexViewModel
     {
-        public IndexViewModel(Api.Models.Mandator mandator, Api.Models.Applicant applicant)
+        public IndexViewModel(Mandator mandator, Api.Models.Applicant applicant)
         {
             Applicant = applicant;
             TitlesBeforeName = FilterTitles(mandator.TitlesBeforeName).Select(x => new HtmlExtensionMethods.GroupedSelectListItem

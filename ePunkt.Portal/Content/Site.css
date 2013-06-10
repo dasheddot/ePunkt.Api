@@ -67,3 +67,4 @@ img.grayed { opacity: 0.4; filter: grayscale(100%); -webkit-filter: grayscale(10
 /* ASP.NET MVC styles */
 .validation-summary-errors { background-color: red; color: white; padding: 5px 0 5px 0; }
 .field-validation-error { color: red; }
+.input-validation-error { background-color: red; color: white; }
