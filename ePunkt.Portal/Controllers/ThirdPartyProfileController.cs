@@ -93,9 +93,9 @@ namespace ePunkt.Portal.Controllers
 
             if (accessToken.HasValue())
             {
-                var xingClient = consumer.GetClient(accessToken);
-                var profile = await xingClient.Users.ForMe();
-
+                var client = consumer.GetClient(accessToken);
+                var profile = await client.Users.ForMe();
+ 
                 var mandator = await GetMandator();
                 var applicant = await GetApplicant();
                 ActionResult onSuccessRedirectTo;
