@@ -95,7 +95,7 @@ namespace ePunkt.Portal.Controllers
             {
                 var client = consumer.GetClient(accessToken);
                 var profile = await client.Users.ForMe();
- 
+
                 var mandator = await GetMandator();
                 var applicant = await GetApplicant();
                 ActionResult onSuccessRedirectTo;
@@ -106,7 +106,13 @@ namespace ePunkt.Portal.Controllers
                     //the applicant is null when the e-mail already exists for another applicant
                     if (applicant == null)
                         return RedirectToAction("EmailAlreadyInUse", "Account", new EmailAlreadyInUseViewModel { Email = profile.Email, JobId = job });
-                    onSuccessRedirectTo = job.HasValue ? RedirectToAction("Index", "Application", new { job }) : RedirectToAction("RegisterSuccess", "Account");
+
+                    if (job.HasValue)
+                        onSuccessRedirectTo = RedirectToAction("Index", "Application", new { job });
+                    else if (applicant.DateOfCreation >= DateTime.Now.AddSeconds(-10)) //the applicant has just been created, redirect him to the "thank you for your registration" page
+                        onSuccessRedirectTo = RedirectToAction("RegisterSuccess", "Account");
+                    else
+                        onSuccessRedirectTo = RedirectToAction("Index", "Applicant");
                 }
                 else
                 {

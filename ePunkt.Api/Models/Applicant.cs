@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ePunkt.Api.Parameters;
 
 namespace ePunkt.Api.Models
@@ -6,6 +7,8 @@ namespace ePunkt.Api.Models
     public class Applicant : ApplicantUpdateParameter
     {
         public int Id { get; set; }
+        public DateTime DateOfCreation { get; set; }
+        public DateTime DateOfUpdate { get; set; }
 
         public IEnumerable<ApplicantThirdPartyProfile> ThirdPartyProfiles { get; set; }
         public IEnumerable<ApplicantDocument> Documents { get; set; }
