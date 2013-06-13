@@ -12,11 +12,26 @@ namespace ePunkt.Portal
 {
     public static class HtmlExtensionMethods
     {
-        public static MvcHtmlString TranslatedValidationSummary(this HtmlHelper helper)
+        public static MvcHtmlString TranslatedValidationSummary(this HtmlHelper helper, params string[] additionalLocations)
         {
             foreach (var modelState in helper.ViewData.ModelState)
             {
-                var newErrors = modelState.Value.Errors.Select(x => new ModelError(Loc(helper, x.ErrorMessage).ToString())).ToList();
+                var newErrors = new List<ModelError>();
+                foreach (var oldError in modelState.Value.Errors)
+                {
+                    bool keyFound;
+                    var errorMessage = Loc(helper, oldError.ErrorMessage, out keyFound).ToString(); //try go the the translation for the current view
+                    if (!keyFound)
+                        foreach (var location in additionalLocations)
+                        {
+                            using (SwitchLocSource(helper, location))
+                                errorMessage = Loc(helper, oldError.ErrorMessage, out keyFound).ToString(); //if we haven't found a translation before, also check the additional locations
+                            if (keyFound)
+                                break;
+                        }
+                    newErrors.Add(new ModelError(errorMessage));
+                }
+
                 modelState.Value.Errors.Clear();
                 foreach (var newError in newErrors)
                     modelState.Value.Errors.Add(newError);
@@ -25,6 +40,12 @@ namespace ePunkt.Portal
         }
 
         public static MvcHtmlString Loc(this HtmlHelper helper, string key, params object[] values)
+        {
+            bool keyFound;
+            return Loc(helper, key, out keyFound, values);
+        }
+
+        public static MvcHtmlString Loc(this HtmlHelper helper, string key, out bool keyFound, params object[] values)
         {
             var controller = (Controllers.ControllerBase)helper.ViewContext.Controller;
             var view = ((RazorView)helper.ViewContext.View);
@@ -44,7 +65,12 @@ namespace ePunkt.Portal
             }
 
             if (resource == null)
-                throw new Exception("Resource '" + key + "' for view '" + pathToView + "' not found.");
+            {
+                resource = "< " + key + " >";
+                keyFound = false;
+            }
+            else
+                keyFound = true;
 
             return new MvcHtmlString(string.Format(resource, values));
         }

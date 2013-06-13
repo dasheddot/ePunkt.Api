@@ -1,8 +1,19 @@
-﻿@model ePunkt.Portal.Models.ApplicantPersonalInformation.IndexViewModel
+﻿@model ePunkt.Portal.Models.Shared.PersonalInformationViewModel
 
-@Html.TranslatedValidationSummary()
+@Html.TranslatedValidationSummary("~/Views/Shared/PersonalInformation.cshtml")
 
 <h1>@Html.Loc("Title")</h1>
 <p>@Html.Loc("Description")</p>
 
-@Html.DropDownList("titleBeforeName",Model.TitlesBeforeName)
+@using (Html.BeginForm())
+{
+    @Html.Partial("PersonalInformation")
+
+    <p>
+        <input type="submit" value="@Html.Loc("Save")"/>
+    </p>
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

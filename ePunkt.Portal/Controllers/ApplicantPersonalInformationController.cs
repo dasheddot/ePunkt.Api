@@ -8,9 +8,12 @@ namespace ePunkt.Portal.Controllers
     [Authorize]
     public class ApplicantPersonalInformationController : ControllerBase
     {
-        public ApplicantPersonalInformationController(ApiHttpClient apiClient, CustomSettings settings)
+        private readonly UpdateApplicantService _updateApplicantService;
+
+        public ApplicantPersonalInformationController(ApiHttpClient apiClient, CustomSettings settings, UpdateApplicantService updateApplicantService)
             : base(apiClient, settings)
         {
+            _updateApplicantService = updateApplicantService;
         }
 
         public async Task<ActionResult> Index()
@@ -18,7 +21,26 @@ namespace ePunkt.Portal.Controllers
             var applicant = await GetApplicant();
             if (applicant == null)
                 return RedirectToAction("Logoff", "Account");
-            return View(new IndexViewModel(await GetMandator(), applicant));
+
+            var model = new IndexViewModel();
+            model.Prepare(await GetMandator(), applicant);
+
+            return View(model);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Index(IndexViewModel model)
+        {
+            var applicant = await GetApplicant();
+            if (applicant == null)
+                return RedirectToAction("Logoff", "Account");
+
+            if (ModelState.IsValid)
+                applicant = await _updateApplicantService.UpdatePersonalInformation(ApiClient, applicant, model);
+
+            model.Prepare(await GetMandator(), applicant);
+            return View(model);
+        }
+
     }
 }

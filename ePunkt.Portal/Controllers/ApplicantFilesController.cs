@@ -14,9 +14,10 @@ namespace ePunkt.Portal.Controllers
     [Authorize]
     public class ApplicantFilesController : ControllerBase
     {
-        public ApplicantFilesController(ApiHttpClient apiClient, CustomSettings settings)
+        public ApplicantFilesController(ApiHttpClient apiClient, CustomSettings settings, UpdateApplicantFileService updateApplicantFileService)
             : base(apiClient, settings)
         {
+            _updateApplicantFileService = updateApplicantFileService;
         }
 
         public async Task<ActionResult> Index()
@@ -30,6 +31,7 @@ namespace ePunkt.Portal.Controllers
         private const int MaxFileSize = 1024 * 1024 * 10;
         private readonly string[] _documentExtensions = new[] { "pdf", "doc", "docx" };
         private readonly string[] _imageExtensions = new[] { "jpg", "jpeg", "png" };
+        private readonly UpdateApplicantFileService _updateApplicantFileService;
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -43,28 +45,19 @@ namespace ePunkt.Portal.Controllers
                     var file = Request.Files[key];
                     if (file != null)
                     {
-                        var extension = (Path.GetExtension(file.FileName) ?? "").ToLower().Trim('.');
-                        if (type.Is("Cv") && (file.ContentLength > MaxFileSize || !_documentExtensions.Contains(extension)))
-                            ModelState.AddModelError("upload", @"Error-Cv");
-                        else if (type.Is("Photo") && (file.ContentLength > MaxFileSize || !_imageExtensions.Contains(extension)))
-                            ModelState.AddModelError("upload", @"Error-Cv");
-                        else if ((file.ContentLength > MaxFileSize || !_documentExtensions.Union(_imageExtensions).Contains(extension)))
-                            ModelState.AddModelError("upload", @"Error-Cv");
+
+                        if (_updateApplicantFileService.CheckFile(file, type) != UpdateApplicantFileService.CheckFileResult.Ok)
+                            if (type.Is("CV"))
+                                ModelState.AddModelError("Documents", @"Error-Cv");
+                            else if (type.Is("Photo"))
+                                ModelState.AddModelError("Documents", @"Error-Photo");
+                            else
+                                ModelState.AddModelError("Documents", @"Error-Documents");
 
                         if (!ModelState.IsValid)
                             return View(new IndexViewModel(await GetMandator(), applicant));
 
-                        using (var reader = new BinaryReader(file.InputStream))
-                        {
-                            var document = new DocumentContent
-                                {
-                                    Content = reader.ReadBytes(file.ContentLength),
-                                    Extension = (Path.GetExtension(file.FileName) ?? "").Trim('.'),
-                                    Name = Path.GetFileNameWithoutExtension(file.FileName),
-                                    Type = type
-                                };
-                            await ApiClient.SendAndReadAsync<string>(new ApplicantDocumentPostRequest(applicant.Id, document));
-                        }
+                        await _updateApplicantFileService.AddFile(ApiClient, applicant, file, type);
                     }
                 }
             }

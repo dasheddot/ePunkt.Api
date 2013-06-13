@@ -18,12 +18,17 @@ namespace ePunkt.Portal.Controllers
     {
         #region Constructor
         private readonly LoadJobsService _jobsService;
+        private readonly UpdateApplicantService _updateApplicantService;
+        private readonly UpdateApplicantFileService _updateApplicantFileService;
 
-        public AccountController(ApiHttpClient apiClient, CustomSettings settings, LoadJobsService jobsService)
+        public AccountController(ApiHttpClient apiClient, CustomSettings settings, LoadJobsService jobsService, UpdateApplicantService updateApplicantService, UpdateApplicantFileService updateApplicantFileService)
             : base(apiClient, settings)
         {
+            _updateApplicantFileService = updateApplicantFileService;
+            _updateApplicantService = updateApplicantService;
             _jobsService = jobsService;
         }
+
         #endregion
 
         #region Login / Logoff
@@ -75,6 +80,25 @@ namespace ePunkt.Portal.Controllers
         {
             var mandator = await GetMandator();
             model.Prepare(mandator, job.HasValue ? await GetJob(mandator, _jobsService, job.Value) : null);
+
+            if (model.Cv != null && _updateApplicantFileService.CheckFile(model.Cv, "Cv") != UpdateApplicantFileService.CheckFileResult.Ok)
+                ModelState.AddModelError("Cv", @"Error-Cv");
+            if (model.Photo != null && _updateApplicantFileService.CheckFile(model.Photo, "Photo") != UpdateApplicantFileService.CheckFileResult.Ok)
+                ModelState.AddModelError("Photo", @"Error-Photo");
+            if (model.Documents != null)
+            {
+                var index = 0;
+                foreach (var document in model.Documents)
+                {
+                    if (document != null && _updateApplicantFileService.CheckFile(document, model.DocumentTypes.ElementAt(index)) != UpdateApplicantFileService.CheckFileResult.Ok)
+                    {
+                        ModelState.AddModelError("Documents", @"Error-Documents");
+                        break;
+                    }               
+                    index++;
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 //check if the email is not in use already
@@ -95,20 +119,24 @@ namespace ePunkt.Portal.Controllers
                 };
                 var applicant = await ApiClient.SendAndReadAsync<Applicant>(new ApplicantRequest(createParameter));
 
-                //set the remaining applicant data by updating it
-                var updateParameter = new ApplicantUpdateParameter(applicant)
+                //update the personal information
+                applicant = await _updateApplicantService.UpdatePersonalInformation(ApiClient, applicant, model);
+
+                //save the documents
+                if (model.Cv != null)
+                    await _updateApplicantFileService.AddFile(ApiClient, applicant, model.Cv, "Cv");
+                if (model.Photo != null)
+                    await _updateApplicantFileService.AddFile(ApiClient, applicant, model.Photo, "Photo");
+                if (model.Documents != null)
+                {
+                    var index = 0;
+                    foreach (var document in model.Documents)
                     {
-                        BirthDate = model.BirthDate,
-                        City = model.City,
-                        Country = model.Country,
-                        Nationality = model.Nationality,
-                        Phone = model.Phone,
-                        Street = model.Street,
-                        TitleBeforeName = model.TitleBeforeName,
-                        TitleAfterName = model.TitleAfterName,
-                        ZipCode = model.ZipCode
-                    };
-                applicant = await ApiClient.SendAndReadAsync<Applicant>(new ApplicantRequest(applicant.Id, updateParameter));
+                        if (document != null)
+                            await _updateApplicantFileService.AddFile(ApiClient, applicant, document, model.DocumentTypes.ElementAt(index));
+                        index++;
+                    }
+                }
 
                 //log the applicant in and redirect either to the applicant profile or the application page
                 FormsAuthentication.SetAuthCookie(applicant.Id.ToString(CultureInfo.InvariantCulture), false);

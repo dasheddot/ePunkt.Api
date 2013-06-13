@@ -1,78 +1,47 @@
 ﻿@model ePunkt.Portal.Models.Account.RegisterViewModel
 
-@{
-    var genders = new List<SelectListItem>
-        {
-            new SelectListItem { Text = Html.Loc("Mrs.").ToString(), Value = "False" }, 
-            new SelectListItem { Text = Html.Loc("Mr.").ToString(), Value = "True" }
-        };
-    if (Model.AllowEmptyGender)
-    {
-        genders.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
-    }
-
-    var titlesBeforeName = Model.AvailableTitlesBeforeName.ToList();
-    titlesBeforeName.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
-    var titlesAfterName = Model.AvailableTitlesAfterName.ToList();
-    titlesAfterName.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
-    var countries = Model.AvailableCountries.ToList();
-    countries.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
-    var nationalities = Model.AvailableNationalities.ToList();
-    nationalities.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
-}
-
-@Html.TranslatedValidationSummary()
+@Html.TranslatedValidationSummary("~/Views/Shared/PersonalInformation.cshtml")
 
 <h1>@Html.Loc("Title")</h1>
 <p>@Html.Loc("Description", Url.Action("Login", "Account", new { job = Model.JobId }))</p>
 
-@using (Html.BeginForm(new { job = Model.JobId }))
+@using (Html.BeginForm("Register", "Account", new { job = Model.JobId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-    <table id="accountRegisterTable">
+    <h2>@Html.Loc("PersonalInformation")</h2>  
+    @Html.Partial("PersonalInformation")
+
+    <h2>@Html.Loc("Documents")</h2>  
+            
+    <table>
         <tr>
-            <td>@Html.Loc("Gender")</td>
-            <td>@Html.DropDownListFor(x => x.Gender, genders)</td>
-            <td>@Html.Loc("Titles")</td>
-            <td>@Html.DropDownListFor(x => x.TitleBeforeName, titlesBeforeName)
-                @Html.DropDownListFor(x => x.TitleAfterName, titlesAfterName)
-            </td>
+            <td>@Html.Loc("Cv")</td>
+            <td>
+                <input type="file" name="cv" /></td>
         </tr>
         <tr>
-            <td>@Html.Loc("FirstName")</td>
-            <td>@Html.TextBoxFor(x => x.FirstName, new { })</td>
-            <td>@Html.Loc("LastName")</td>
-            <td>@Html.TextBoxFor(x => x.LastName, new { required = "required" })</td>
+            <td>@Html.Loc("Photo")</td>
+            <td>
+                <input type="file" name="photo" /></td>
         </tr>
         <tr>
-            <td>@Html.Loc("Email")</td>
-            <td>@Html.TextBoxFor(x => x.Email, new { required = "required", type = "email" })</td>
-            <td>@Html.Loc("Phone")</td>
-            <td>@Html.TextBoxFor(x => x.Phone, new { required = "required" })</td>
+            <td>@Html.Loc("Document")</td>
+            <td>
+                <input type="file" name="documents" />
+                @Html.DropDownListFor(x => x.DocumentTypes[0], Model.AvailableDocumentTypes)</td>
         </tr>
         <tr>
-            <td>@Html.Loc("Birthdate")</td>
-            <td>@Html.TextBoxFor(x => x.BirthDate, new { required = "required", type = "date" })</td>
-        </tr>
-        <tr>
-            <td>@Html.Loc("Street")</td>
-            <td>@Html.TextBoxFor(x => x.Street, new { required = "required" })</td>
-            <td>@Html.Loc("ZipCodeAndCity")</td>
-            <td>@Html.TextBoxFor(x => x.ZipCode, new { required = "required" }) @Html.TextBoxFor(x => x.City, new { required = "required" })</td>
-        </tr>
-                <tr>
-            <td>@Html.Loc("Country")</td>
-            <td>@Html.DropDownListFor(x => x.Country, countries)</td>
-            <td>@Html.Loc("Nationality")</td>
-            <td>@Html.DropDownListFor(x => x.Nationality, nationalities)</td>
+            <td>@Html.Loc("Document")</td>
+            <td>
+                <input type="file" name="documents" />
+                @Html.DropDownListFor(x => x.DocumentTypes[1], Model.AvailableDocumentTypes)</td>
         </tr>
     </table>
     
     <p>
         <input type="submit" value="@Html.Loc("Save")" />
     </p>
-
 }
 
 @section scripts {

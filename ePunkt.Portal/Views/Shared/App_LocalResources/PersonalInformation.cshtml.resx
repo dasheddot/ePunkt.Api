@@ -117,13 +117,76 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Description" xml:space="preserve">
-    <value>Please leave your contact information (especially e-mail and telephone) so we can reach you.</value>
+  <data name="BirthDate" xml:space="preserve">
+    <value>Date of birth:</value>
   </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
+  <data name="Country" xml:space="preserve">
+    <value>Country:</value>
   </data>
-  <data name="Title" xml:space="preserve">
-    <value>My personal information</value>
+  <data name="Email" xml:space="preserve">
+    <value>Email address:</value>
+  </data>
+  <data name="EmptySelection" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="Error-BirthDate" xml:space="preserve">
+    <value>Please enter your date of birth.</value>
+  </data>
+  <data name="Error-City" xml:space="preserve">
+    <value>Please enter your city.</value>
+  </data>
+  <data name="Error-Country" xml:space="preserve">
+    <value>Please choose your country.</value>
+  </data>
+  <data name="Error-Email" xml:space="preserve">
+    <value>Please enter your e-mail address.</value>
+  </data>
+  <data name="Error-FirstName" xml:space="preserve">
+    <value>Please enter your first name.</value>
+  </data>
+  <data name="Error-LastName" xml:space="preserve">
+    <value>Please enter your last name.</value>
+  </data>
+  <data name="Error-Nationality" xml:space="preserve">
+    <value>Please choose your nationality.</value>
+  </data>
+  <data name="Error-Phone" xml:space="preserve">
+    <value>Please enter your phone number.</value>
+  </data>
+  <data name="Error-Street" xml:space="preserve">
+    <value>Please enter your address.</value>
+  </data>
+  <data name="Error-ZipCode" xml:space="preserve">
+    <value>Please enter your ZIP code.</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First name(s):</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender:</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last name(s):</value>
+  </data>
+  <data name="Mr." xml:space="preserve">
+    <value>Mr.</value>
+  </data>
+  <data name="Mrs." xml:space="preserve">
+    <value>Mrs./Ms.</value>
+  </data>
+  <data name="Nationality" xml:space="preserve">
+    <value>Nationality:</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone number:</value>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>Address:</value>
+  </data>
+  <data name="Titles" xml:space="preserve">
+    <value>Title(s):</value>
+  </data>
+  <data name="ZipCodeAndCity" xml:space="preserve">
+    <value>ZIP code and city:</value>
   </data>
 </root>

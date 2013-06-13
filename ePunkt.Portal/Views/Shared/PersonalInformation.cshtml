@@ -1,0 +1,66 @@
+﻿@model ePunkt.Portal.Models.Shared.PersonalInformationViewModel
+
+@using (Html.SwitchLocSource("~/Views/Shared/PersonalInformation.cshtml"))
+{
+    <text>
+    @{
+    var genders = new List<SelectListItem>
+            {
+                new SelectListItem {Text = Html.Loc("Mrs.").ToString(), Value = "False"},
+                new SelectListItem {Text = Html.Loc("Mr.").ToString(), Value = "True"}
+            };
+    if (Model.AllowEmptyGender)
+    {
+        genders.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
+    }
+
+    var titlesBeforeName = Model.AvailableTitlesBeforeName.ToList();
+    titlesBeforeName.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
+    var titlesAfterName = Model.AvailableTitlesAfterName.ToList();
+    titlesAfterName.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
+    var countries = Model.AvailableCountries.ToList();
+    countries.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
+    var nationalities = Model.AvailableNationalities.ToList();
+    nationalities.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
+    }
+
+    <table id="personalInformationTable">
+        <tr>
+            <td>@Html.Loc("Gender")</td>
+            <td>@Html.DropDownListFor(x => x.Gender, genders)</td>
+            <td>@Html.Loc("Titles")</td>
+            <td>@Html.DropDownListFor(x => x.TitleBeforeName, titlesBeforeName)
+                @Html.DropDownListFor(x => x.TitleAfterName, titlesAfterName)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.Loc("FirstName")</td>
+            <td>@Html.TextBoxFor(x => x.FirstName, new { })</td>
+            <td>@Html.Loc("LastName")</td>
+            <td>@Html.TextBoxFor(x => x.LastName, new { required = "required" })</td>
+        </tr>
+        <tr>
+            <td>@Html.Loc("Email")</td>
+            <td>@Html.TextBoxFor(x => x.Email, new { required = "required", type = "email" })</td>
+            <td>@Html.Loc("Phone")</td>
+            <td>@Html.TextBoxFor(x => x.Phone, new { required = "required" })</td>
+        </tr>
+        <tr>
+            <td>@Html.Loc("Birthdate")</td>
+            <td>@Html.TextBoxFor(x => x.BirthDate, "{0:yyyy-MM-dd}", new { required = "required", type = "date" })</td>
+        </tr>
+        <tr>
+            <td>@Html.Loc("Street")</td>
+            <td>@Html.TextBoxFor(x => x.Street, new { required = "required" })</td>
+            <td>@Html.Loc("ZipCodeAndCity")</td>
+            <td>@Html.TextBoxFor(x => x.ZipCode, new { required = "required" }) @Html.TextBoxFor(x => x.City, new { required = "required" })</td>
+        </tr>
+        <tr>
+            <td>@Html.Loc("Country")</td>
+            <td>@Html.DropDownListFor(x => x.Country, countries)</td>
+            <td>@Html.Loc("Nationality")</td>
+            <td>@Html.DropDownListFor(x => x.Nationality, nationalities)</td>
+        </tr>
+    </table>
+    </text>
+}
