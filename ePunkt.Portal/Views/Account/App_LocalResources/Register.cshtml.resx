@@ -138,6 +138,9 @@
   <data name="Error-Photo" xml:space="preserve">
     <value>Please select a different photo to upload. The max. file size is 10 MB, support file extensions are JPG and PNG.</value>
   </data>
+  <data name="MoreDocuments" xml:space="preserve">
+    <value>Add more documents</value>
+  </data>
   <data name="PersonalInformation" xml:space="preserve">
     <value>Personal information</value>
   </data>

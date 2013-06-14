@@ -1,19 +1,19 @@
-﻿using System.IO;
-using System.Linq;
-using ePunkt.Api.Client;
+﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
 using ePunkt.Api.Models;
 using ePunkt.Portal.Models.ApplicantFiles;
+using ePunkt.Utilities;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using ePunkt.Utilities;
 
 namespace ePunkt.Portal.Controllers
 {
     [Authorize]
     public class ApplicantFilesController : ControllerBase
     {
+        private readonly UpdateApplicantFileService _updateApplicantFileService;
+
         public ApplicantFilesController(ApiHttpClient apiClient, CustomSettings settings, UpdateApplicantFileService updateApplicantFileService)
             : base(apiClient, settings)
         {
@@ -27,11 +27,6 @@ namespace ePunkt.Portal.Controllers
                 return RedirectToAction("Logoff", "Account");
             return View(new IndexViewModel(await GetMandator(), applicant));
         }
-
-        private const int MaxFileSize = 1024 * 1024 * 10;
-        private readonly string[] _documentExtensions = new[] { "pdf", "doc", "docx" };
-        private readonly string[] _imageExtensions = new[] { "jpg", "jpeg", "png" };
-        private readonly UpdateApplicantFileService _updateApplicantFileService;
 
         [HttpPost]
         [ValidateAntiForgeryToken]

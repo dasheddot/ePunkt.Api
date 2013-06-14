@@ -7,8 +7,13 @@
 
 @using (Html.BeginForm())
 {
-    @Html.Partial("PersonalInformation")
-
+    @Html.AntiForgeryToken()
+    
+    <fieldset>
+        <legend></legend>
+        @Html.Partial("PersonalInformation")
+    </fieldset>
+    
     <p>
         <input type="submit" value="@Html.Loc("Save")"/>
     </p>

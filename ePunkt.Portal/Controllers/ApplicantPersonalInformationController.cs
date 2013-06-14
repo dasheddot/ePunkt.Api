@@ -29,6 +29,7 @@ namespace ePunkt.Portal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(IndexViewModel model)
         {
             var applicant = await GetApplicant();

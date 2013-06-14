@@ -199,6 +199,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\Account\RequestPasswordStep2ViewModel.cs" />
+    <Compile Include="Models\Account\RequestPasswordStep1ViewModel.cs" />
     <Compile Include="Models\Account\EmailAlreadyInUseViewModel.cs" />
     <Compile Include="Models\Account\IndexViewModel.cs" />
     <Compile Include="Models\ApplicantCompleteness.cs" />
@@ -430,9 +433,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\App_LocalResources\PersonalInformation.cshtml.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

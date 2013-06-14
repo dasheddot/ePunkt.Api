@@ -24,43 +24,55 @@
     nationalities.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
     }
 
-    <table id="personalInformationTable">
-        <tr>
-            <td>@Html.Loc("Gender")</td>
-            <td>@Html.DropDownListFor(x => x.Gender, genders)</td>
-            <td>@Html.Loc("Titles")</td>
-            <td>@Html.DropDownListFor(x => x.TitleBeforeName, titlesBeforeName)
-                @Html.DropDownListFor(x => x.TitleAfterName, titlesAfterName)
-            </td>
-        </tr>
-        <tr>
-            <td>@Html.Loc("FirstName")</td>
-            <td>@Html.TextBoxFor(x => x.FirstName, new { })</td>
-            <td>@Html.Loc("LastName")</td>
-            <td>@Html.TextBoxFor(x => x.LastName, new { required = "required" })</td>
-        </tr>
-        <tr>
-            <td>@Html.Loc("Email")</td>
-            <td>@Html.TextBoxFor(x => x.Email, new { required = "required", type = "email" })</td>
-            <td>@Html.Loc("Phone")</td>
-            <td>@Html.TextBoxFor(x => x.Phone, new { required = "required" })</td>
-        </tr>
-        <tr>
-            <td>@Html.Loc("Birthdate")</td>
-            <td>@Html.TextBoxFor(x => x.BirthDate, "{0:yyyy-MM-dd}", new { required = "required", type = "date" })</td>
-        </tr>
-        <tr>
-            <td>@Html.Loc("Street")</td>
-            <td>@Html.TextBoxFor(x => x.Street, new { required = "required" })</td>
-            <td>@Html.Loc("ZipCodeAndCity")</td>
-            <td>@Html.TextBoxFor(x => x.ZipCode, new { required = "required" }) @Html.TextBoxFor(x => x.City, new { required = "required" })</td>
-        </tr>
-        <tr>
-            <td>@Html.Loc("Country")</td>
-            <td>@Html.DropDownListFor(x => x.Country, countries)</td>
-            <td>@Html.Loc("Nationality")</td>
-            <td>@Html.DropDownListFor(x => x.Nationality, nationalities)</td>
-        </tr>
-    </table>
+    <div class="editor-row">
+        @Html.LabelFor(x => x.Gender, Html.Loc("Gender").ToString())
+        @Html.DropDownListFor(x => x.Gender, genders, new { @class = "smaller" })
+    </div>
+    <div class="editor-row">
+        @Html.LabelFor(x => x.TitleBeforeName, Html.Loc("Titles").ToString())
+        @Html.DropDownListFor(x => x.TitleBeforeName, titlesBeforeName, new { @class = "smaller" }) @Html.DropDownListFor(x => x.TitleAfterName, titlesAfterName, new { @class = "smaller" })
+    </div>
+
+    <div class="editor-row">
+        @Html.LabelFor(x => x.FirstName, Html.Loc("FirstName").ToString())
+        @Html.TextBoxFor(x => x.FirstName, new { })
+    </div>
+    <div class="editor-row">
+        @Html.LabelFor(x => x.LastName, Html.Loc("LastName").ToString())
+        @Html.TextBoxFor(x => x.LastName, new { required = "required" })
+    </div>
+
+    <div class="editor-row">
+        @Html.LabelFor(x => x.Email, Html.Loc("Email").ToString())
+        @Html.TextBoxFor(x => x.Email, new { required = "required", type = "email" })
+    </div>
+    <div class="editor-row">
+        @Html.LabelFor(x => x.Phone, Html.Loc("Phone").ToString())
+        @Html.TextBoxFor(x => x.Phone, new { required = "required", type = "tel" })
+    </div>
+
+    <div class="editor-row">
+        @Html.LabelFor(x => x.BirthDate, Html.Loc("Birthdate").ToString())
+        @Html.TextBoxFor(x => x.BirthDate, "{0:yyyy-MM-dd}", new { required = "required", type = "date" })
+    </div>
+
+    <div class="editor-row">
+        @Html.LabelFor(x => x.Street, Html.Loc("Street").ToString())
+        @Html.TextBoxFor(x => x.Street, new { required = "required" })
+    </div>
+    <div class="editor-row">
+        @Html.LabelFor(x => x.ZipCode, Html.Loc("ZipCodeAndCity").ToString())
+        @Html.TextBoxFor(x => x.ZipCode, new { @class = "smaller", required = "required" }) @Html.TextBoxFor(x => x.City, new { required = "required" })
+    </div>
+
+    <div class="editor-row">
+        @Html.LabelFor(x => x.Country, Html.Loc("Country").ToString())
+        @Html.DropDownListFor(x => x.Country, countries)
+    </div>
+    <div class="editor-row">
+        @Html.LabelFor(x => x.Nationality, Html.Loc("Nationality").ToString())
+        @Html.DropDownListFor(x => x.Nationality, nationalities)
+    </div>
+
     </text>
 }

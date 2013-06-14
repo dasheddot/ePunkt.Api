@@ -4,7 +4,6 @@ using ePunkt.Api.Models;
 using ePunkt.Api.Parameters;
 using ePunkt.Api.Responses;
 using ePunkt.Portal.Models.Account;
-using ePunkt.Utilities;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -39,20 +38,23 @@ namespace ePunkt.Portal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(string username, string password, int? job)
+        public async Task<ActionResult> Login(IndexViewModel model)
         {
-            var applicant = await ApiClient.SendAndReadAsync<Applicant>(new ApplicantRequest(username, password));
-            if (applicant != null)
+            if (ModelState.IsValid)
             {
-                FormsAuthentication.SetAuthCookie(applicant.Id.ToString(CultureInfo.InvariantCulture), false);
+                var applicant = await ApiClient.SendAndReadAsync<Applicant>(new ApplicantRequest(model.Username, model.Password));
+                if (applicant != null)
+                {
+                    FormsAuthentication.SetAuthCookie(applicant.Id.ToString(CultureInfo.InvariantCulture), false);
 
-                if (job.HasValue)
-                    return RedirectToAction("Index", "Application", new { job });
-                return RedirectToAction("Index", "Applicant");
+                    if (model.JobId.HasValue)
+                        return RedirectToAction("Index", "Application", new { job = model.JobId });
+                    return RedirectToAction("Index", "Applicant");
+                }
+
+                ModelState.AddModelError("username", @"Error-InvalidUsernameOrPassword");
             }
-
-            ModelState.AddModelError("username", @"Error-InvalidUsernameOrPassword");
-            return View(new IndexViewModel { JobId = job });
+            return View(model);
         }
 
         public ActionResult Logoff()
@@ -76,6 +78,7 @@ namespace ePunkt.Portal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(int? job, RegisterViewModel model)
         {
             var mandator = await GetMandator();
@@ -94,7 +97,7 @@ namespace ePunkt.Portal.Controllers
                     {
                         ModelState.AddModelError("Documents", @"Error-Documents");
                         break;
-                    }               
+                    }
                     index++;
                 }
             }
@@ -168,22 +171,20 @@ namespace ePunkt.Portal.Controllers
         [Authorize]
         public ActionResult ChangePassword()
         {
-            return View();
+            return View(new ChangePasswordViewModel());
         }
 
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangePassword(string oldPassword, string password1, string password2)
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
-            if (password1.IsNoE())
-                ModelState.AddModelError("password1", @"Error-PasswordIsEmpty");
-            if (password1 != password2)
-                ModelState.AddModelError("password2", @"Error-PasswordsDontMatch");
+            if (model.NewPassword != model.NewPassword2)
+                ModelState.AddModelError("NewPassword", @"Error-PasswordsDontMatch");
 
             if (ModelState.IsValid)
             {
-                var requestParam = new SetPasswordParameter(oldPassword, password1, Request.Url);
+                var requestParam = new SetPasswordParameter(model.OldPassword, model.NewPassword, Request.Url);
                 var result = await ApiClient.SendAndReadAsync<ApplicantSetPasswordResponse>(new SetPasswordRequest(GetApplicantId(), requestParam));
                 if (result.Errors != null)
                     foreach (var error in result.Errors)
@@ -198,49 +199,58 @@ namespace ePunkt.Portal.Controllers
         #endregion
 
         #region RequestPassword
-
-        [HttpGet]
         public async Task<ActionResult> RequestPassword(string email, string code)
         {
-            if (code.IsNoE())
-                return View("RequestPasswordStep1");
+            return await RequestPasswordStep2(email, code);
+        }
 
-            //check if the code really works, to display an early error message if not
-            var applicant = await ApiClient.SendAndReadAsync<Applicant>(new ConfirmRequestPasswordRequest(email, code));
-            if (applicant == null || applicant.Id <= 0)
-                ModelState.AddModelError("password1", @"Error-InvalidCode");
-
-            return View("RequestPasswordStep2");
+        public ActionResult RequestPasswordStep1()
+        {
+            return View(new RequestPasswordStep1ViewModel());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RequestPassword(string email, string code, string password1, string password2)
+        public async Task<ActionResult> RequestPasswordStep1(RequestPasswordStep1ViewModel model)
         {
-            if (code.IsNoE())
+            if (ModelState.IsValid)
             {
-                await ApiClient.SendAndReadAsync<string>(new RequestPasswordRequest(email, Request.Url));
+                await ApiClient.SendAndReadAsync<string>(new RequestPasswordRequest(model.Email, Request.Url));
                 return View("RequestPasswordStep1Success");
             }
+            return View(model);
+        }
 
-            if (password1.IsNoE())
-                ModelState.AddModelError("password1", @"Error-PasswordIsEmpty");
-            if (password1 != password2)
-                ModelState.AddModelError("password2", @"Error-PasswordsDontMatch");
+        public async Task<ActionResult> RequestPasswordStep2(string email, string code)
+        {
+            //check if the code really works, to display an early error message if not
+            var applicant = await ApiClient.SendAndReadAsync<Applicant>(new ConfirmRequestPasswordRequest(email, code));
+            if (applicant == null || applicant.Id <= 0)
+                ModelState.AddModelError("", @"Error-InvalidCode");
+
+            return View("RequestPasswordStep2", new RequestPasswordStep2ViewModel { Code = code, Email = email });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RequestPasswordStep2(RequestPasswordStep2ViewModel model)
+        {
+            if (model.NewPassword != model.NewPassword2)
+                ModelState.AddModelError("NewPassword", @"Error-PasswordsDontMatch");
 
             if (ModelState.IsValid)
             {
-                var requestParam = new SetPasswordAfterRequestParameter(email, code, password1, Request.Url);
+                var requestParam = new SetPasswordAfterRequestParameter(model.Email, model.Code, model.NewPassword, Request.Url);
                 var result = await ApiClient.SendAndReadAsync<ApplicantSetPasswordResponse>(new SetPasswordRequest(requestParam));
                 if (result.Errors != null)
                     foreach (var error in result.Errors)
-                        ModelState.AddModelError("password1", @"Error-" + error);
+                        ModelState.AddModelError("NewPassword", @"Error-" + error);
 
                 if (ModelState.IsValid)
                     return View("RequestPasswordStep2Success");
             }
 
-            return View("RequestPasswordStep2");
+            return View(model);
         }
         #endregion
     }

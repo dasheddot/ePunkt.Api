@@ -21,32 +21,25 @@
     @using (Html.BeginForm(new { job = Model.JobId }))
     {
         @Html.AntiForgeryToken()
-        <table>
-            <tr>
-                <td>@Html.Loc("Email_Label")</td>
-                <td>
-                    <input type="email" name="username" required placeholder="@Html.Loc("Email_Placeholder")" />
-                    @Html.ValidationMessage("username")
-                </td>
-            </tr>
-            <tr>
-                <td>@Html.Loc("Password_Label")</td>
-                <td>
-                    <input type="password" name="password" required />
-                    @Html.ValidationMessage("password")
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="submit" value="@Html.Loc("LoginButton_Label")" />
-                </td>
-            </tr>
-        </table>
+
+        <fieldset>
+            <legend></legend>
+            <div class="editor-row">
+                @Html.LabelFor(x => x.Username, @Html.Loc("Email_Label").ToString())
+                @Html.TextBoxFor(x => x.Username, new { required = "required", type = "email", placeholder = Html.Loc("Email_Placeholder").ToString() })
+            </div>
+            <div class="editor-row">
+                @Html.LabelFor(x => x.Password, @Html.Loc("Password_Label").ToString())
+                @Html.PasswordFor(x => x.Password, new { required = "required" })
+            </div>
+        </fieldset>
+        <p>
+            <input type="submit" value="@Html.Loc("LoginButton_Label")" />
+        </p>
     }
     <p>@Html.Loc("Credentials_Text")</p>
     <p>@Html.ActionLink(Html.Loc("CreateProfile_Link").ToString(), "Register", "Account", new { job = Model.JobId }, null)</p>
-    <p>@Html.ActionLink(Html.Loc("ForgotPassword_Link").ToString(), "RequestPassword", "Account", new { job = Model.JobId }, null)</p>
+    <p>@Html.ActionLink(Html.Loc("ForgotPassword_Link").ToString(), "RequestPasswordStep1", "Account", new { job = Model.JobId }, null)</p>
 </div>
 
 @section scripts

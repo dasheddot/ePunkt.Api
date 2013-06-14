@@ -24,10 +24,30 @@
 <h1>@Html.Loc("Title")</h1>
 <p>@Html.Loc("Description")</p>
 
-<div id="applicantFiles">
+
+<fieldset id="applicantFiles">
+    <legend></legend>
+
     @foreach (var f in Model.Applicant.Documents)
     {       
-        <div>
+        <div class="editor-row">
+            @using (Html.BeginForm("Download", "ApplicantFiles"))
+            {
+                <text>
+                @Html.AntiForgeryToken()
+                @Html.Hidden("name", f.Name)@Html.Hidden("type", f.Type)
+                <input type="submit" value="@Html.Loc("Download")" class="in-row" />
+                </text>
+            }
+
+            @using (Html.BeginForm("Delete", "ApplicantFiles"))
+            {
+                <text>
+                @Html.AntiForgeryToken()
+                @Html.Hidden("name", f.Name)@Html.Hidden("type", f.Type)
+                <input type="submit" value="@Html.Loc("Delete")" class="in-row" />
+                </text>
+            }
             @if (f.Type.Is("CV") || f.Type.Is("Photo"))
             {
                 <text>
@@ -40,41 +60,32 @@
                 @f.Name<span>@GetTranslatedType(f.Type)</span>
                 </text>
             }
-            @using (Html.BeginForm("Download", "ApplicantFiles"))
-            {
-                <text>
-                @Html.AntiForgeryToken()
-                @Html.Hidden("name", f.Name)@Html.Hidden("type", f.Type)
-                <input type="submit" value="@Html.Loc("Download")" />
-                </text>
-            }
-
-            @using (Html.BeginForm("Delete", "ApplicantFiles"))
-            {
-                <text>
-                @Html.AntiForgeryToken()
-                @Html.Hidden("name", f.Name)@Html.Hidden("type", f.Type)
-                <input type="submit" value="@Html.Loc("Delete")" />
-                </text>
-            }
         </div>
     }
-</div>
+</fieldset>
 
-<div id="applicantFilesUpload">
+
+
+
+<fieldset>
+    <legend>@Html.Loc("Upload_Title")</legend>
+
+    <p>
+        @Html.Loc("Upload_Description")
+    </p>
+
     @using (Html.BeginForm("Index", "ApplicantFiles", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <text>
         @Html.AntiForgeryToken()
-        <p>
-            @Html.Loc("Upload_Description")
-        </p>
-        <p>
-            @Html.Loc("Choose_File")
-            <input type="file" name="upload" />
-            @Html.DropDownList("type", availableTypes)
-            <input type="submit" value="@Html.Loc("Upload")" />
-        </p>
+        <div class="editor-row">
+            <input type="submit" value="@Html.Loc("Upload")" class="in-row" />
+            <label for="upload">@Html.Loc("Choose_File")</label>
+            <input type="file" name="upload" id="upload" />
+            @Html.DropDownList("type", availableTypes, new { @class = "smaller" })
+        </div>
         </text>
     }
-</div>
+
+</fieldset>
+
