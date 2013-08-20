@@ -5,7 +5,7 @@ namespace ePunkt.Api.Client.Requests
     public class CreateApplicationRequest : PutJsonHttpRequestMessage
     {
         public CreateApplicationRequest(ApplicationCreateParameter parameter)
-            : base("Applications", parameter)
+            : base("Application", parameter)
         {
         }
     }
