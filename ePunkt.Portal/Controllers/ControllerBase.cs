@@ -51,7 +51,7 @@ namespace ePunkt.Portal.Controllers
 
         protected int GetApplicantId()
         {
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated && User.Identity.Name.IsInt() && User.Identity.Name.GetInt() > 0)
                 return User.Identity.Name.GetInt();
             throw new ApplicationException("No applicant is logged in at the moment.");
         }

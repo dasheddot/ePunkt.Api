@@ -5,12 +5,12 @@ namespace ePunkt.Api.Client.Requests
     public class SetPasswordRequest : PostJsonHttpRequestMessage
     {
         public SetPasswordRequest(SetPasswordAfterRequestParameter param)
-            : base("SetPassword", param)
+            : base("Applicant/SetPassword", param)
         {
         }
 
         public SetPasswordRequest(int applicantId, SetPasswordParameter param)
-            : base("SetPassword/" + applicantId, param)
+            : base("Applicant/SetPassword/" + applicantId, param)
         {
         }
     }

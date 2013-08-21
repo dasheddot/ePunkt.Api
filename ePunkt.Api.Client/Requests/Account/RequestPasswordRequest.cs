@@ -6,7 +6,7 @@ namespace ePunkt.Api.Client.Requests
     public class RequestPasswordRequest : HttpRequestMessage
     {
         public RequestPasswordRequest(string email, Uri currentUri)
-            : base(HttpMethod.Post, "RequestPassword?email=" + email + "&url=" + currentUri)
+            : base(HttpMethod.Post, "Applicant/RequestPassword?email=" + email + "&url=" + currentUri)
         {
         }
     }
