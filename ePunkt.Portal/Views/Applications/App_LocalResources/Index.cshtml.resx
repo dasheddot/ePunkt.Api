@@ -117,25 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Applications_Link" xml:space="preserve">
+  <data name="Description" xml:space="preserve">
+    <value>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</value>
+  </data>
+  <data name="No_Applications_Visible" xml:space="preserve">
+    <value>There are no applications visible at the moment.</value>
+  </data>
+  <data name="Title" xml:space="preserve">
     <value>My applications</value>
-  </data>
-  <data name="ChangePassword_Link" xml:space="preserve">
-    <value>Change password</value>
-  </data>
-  <data name="Jobs_Link" xml:space="preserve">
-    <value>Open jobs</value>
-  </data>
-  <data name="Login_Link" xml:space="preserve">
-    <value>Log in</value>
-  </data>
-  <data name="Logoff_Link" xml:space="preserve">
-    <value>Log off</value>
-  </data>
-  <data name="Profile_Link" xml:space="preserve">
-    <value>My applicant profile</value>
-  </data>
-  <data name="ThirdPartyProfiles_Link" xml:space="preserve">
-    <value>Linked accounts</value>
   </data>
 </root>

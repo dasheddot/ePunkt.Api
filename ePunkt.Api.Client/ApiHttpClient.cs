@@ -39,9 +39,13 @@ namespace ePunkt.Api.Client
             {
                 result = await request.Content.ReadAsAsync<T>();
             }
-            catch (JsonReaderException ex)
+            catch (JsonSerializationException)
             {
-                throw new ApplicationException("Unable to parse result: " + ex.Message + ". The result was: " + request.Content.ReadAsStringAsync().Result);
+                throw new ApplicationException("Unable to deserialize to type '" + typeof(T).Name + "'. The result was: " + Environment.NewLine + request.Content.ReadAsStringAsync().Result);
+            }
+            catch (JsonReaderException readerException)
+            {
+                throw new ApplicationException("Unable to read result: " + readerException.Message + "." + Environment.NewLine + "The result was: " + request.Content.ReadAsStringAsync().Result);
             }
 
             if (runTimer)

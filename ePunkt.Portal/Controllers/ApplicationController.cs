@@ -48,6 +48,12 @@ namespace ePunkt.Portal.Controllers
             return View(new IndexViewModel(jobObject));
         }
 
+        [HttpPost]
+        public ActionResult Index(int job)
+        {
+            return RedirectToAction("Index", "Applicant");
+        }
+
         public async Task<ActionResult> Refresh(int job)
         {
             var jobObject = await GetJob(_jobsService, job);

@@ -22,7 +22,7 @@ namespace ePunkt.Api.Client.Requests
 
         public override string GetCacheKey()
         {
-            return "PortalSettings_" + _channel + "_" + _culture.Name;
+            return "Jobs_" + _channel + "_" + _culture.Name;
         }
     }
 }

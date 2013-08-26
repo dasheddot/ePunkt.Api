@@ -24,5 +24,10 @@ namespace ePunkt.Portal
         {
             return await _client.SendAndReadAsyncCached<JobsResponse>(new JobsRequest(string.Empty));
         }
+
+        public async Task<JobResponse> LoadSingleJob(int jobId)
+        {
+            return await _client.SendAndReadAsyncCached<JobResponse>(new JobRequest(jobId));
+        }
     }
 }

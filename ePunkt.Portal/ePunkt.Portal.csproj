@@ -185,6 +185,7 @@
     <Compile Include="Code\Services\SyndicationService.cs" />
     <Compile Include="Code\Translations.cs" />
     <Compile Include="Code\Services\UrlBuilderService.cs" />
+    <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\ApplicantController.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Models\ApplicantFiles\IndexViewModel.cs" />
     <Compile Include="Models\ApplicantPersonalInformation\IndexViewModel.cs" />
     <Compile Include="Models\Applicant\IndexViewModel.cs" />
+    <Compile Include="Models\Applications\IndexViewModel.cs" />
     <Compile Include="Models\Application\JobIsClosedViewModel.cs" />
     <Compile Include="Models\Application\RefreshViewModel.cs" />
     <Compile Include="Models\Application\IndexViewModel.cs" />
@@ -342,6 +344,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\RegisterSuccess.cshtml" />
     <Content Include="Views\Shared\PersonalInformation.cshtml" />
+    <Content Include="Views\Applications\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -433,6 +436,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\App_LocalResources\PersonalInformation.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Applications\App_LocalResources\Index.cshtml.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

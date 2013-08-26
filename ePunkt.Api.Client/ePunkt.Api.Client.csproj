@@ -67,8 +67,10 @@
     <Compile Include="Requests\Applicant\ApplicantDocumentGetRequest.cs" />
     <Compile Include="Requests\Applicant\ApplicantDocumentDeleteRequest.cs" />
     <Compile Include="Requests\Applicant\ApplicantDocumentPostRequest.cs" />
+    <Compile Include="Requests\Application\ApplicationsRequest.cs" />
     <Compile Include="Requests\Application\CreateApplicationRequest.cs" />
     <Compile Include="PutJsonHttpRequestMessage.cs" />
+    <Compile Include="Requests\Job\JobRequest.cs" />
     <Compile Include="Requests\ThirdPartyProfile\UnlinkLinkedInRequest.cs" />
     <Compile Include="Requests\ThirdPartyProfile\UnlinkXingRequest.cs" />
     <Compile Include="Requests\ThirdPartyProfile\LinkLinkedInRequest.cs" />
