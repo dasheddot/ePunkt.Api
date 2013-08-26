@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ePunkt.Api.Models
+namespace ePunkt.Api.Responses
 {
-    public class Job
+    public class JobResponse
     {
         public int Id { get; set; }
         public string InternalName { get; set; }
@@ -26,7 +26,7 @@ namespace ePunkt.Api.Models
 
         public IEnumerable<string> JobProfiles { get; set; }
         public IEnumerable<string> Regions { get; set; }
-        public IEnumerable<JobCustomField> CustomFields { get; set; }
+        public IEnumerable<JobCustomFieldResponse> CustomFields { get; set; }
         public IEnumerable<string> OccupationTypes { get; set; }
         public IEnumerable<string> CareerLevels { get; set; }
         public IEnumerable<string> Tags { get; set; }
@@ -46,5 +46,5 @@ namespace ePunkt.Api.Models
         public int? QuestionnaireId { get; set; }
     }
 
-    public class JobCustomField : CustomField { }
+    public class JobCustomFieldResponse : CustomFieldResponse { }
 }

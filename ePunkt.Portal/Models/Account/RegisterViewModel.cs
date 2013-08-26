@@ -1,24 +1,24 @@
-﻿using System.Linq;
-using System.Web.Mvc;
-using ePunkt.Api.Models;
+﻿using ePunkt.Api.Responses;
 using ePunkt.Portal.Models.Shared;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace ePunkt.Portal.Models.Account
 {
     public class RegisterViewModel : PersonalInformationViewModel
     {
 
-        public RegisterViewModel Prepare(Mandator mandator, Job job)
+        public RegisterViewModel Prepare(MandatorResponse mandatorResponse, JobResponse jobResponse)
         {
-            if (job != null)
-                JobId = job.Id;
+            if (jobResponse != null)
+                JobId = jobResponse.Id;
 
-            AvailableDocumentTypes = mandator.ApplicantDocumentTypes.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
+            AvailableDocumentTypes = mandatorResponse.ApplicantDocumentTypes.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
 
-            base.Prepare(mandator);
+            base.Prepare(mandatorResponse);
 
             return this;
         }

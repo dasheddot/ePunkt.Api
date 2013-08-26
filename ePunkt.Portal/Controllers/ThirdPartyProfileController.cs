@@ -1,6 +1,6 @@
 ﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
-using ePunkt.Api.Models;
+using ePunkt.Api.Responses;
 using ePunkt.Portal.Models.Account;
 using ePunkt.Portal.Models.ThirdPartyProfile;
 using ePunkt.SocialConnector;
@@ -48,7 +48,7 @@ namespace ePunkt.Portal.Controllers
         public async Task<ActionResult> Xing(int? job)
         {
             var mandator = await GetMandator();
-            var tokenManager = new InMemoryTokenManager(mandator.Settings.XingConsumerKey, mandator.Settings.XingConsumerSecret);
+            var tokenManager = new InMemoryTokenManager(mandator.PortalSettings.XingConsumerKey, mandator.PortalSettings.XingConsumerSecret);
             var xingConsumer = new XingConsumer(tokenManager);
 
             return await Link(xingConsumer, ThirdParty.Xing, job);
@@ -57,7 +57,7 @@ namespace ePunkt.Portal.Controllers
         public async Task<ActionResult> LinkedIn(int? job)
         {
             var mandator = await GetMandator();
-            var tokenManager = new InMemoryTokenManager(mandator.Settings.LinkedinConsumerKey, mandator.Settings.LinkedinConsumerSecret);
+            var tokenManager = new InMemoryTokenManager(mandator.PortalSettings.LinkedinConsumerKey, mandator.PortalSettings.LinkedinConsumerSecret);
             var linkedinConsumer = new LinkedinConsumer(tokenManager);
 
             return await Link(linkedinConsumer, ThirdParty.LinkedIn, job);
@@ -66,14 +66,14 @@ namespace ePunkt.Portal.Controllers
         [Authorize]
         public async Task<ActionResult> UnlinkXing()
         {
-            await ApiClient.SendAndReadAsync<Applicant>(new UnlinkXingRequest(GetApplicantId()));
+            await ApiClient.SendAndReadAsync<ApplicantResponse>(new UnlinkXingRequest(GetApplicantId()));
             return RedirectToAction("Index");
         }
 
         [Authorize]
         public async Task<ActionResult> UnlinkLinkedIn()
         {
-            await ApiClient.SendAndReadAsync<Applicant>(new UnlinkLinkedInRequest(GetApplicantId()));
+            await ApiClient.SendAndReadAsync<ApplicantResponse>(new UnlinkLinkedInRequest(GetApplicantId()));
             return RedirectToAction("Index");
         }
 
@@ -126,11 +126,11 @@ namespace ePunkt.Portal.Controllers
             return result;
         }
 
-        private ActionResult SetAuthCookieOrRedirectToErrorPage(Applicant applicant, ActionResult onSuccessRedirectTo)
+        private ActionResult SetAuthCookieOrRedirectToErrorPage(ApplicantResponse applicantResponse, ActionResult onSuccessRedirectTo)
         {
-            if (applicant != null)
+            if (applicantResponse != null)
             {
-                FormsAuthentication.SetAuthCookie(applicant.Id.ToString(CultureInfo.InvariantCulture), false);
+                FormsAuthentication.SetAuthCookie(applicantResponse.Id.ToString(CultureInfo.InvariantCulture), false);
                 return onSuccessRedirectTo;
             }
             return RedirectToAction("Login", "Account");

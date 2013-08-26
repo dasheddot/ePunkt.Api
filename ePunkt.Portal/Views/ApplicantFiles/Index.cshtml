@@ -28,7 +28,7 @@
 <fieldset id="applicantFiles">
     <legend></legend>
 
-    @foreach (var f in Model.Applicant.Documents)
+    @foreach (var f in Model.ApplicantResponse.Documents)
     {       
         <div class="editor-row">
             @using (Html.BeginForm("Download", "ApplicantFiles"))

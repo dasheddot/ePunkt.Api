@@ -1,6 +1,6 @@
 ﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
-using ePunkt.Api.Models;
+using ePunkt.Api.Responses;
 using ePunkt.Utilities;
 using System;
 using System.Linq;
@@ -20,32 +20,32 @@ namespace ePunkt.Portal.Controllers
             Settings = customSettings;
         }
 
-        protected async Task<Mandator> GetMandator()
+        protected async Task<MandatorResponse> GetMandator()
         {
-            var mandator = await ApiClient.SendAndReadAsyncCached<Mandator>(new MandatorRequest(Request.Url));
-            new CombinePortalAndCustomSettingsService().UpdatePortalSettingsWithCustomSettings(mandator.Settings, Settings);
+            var mandator = await ApiClient.SendAndReadAsyncCached<MandatorResponse>(new MandatorRequest(Request.Url));
+            new CombinePortalAndCustomSettingsService().UpdatePortalSettingsWithCustomSettings(mandator.PortalSettings, Settings);
             return mandator;
         }
 
-        protected async Task<Applicant> GetApplicant()
+        protected async Task<ApplicantResponse> GetApplicant()
         {
             if (!User.Identity.IsAuthenticated)
                 return null;
 
-            var applicant = await ApiClient.SendAndReadAsync<Applicant>(new ApplicantRequest(GetApplicantId()));
+            var applicant = await ApiClient.SendAndReadAsync<ApplicantResponse>(new ApplicantRequest(GetApplicantId()));
             if (applicant == null || applicant.Id <= 0)
                 return null;
             return applicant;
         }
 
-        protected async Task<Job> GetJob(LoadJobsService jobsService, int jobId)
+        protected async Task<JobResponse> GetJob(LoadJobsService jobsService, int jobId)
         {
             return await GetJob(await GetMandator(), jobsService, jobId);
         }
 
-        protected async Task<Job> GetJob(Mandator mandator, LoadJobsService jobsService, int jobId)
+        protected async Task<JobResponse> GetJob(MandatorResponse mandatorResponse, LoadJobsService jobsService, int jobId)
         {
-            var jobsResponse = await jobsService.LoadJobsForCurrentPortal(Request.Url, mandator);
+            var jobsResponse = await jobsService.LoadJobsForCurrentPortal(Request.Url, mandatorResponse);
             return jobsResponse.Jobs.FirstOrDefault(x => x.Id == jobId);
         }
 

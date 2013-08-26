@@ -1,7 +1,7 @@
 ﻿
-namespace ePunkt.Api.Models
+namespace ePunkt.Api.Parameters
 {
-    public class ApiKey
+    public class ApiKeyParameter
     {
         public string Key { get; set; }
         public int MandatorId { get; set; }

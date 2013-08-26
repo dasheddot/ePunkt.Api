@@ -1,5 +1,5 @@
-﻿using JetBrains.Annotations;
-using ePunkt.Api.Models;
+﻿using ePunkt.Api.Responses;
+using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,41 +10,41 @@ namespace ePunkt.Portal.Models.Shared
 {
     public class PersonalInformationViewModel
     {
-        public virtual PersonalInformationViewModel Prepare(Mandator mandator)
+        public virtual PersonalInformationViewModel Prepare(MandatorResponse mandatorResponse)
         {
-            return Prepare(mandator, null);
+            return Prepare(mandatorResponse, null);
         }
 
-        public virtual PersonalInformationViewModel Prepare([NotNull]Mandator mandator, [CanBeNull] Api.Models.Applicant applicant)
+        public virtual PersonalInformationViewModel Prepare([NotNull]MandatorResponse mandatorResponse, [CanBeNull] ApplicantResponse applicantResponse)
         {
-            AllowEmptyGender = mandator.Settings.AllowEmptyGender;
-            AvailableTitlesBeforeName = from x in mandator.TitlesBeforeName
+            AllowEmptyGender = mandatorResponse.PortalSettings.AllowEmptyGender;
+            AvailableTitlesBeforeName = from x in mandatorResponse.TitlesBeforeName
                                         select new SelectListItem
                                             {
                                                 Value = x.Name,
                                                 Text = x.Name
                                             };
-            AvailableTitlesAfterName = from x in mandator.TitlesAfterName
+            AvailableTitlesAfterName = from x in mandatorResponse.TitlesAfterName
                                        select new SelectListItem
                                            {
                                                Value = x.Name,
                                                Text = x.Name
                                            };
-            AvailableCountries = from x in mandator.Countries
+            AvailableCountries = from x in mandatorResponse.Countries
                                  select new SelectListItem
                                      {
                                          Value = x,
                                          Text = x
                                      };
-            AvailableNationalities = from x in mandator.Countries
+            AvailableNationalities = from x in mandatorResponse.Countries
                                      select new SelectListItem
                                          {
                                              Value = x,
                                              Text = x
                                          };
 
-            if (applicant != null)
-                AutoMapper.Mapper.DynamicMap(applicant, this);
+            if (applicantResponse != null)
+                AutoMapper.Mapper.DynamicMap(applicantResponse, this);
 
             return this;
         }

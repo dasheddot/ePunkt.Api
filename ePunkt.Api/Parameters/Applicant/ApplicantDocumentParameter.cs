@@ -1,9 +1,9 @@
-﻿namespace ePunkt.Api.Models
+﻿namespace ePunkt.Api.Parameters
 {
-    public class DocumentContent
+    public class ApplicantDocumentParameter
     {
         public string Name { get; set; }
-        public string Extension { get; set; }
+        public string FileExtension { get; set; }
         public string Type { get; set; }
         public byte[] Content { get; set; }
     }

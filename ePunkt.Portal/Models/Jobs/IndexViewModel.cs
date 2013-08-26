@@ -1,4 +1,4 @@
-﻿using ePunkt.Api.Models;
+﻿using ePunkt.Api.Responses;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +7,7 @@ namespace ePunkt.Portal.Models.Jobs
     public class IndexViewModel
     {
 
-        public void BuildJobs(IEnumerable<Api.Models.Job> jobs)
+        public void BuildJobs(IEnumerable<JobResponse> jobs)
         {
             var result = jobs.Select(job => new Job
                 {
@@ -20,7 +20,7 @@ namespace ePunkt.Portal.Models.Jobs
             Jobs = result;
         }
 
-        public IEnumerable<Region> AvailableRegions { get; set; }
+        public IEnumerable<RegionResponse> AvailableRegions { get; set; }
         public IEnumerable<string> AvailableJobProfiles { get; set; }
         public IEnumerable<string> FilteredRegions { get; set; }
         public IEnumerable<string> FilteredJobProfiles { get; set; }

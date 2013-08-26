@@ -1,12 +1,12 @@
-﻿using System;
+﻿using ePunkt.Api.Client.Requests;
+using ePunkt.Api.Parameters;
+using JetBrains.Annotations;
+using Newtonsoft.Json;
+using System;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Runtime.Caching;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
-using Newtonsoft.Json;
-using ePunkt.Api.Client.Requests;
-using ePunkt.Api.Models;
 
 namespace ePunkt.Api.Client
 {
@@ -16,7 +16,7 @@ namespace ePunkt.Api.Client
         private readonly Stopwatch _watch;
         private const int CacheDurationInSeconds = 300;
 
-        public ApiHttpClient([NotNull] Uri baseAddress, [NotNull] Func<ApiKey> apiKeyFunction, [NotNull] Func<ApiTokenCache> apiCacheFunction)
+        public ApiHttpClient([NotNull] Uri baseAddress, [NotNull] Func<ApiKeyParameter> apiKeyFunction, [NotNull] Func<ApiTokenCache> apiCacheFunction)
             : base(new AuthorizationHandler(baseAddress, apiKeyFunction, apiCacheFunction))
         {
             _mandatorId = apiKeyFunction.Invoke().MandatorId;

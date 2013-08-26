@@ -1,9 +1,9 @@
 ﻿using ePunkt.Api.Client;
+using ePunkt.Api.Client.Requests;
+using ePunkt.Api.Responses;
+using ePunkt.Portal.Models.Applicant;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using ePunkt.Api.Client.Requests;
-using ePunkt.Api.Models;
-using ePunkt.Portal.Models.Applicant;
 
 namespace ePunkt.Portal.Controllers
 {
@@ -36,7 +36,7 @@ namespace ePunkt.Portal.Controllers
                     applicant.EnableNewsletter = newsletter.Value;
                 if (matchingJobs.HasValue)
                     applicant.EnableMatchingJobsAutoMail = matchingJobs.Value;
-                await ApiClient.SendAndReadAsync<Applicant>(new ApplicantRequest(applicant.Id, applicant));
+                await ApiClient.SendAndReadAsync<ApplicantResponse>(new ApplicantRequest(applicant.Id, applicant));
             }
 
             return RedirectToAction("Index");

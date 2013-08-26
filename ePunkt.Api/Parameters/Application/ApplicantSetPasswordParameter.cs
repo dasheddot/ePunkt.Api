@@ -2,9 +2,9 @@
 
 namespace ePunkt.Api.Parameters
 {
-    public class SetPasswordParameter
+    public class ApplicantSetPasswordParameter
     {
-        public SetPasswordParameter(string oldPassword, string newPassword, Uri url)
+        public ApplicantSetPasswordParameter(string oldPassword, string newPassword, Uri url)
         {
             OldPassword = oldPassword;
             NewPassword = newPassword;

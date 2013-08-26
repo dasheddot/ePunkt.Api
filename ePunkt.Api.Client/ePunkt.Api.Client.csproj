@@ -62,12 +62,12 @@
     <Compile Include="Requests\Account\ConfirmRequestPasswordRequest.cs" />
     <Compile Include="Requests\Account\SetPasswordRequest.cs" />
     <Compile Include="Requests\Account\RequestPasswordRequest.cs" />
-    <Compile Include="Requests\Applicants\ApplicantRequest.cs" />
-    <Compile Include="Requests\Applicants\ApplicantsRequest.cs" />
-    <Compile Include="Requests\Applicants\ApplicantDocumentGetRequest.cs" />
-    <Compile Include="Requests\Applicants\ApplicantDocumentDeleteRequest.cs" />
-    <Compile Include="Requests\Applicants\ApplicantDocumentPostRequest.cs" />
-    <Compile Include="Requests\Applications\CreateApplicationRequest.cs" />
+    <Compile Include="Requests\Applicant\ApplicantRequest.cs" />
+    <Compile Include="Requests\Applicant\ApplicantsRequest.cs" />
+    <Compile Include="Requests\Applicant\ApplicantDocumentGetRequest.cs" />
+    <Compile Include="Requests\Applicant\ApplicantDocumentDeleteRequest.cs" />
+    <Compile Include="Requests\Applicant\ApplicantDocumentPostRequest.cs" />
+    <Compile Include="Requests\Application\CreateApplicationRequest.cs" />
     <Compile Include="PutJsonHttpRequestMessage.cs" />
     <Compile Include="Requests\ThirdPartyProfile\UnlinkLinkedInRequest.cs" />
     <Compile Include="Requests\ThirdPartyProfile\UnlinkXingRequest.cs" />
@@ -75,10 +75,10 @@
     <Compile Include="Requests\ThirdPartyProfile\LinkXingRequest.cs" />
     <Compile Include="Requests\Auth\ApiKeyRequest.cs" />
     <Compile Include="Requests\CachedHttpRequestMessage.cs" />
-    <Compile Include="Requests\Jobs\JobSalaryImageRequest.cs" />
+    <Compile Include="Requests\Job\JobSalaryImageRequest.cs" />
     <Compile Include="Requests\Mandator\MandatorRequest.cs" />
     <Compile Include="Requests\PingRequest.cs" />
-    <Compile Include="Requests\Jobs\JobsRequest.cs" />
+    <Compile Include="Requests\Job\JobsRequest.cs" />
     <Compile Include="ApiTokenCache.cs" />
     <Compile Include="ThirdParty.cs" />
   </ItemGroup>

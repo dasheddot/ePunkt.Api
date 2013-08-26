@@ -1,5 +1,5 @@
 using ePunkt.Api.Client;
-using ePunkt.Api.Models;
+using ePunkt.Api.Parameters;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(ePunkt.Portal.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(ePunkt.Portal.NinjectWebCommon), "Stop")]
@@ -76,12 +76,12 @@ namespace ePunkt.Portal
             return new CustomSettingsService().LoadCustomSettings(HttpContext.Current);
         }
 
-        private static ApiKey LoadApiKey()
+        private static ApiKeyParameter LoadApiKey()
         {
             var customSettings = LoadCustomSettings();
             if (customSettings == null)
                 throw new Exception("No custom settings found.");
-            return new ApiKey
+            return new ApiKeyParameter
                 {
                     ClientInfo = "ePunkt.Portal v" + typeof (NinjectWebCommon).Assembly.GetName().Version,
                     Key = customSettings.ApiKey,

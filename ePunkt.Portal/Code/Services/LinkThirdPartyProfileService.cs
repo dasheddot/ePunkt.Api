@@ -1,7 +1,7 @@
 ﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
-using ePunkt.Api.Models;
 using ePunkt.Api.Parameters;
+using ePunkt.Api.Responses;
 using ePunkt.SocialConnector;
 using JetBrains.Annotations;
 using System;
@@ -14,28 +14,28 @@ namespace ePunkt.Portal
 {
     public class LinkThirdPartyProfileService
     {
-        public async Task<Applicant> LinkProfileToApplicant([NotNull]ApiHttpClient apiClient, [NotNull] Mandator mandator, [NotNull]IProfile profile, ThirdParty thirdParty)
+        public async Task<ApplicantResponse> LinkProfileToApplicant([NotNull]ApiHttpClient apiClient, [NotNull] MandatorResponse mandatorResponse, [NotNull]IProfile profile, ThirdParty thirdParty)
         {
-            return await LinkProfileToApplicant(apiClient, mandator, null, profile, thirdParty);
+            return await LinkProfileToApplicant(apiClient, mandatorResponse, null, profile, thirdParty);
         }
 
-        public async Task<bool> IsEmailAddressAlreadyInUse([NotNull] ApiHttpClient apiClient, [NotNull] Mandator mandator, string email)
+        public async Task<bool> IsEmailAddressAlreadyInUse([NotNull] ApiHttpClient apiClient, [NotNull] MandatorResponse mandatorResponse, string email)
         {
             //check if the email is not in use already
-            if (!mandator.Settings.AllowDuplicateEmail)
+            if (!mandatorResponse.PortalSettings.AllowDuplicateEmail)
             {
-                var applicantsWithThisEmail = await apiClient.SendAndReadAsync<IEnumerable<Applicant>>(new ApplicantsRequest(email));
+                var applicantsWithThisEmail = await apiClient.SendAndReadAsync<IEnumerable<ApplicantResponse>>(new ApplicantsRequest(email));
                 return applicantsWithThisEmail.Any();
             }
             return false;
         }
 
-        public async Task<Applicant> LinkProfileToApplicant([NotNull]ApiHttpClient apiClient, [NotNull] Mandator mandator, [CanBeNull] Applicant loggedInApplicant, [NotNull] IProfile profile, ThirdParty thirdParty)
+        public async Task<ApplicantResponse> LinkProfileToApplicant([NotNull]ApiHttpClient apiClient, [NotNull] MandatorResponse mandatorResponse, [CanBeNull] ApplicantResponse loggedInApplicantResponse, [NotNull] IProfile profile, ThirdParty thirdParty)
         {
             if (profile == null)
                 throw new ArgumentNullException("profile");
 
-            var applicant = loggedInApplicant ?? await apiClient.SendAndReadAsync<Applicant>(new ApplicantRequest(profile.Id, thirdParty));
+            var applicant = loggedInApplicantResponse ?? await apiClient.SendAndReadAsync<ApplicantResponse>(new ApplicantRequest(profile.Id, thirdParty));
 
             //we don't have an applicant that is logged in or has a matching profile
             //so, lets create a new applicant
@@ -43,7 +43,7 @@ namespace ePunkt.Portal
             {
                 //this should never happen, because we catch this case earlier, before calling this method
                 //this is just to make absolutely sure ;)
-                if (await IsEmailAddressAlreadyInUse(apiClient, mandator, profile.Email))
+                if (await IsEmailAddressAlreadyInUse(apiClient, mandatorResponse, profile.Email))
                     return null;
 
                 bool? gender = null;
@@ -59,14 +59,14 @@ namespace ePunkt.Portal
                         LastName = profile.LastName,
                         Gender = gender
                     };
-                applicant = await apiClient.SendAndReadAsync<Applicant>(new ApplicantRequest(parameter));
+                applicant = await apiClient.SendAndReadAsync<ApplicantResponse>(new ApplicantRequest(parameter));
             }
 
             //now link the profile
             var linkRequest = thirdParty == ThirdParty.Xing
                                   ? new LinkXingRequest(applicant.Id, profile.Id, profile.Url)
                                   : (HttpRequestMessage) new LinkLinkedInRequest(applicant.Id, profile.Id, profile.Url);
-            applicant = await apiClient.SendAndReadAsync<Applicant>(linkRequest);
+            applicant = await apiClient.SendAndReadAsync<ApplicantResponse>(linkRequest);
 
             return applicant;
         }

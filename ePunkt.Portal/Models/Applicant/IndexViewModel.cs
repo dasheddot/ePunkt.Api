@@ -1,15 +1,16 @@
-﻿
+﻿using ePunkt.Api.Responses;
+
 namespace ePunkt.Portal.Models.Applicant
 {
     public class IndexViewModel
     {
-        public IndexViewModel(Api.Models.Applicant applicant)
+        public IndexViewModel(ApplicantResponse applicantResponse)
         {
-            Applicant = applicant;
-            Completeness = new ApplicantCompleteness(applicant);
+            ApplicantResponse = applicantResponse;
+            Completeness = new ApplicantCompleteness(applicantResponse);
         }
 
-        public Api.Models.Applicant Applicant { get; set; }
+        public ApplicantResponse ApplicantResponse { get; set; }
         public ApplicantCompleteness Completeness { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
-using ePunkt.Api.Models;
 using ePunkt.Api.Responses;
 using System;
 using System.Threading.Tasks;
@@ -21,7 +20,7 @@ namespace ePunkt.Portal
             return await _client.SendAndReadAsyncCached<JobsResponse>(new JobsRequest(channel));
         }
 
-        public async Task<JobsResponse> LoadJobsForCurrentPortal(Uri requestUri, Mandator mandator)
+        public async Task<JobsResponse> LoadJobsForCurrentPortal(Uri requestUri, MandatorResponse mandatorResponse)
         {
             return await _client.SendAndReadAsyncCached<JobsResponse>(new JobsRequest(string.Empty));
         }

@@ -12,8 +12,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ePunkt.Api", "ePunkt.Api\eP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ePunkt.Api.Client", "ePunkt.Api.Client\ePunkt.Api.Client.csproj", "{7AB36921-CAFC-403D-BBC7-F28C8CE9192B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ePunkt.Api.CommandLineClient", "ePunkt.Api.CommandLineClient\ePunkt.Api.CommandLineClient.csproj", "{C783C84F-6A64-45E5-9F31-F8E62065ACC1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ePunkt.Portal", "ePunkt.Portal\ePunkt.Portal.csproj", "{AEBC4B76-1791-4FF0-86C4-935290CD05B4}"
 EndProject
 Global
@@ -30,10 +28,6 @@ Global
 		{7AB36921-CAFC-403D-BBC7-F28C8CE9192B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AB36921-CAFC-403D-BBC7-F28C8CE9192B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AB36921-CAFC-403D-BBC7-F28C8CE9192B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C783C84F-6A64-45E5-9F31-F8E62065ACC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C783C84F-6A64-45E5-9F31-F8E62065ACC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C783C84F-6A64-45E5-9F31-F8E62065ACC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C783C84F-6A64-45E5-9F31-F8E62065ACC1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AEBC4B76-1791-4FF0-86C4-935290CD05B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AEBC4B76-1791-4FF0-86C4-935290CD05B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEBC4B76-1791-4FF0-86C4-935290CD05B4}.Release|Any CPU.ActiveCfg = Release|Any CPU

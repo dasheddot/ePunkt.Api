@@ -1,7 +1,7 @@
 ﻿
-namespace ePunkt.Api.Models
+namespace ePunkt.Api.Responses
 {
-    public class PortalSettings
+    public class PortalSettingsResponse
     {
         public bool ForceSsl { get; set; }
         public bool EnableNewsletterSection { get; set; }

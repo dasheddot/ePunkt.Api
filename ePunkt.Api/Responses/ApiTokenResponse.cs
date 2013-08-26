@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace ePunkt.Api.Models
+namespace ePunkt.Api.Responses
 {
-    public class ApiToken
+    public class ApiTokenResponse
     {
         public string Token { get; set; }
         public DateTime Expires { get; set; }

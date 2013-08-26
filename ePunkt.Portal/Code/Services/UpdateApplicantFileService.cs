@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using ePunkt.Api.Client;
+﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
-using ePunkt.Api.Models;
+using ePunkt.Api.Responses;
 using ePunkt.Utilities;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace ePunkt.Portal
@@ -12,8 +12,8 @@ namespace ePunkt.Portal
     public class UpdateApplicantFileService
     {
         private const int MaxFileSize = 1024 * 1024 * 10;
-        private readonly string[] _documentExtensions = new[] { "pdf", "doc", "docx" };
-        private readonly string[] _imageExtensions = new[] { "jpg", "jpeg", "png" };
+        private readonly string[] _documentExtensions = { "pdf", "doc", "docx" };
+        private readonly string[] _imageExtensions = { "jpg", "jpeg", "png" };
 
         public enum CheckFileResult
         {
@@ -37,18 +37,18 @@ namespace ePunkt.Portal
             return CheckFileResult.Ok;
         }
 
-        public async Task AddFile(ApiHttpClient apiClient, Applicant applicant, HttpPostedFileBase file, string type)
+        public async Task AddFile(ApiHttpClient apiClient, ApplicantResponse applicantResponse, HttpPostedFileBase file, string type)
         {
             using (var reader = new BinaryReader(file.InputStream))
             {
-                var document = new DocumentContent
+                var document = new ApplicantDocumentResponse
                     {
                         Content = reader.ReadBytes(file.ContentLength),
-                        Extension = (Path.GetExtension(file.FileName) ?? "").Trim('.'),
+                        FileExtension = (Path.GetExtension(file.FileName) ?? "").Trim('.'),
                         Name = Path.GetFileNameWithoutExtension(file.FileName),
                         Type = type
                     };
-                await apiClient.SendAndReadAsync<string>(new ApplicantDocumentPostRequest(applicant.Id, document));
+                await apiClient.SendAndReadAsync<string>(new ApplicantDocumentPostRequest(applicantResponse.Id, document));
             }
         }
 

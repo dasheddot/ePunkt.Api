@@ -1,6 +1,5 @@
 ﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
-using ePunkt.Api.Models;
 using ePunkt.Api.Parameters;
 using ePunkt.Api.Responses;
 using ePunkt.Portal.Models.Account;
@@ -42,7 +41,7 @@ namespace ePunkt.Portal.Controllers
         {
             if (ModelState.IsValid)
             {
-                var applicant = await ApiClient.SendAndReadAsync<Applicant>(new ApplicantRequest(model.Username, model.Password));
+                var applicant = await ApiClient.SendAndReadAsync<ApplicantResponse>(new ApplicantRequest(model.Username, model.Password));
                 if (applicant != null)
                 {
                     FormsAuthentication.SetAuthCookie(applicant.Id.ToString(CultureInfo.InvariantCulture), false);
@@ -105,9 +104,9 @@ namespace ePunkt.Portal.Controllers
             if (ModelState.IsValid)
             {
                 //check if the email is not in use already
-                if (!mandator.Settings.AllowDuplicateEmail)
+                if (!mandator.PortalSettings.AllowDuplicateEmail)
                 {
-                    var applicantsWithThisEmail = await ApiClient.SendAndReadAsync<IEnumerable<Applicant>>(new ApplicantsRequest(model.Email));
+                    var applicantsWithThisEmail = await ApiClient.SendAndReadAsync<IEnumerable<ApplicantResponse>>(new ApplicantsRequest(model.Email));
                     if (applicantsWithThisEmail.Any())
                         return RedirectToAction("EmailAlreadyInUse", "Account", new { job, email = model.Email });
                 }
@@ -120,7 +119,7 @@ namespace ePunkt.Portal.Controllers
                     LastName = model.LastName,
                     Gender = model.Gender
                 };
-                var applicant = await ApiClient.SendAndReadAsync<Applicant>(new ApplicantRequest(createParameter));
+                var applicant = await ApiClient.SendAndReadAsync<ApplicantResponse>(new ApplicantRequest(createParameter));
 
                 //update the personal information
                 applicant = await _updateApplicantService.UpdatePersonalInformation(ApiClient, applicant, model);
@@ -184,7 +183,7 @@ namespace ePunkt.Portal.Controllers
 
             if (ModelState.IsValid)
             {
-                var requestParam = new SetPasswordParameter(model.OldPassword, model.NewPassword, Request.Url);
+                var requestParam = new ApplicantSetPasswordParameter(model.OldPassword, model.NewPassword, Request.Url);
                 var result = await ApiClient.SendAndReadAsync<ApplicantSetPasswordResponse>(new SetPasswordRequest(GetApplicantId(), requestParam));
                 if (result.Errors != null)
                     foreach (var error in result.Errors)
@@ -224,7 +223,7 @@ namespace ePunkt.Portal.Controllers
         public async Task<ActionResult> RequestPasswordStep2(string email, string code)
         {
             //check if the code really works, to display an early error message if not
-            var applicant = await ApiClient.SendAndReadAsync<Applicant>(new ConfirmRequestPasswordRequest(email, code));
+            var applicant = await ApiClient.SendAndReadAsync<ApplicantResponse>(new ConfirmRequestPasswordRequest(email, code));
             if (applicant == null || applicant.Id <= 0)
                 ModelState.AddModelError("", @"Error-InvalidCode");
 
@@ -240,7 +239,7 @@ namespace ePunkt.Portal.Controllers
 
             if (ModelState.IsValid)
             {
-                var requestParam = new SetPasswordAfterRequestParameter(model.Email, model.Code, model.NewPassword, Request.Url);
+                var requestParam = new ApplicantSetPasswordAfterRequestParameter(model.Email, model.Code, model.NewPassword, Request.Url);
                 var result = await ApiClient.SendAndReadAsync<ApplicantSetPasswordResponse>(new SetPasswordRequest(requestParam));
                 if (result.Errors != null)
                     foreach (var error in result.Errors)

@@ -1,6 +1,5 @@
 ﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
-using ePunkt.Api.Models;
 using ePunkt.Api.Responses;
 using ePunkt.Portal.Models.Jobs;
 using ePunkt.Utilities;
@@ -41,12 +40,12 @@ namespace ePunkt.Portal.Controllers
                     FilteredText = filter,
                     FilteredJobProfiles = jobProfilesFilter,
                     FilteredRegions = regionsFilter,
-                    DisplayFilter = mandator.Settings.EnableFilterOnJobsList,
-                    DisplayJobProfileFilter = mandator.Settings.EnableJobProfilesFilterOnJobsList,
-                    DisplayRegionFilter = mandator.Settings.EnableRegionsFilterOnJobsList,
-                    DisplayJobDate = mandator.Settings.DisplayDateInJobListing,
-                    DisplayJobLocation = mandator.Settings.DisplayLocationInJobListing,
-                    MoveFilterToBottom = mandator.Settings.MoveJobsFilterToBottomOnJobsList
+                    DisplayFilter = mandator.PortalSettings.EnableFilterOnJobsList,
+                    DisplayJobProfileFilter = mandator.PortalSettings.EnableJobProfilesFilterOnJobsList,
+                    DisplayRegionFilter = mandator.PortalSettings.EnableRegionsFilterOnJobsList,
+                    DisplayJobDate = mandator.PortalSettings.DisplayDateInJobListing,
+                    DisplayJobLocation = mandator.PortalSettings.DisplayLocationInJobListing,
+                    MoveFilterToBottom = mandator.PortalSettings.MoveJobsFilterToBottomOnJobsList
                 };
             model.BuildJobs(jobs.OrderByDescending(x => x.OnlineDateCorrected));
 
@@ -70,7 +69,7 @@ namespace ePunkt.Portal.Controllers
                                     new { filter, jobProfiles = selectedJobProfiles.HasValue() ? selectedJobProfiles : null, regions = selectedRegions.HasValue() ? selectedRegions : null });
         }
 
-        private string BuildSelectedRegionsString(IEnumerable<Region> regions)
+        private string BuildSelectedRegionsString(IEnumerable<RegionResponse> regions)
         {
             var selectedRegions = "";
             foreach (var region in regions)
@@ -93,7 +92,7 @@ namespace ePunkt.Portal.Controllers
             var model = new JobViewModel
                 {
                     Html = fixUrlsService.ReplaceUrlsWithCurrent(job.Html, Request.Url),
-                    DisplayBackLink = mandator.Settings.DisplayBackToOverviewLinkOnJobDetails
+                    DisplayBackLink = mandator.PortalSettings.DisplayBackToOverviewLinkOnJobDetails
                 };
             return View(model);
         }

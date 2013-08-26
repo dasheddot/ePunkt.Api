@@ -1,5 +1,5 @@
 ﻿using ePunkt.Api.Client;
-using ePunkt.Api.Models;
+using ePunkt.Api.Responses;
 using ePunkt.Utilities;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +59,7 @@ namespace ePunkt.Portal.Controllers
             return syndicationService.BuildFeed(jobs, Request.Url, referrer, format.Is("html"));
         }
 
-        private async Task<IEnumerable<Job>> GetJobs(string channel, string filter, string jobProfiles, string regions)
+        private async Task<IEnumerable<JobResponse>> GetJobs(string channel, string filter, string jobProfiles, string regions)
         {
             var response = await _jobsService.LoadJobsForChannel(channel);
             return response.Jobs.Filter(filter, jobProfiles, regions).OrderByDescending(x => x.OnlineDateCorrected);

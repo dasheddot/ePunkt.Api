@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using ePunkt.Api.Models;
+﻿using ePunkt.Api.Responses;
 using ePunkt.Utilities;
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace ePunkt.Portal
@@ -11,11 +11,11 @@ namespace ePunkt.Portal
     /// </summary>
     public class FixJobAdUrlsService
     {
-        private readonly Mandator _mandator;
+        private readonly MandatorResponse _mandatorResponse;
 
-        public FixJobAdUrlsService(Mandator mandator)
+        public FixJobAdUrlsService(MandatorResponse mandatorResponse)
         {
-            _mandator = mandator;
+            _mandatorResponse = mandatorResponse;
         }
 
         public string InjectReferrer(string html, int jobId, string referrerToInject)
@@ -25,7 +25,7 @@ namespace ePunkt.Portal
 
         public string ReplaceUrlsWithCurrent(string html, Uri currentRequestUri)
         {
-            return _mandator.Urls.Aggregate(html, (current, url) => Replace(current, url, currentRequestUri));
+            return _mandatorResponse.Urls.Aggregate(html, (current, url) => Replace(current, url, currentRequestUri));
         }
 
         private string Replace(string html, string urlToReplace, Uri currentRequestUri)

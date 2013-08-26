@@ -1,4 +1,4 @@
-﻿using ePunkt.Api.Models;
+﻿using ePunkt.Api.Responses;
 using ePunkt.Utilities;
 using System.Globalization;
 using System.Linq;
@@ -8,9 +8,9 @@ namespace ePunkt.Portal
     public class Translations
     {
 
-        public static string TlT(Mandator mandator, string originalText)
+        public static string TlT(MandatorResponse mandatorResponse, string originalText)
         {
-            var allTranslations = mandator.Translations;
+            var allTranslations = mandatorResponse.Translations;
             var matchingEntry = allTranslations.FirstOrDefault(x => x.Texts.Any(y => y.Text.Is(originalText)));
             if (matchingEntry != null)
             {

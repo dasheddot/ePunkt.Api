@@ -1,15 +1,15 @@
 ﻿using ePunkt.Api.Parameters;
 
-namespace ePunkt.Api.Models
+namespace ePunkt.Api.Responses
 {
-    public class CustomField : CustomFieldCreateUpdateParameter
+    public class CustomFieldResponse : CustomFieldUpdateParameter
     {
         public string Name { get; set; }
-        public CustomFieldType Type { get; set; }
+        public CustomFieldResponseType Type { get; set; }
         public bool IsPublic { get; set; }
     }
 
-    public enum CustomFieldType
+    public enum CustomFieldResponseType
     {
         TextMultiLine = 1,
         CheckBox = 2,

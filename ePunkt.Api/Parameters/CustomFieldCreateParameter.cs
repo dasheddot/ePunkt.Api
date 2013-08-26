@@ -2,7 +2,7 @@
 
 namespace ePunkt.Api.Parameters
 {
-    public class CustomFieldCreateUpdateParameter
+    public class CustomFieldCreateParameter
     {
         public string InternalName { get; set; }
         public string StringValue { get; set; }

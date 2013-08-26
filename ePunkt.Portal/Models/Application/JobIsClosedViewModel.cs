@@ -1,16 +1,16 @@
-﻿using ePunkt.Api.Models;
+﻿using ePunkt.Api.Responses;
 
 namespace ePunkt.Portal.Models.Application
 {
     public class JobIsClosedViewModel
     {
-        public JobIsClosedViewModel(Job job)
+        public JobIsClosedViewModel(JobResponse jobResponse)
         {
-            JobId = job.Id;
-            Job = job;
+            JobId = jobResponse.Id;
+            JobResponse = jobResponse;
         }
 
         public int JobId { get; set; }
-        public Job Job { get; set; }
+        public JobResponse JobResponse { get; set; }
     }
 }

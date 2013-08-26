@@ -18,15 +18,15 @@
     @Html.AntiForgeryToken()
     <div id="applicantAdditionalSettings">
         <p>
-            @Html.CheckBox("active", Model.Applicant.IsActive)@Html.Label("active", Html.Loc("Active_Label").ToString())
+            @Html.CheckBox("active", Model.ApplicantResponse.IsActive)@Html.Label("active", Html.Loc("Active_Label").ToString())
             <span>@Html.Loc("Active_Description")</span>
         </p>
         <p>
-            @Html.CheckBox("matchingJobs", Model.Applicant.EnableMatchingJobsAutoMail)@Html.Label("matchingJobs", Html.Loc("MatchingJobs_Label").ToString())
+            @Html.CheckBox("matchingJobs", Model.ApplicantResponse.EnableMatchingJobsAutoMail)@Html.Label("matchingJobs", Html.Loc("MatchingJobs_Label").ToString())
             <span>@Html.Loc("MatchingJobs_Description")</span>
         </p>
         <p>
-            @Html.CheckBox("newsletter", Model.Applicant.EnableNewsletter)@Html.Label("newsletter", Html.Loc("Newsletter_Label").ToString())
+            @Html.CheckBox("newsletter", Model.ApplicantResponse.EnableNewsletter)@Html.Label("newsletter", Html.Loc("Newsletter_Label").ToString())
             <span>@Html.Loc("Newsletter_Description")</span>
         </p>
         <input type="submit" value="@Html.Loc("Save")" />

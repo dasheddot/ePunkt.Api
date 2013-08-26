@@ -1,6 +1,6 @@
 ﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
-using ePunkt.Api.Models;
+using ePunkt.Api.Responses;
 using ePunkt.Portal.Models.ApplicantFiles;
 using ePunkt.Utilities;
 using System.Threading.Tasks;
@@ -66,10 +66,10 @@ namespace ePunkt.Portal.Controllers
             var applicant = await GetApplicant();
             if (applicant != null)
             {
-                var response = await ApiClient.SendAndReadAsync<DocumentContent>(new ApplicantDocumentGetRequest(applicant.Id, name, type));
-                return new FileContentResult(response.Content, MimeMapping.GetMimeMapping(response.Name + "." + response.Extension))
+                var response = await ApiClient.SendAndReadAsync<ApplicantDocumentResponse>(new ApplicantDocumentGetRequest(applicant.Id, name, type));
+                return new FileContentResult(response.Content, MimeMapping.GetMimeMapping(response.Name + "." + response.FileExtension))
                     {
-                        FileDownloadName = response.Name + "." + response.Extension
+                        FileDownloadName = response.Name + "." + response.FileExtension
                     };
             }
             return HttpNotFound();

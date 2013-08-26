@@ -1,15 +1,15 @@
-﻿using System.Net.Http;
+﻿using ePunkt.Api.Parameters;
+using System.Net.Http;
 using System.Net.Http.Formatting;
-using ePunkt.Api.Models;
 
 namespace ePunkt.Api.Client.Requests
 {
     public class ApiKeyRequest : HttpRequestMessage
     {
-        public ApiKeyRequest(ApiKey apiKey)
+        public ApiKeyRequest(ApiKeyParameter apiKeyParameter)
             : base(HttpMethod.Post, "Auth")
         {
-            Content = new ObjectContent(typeof (ApiKey), apiKey, new JsonMediaTypeFormatter());
+            Content = new ObjectContent(typeof (ApiKeyParameter), apiKeyParameter, new JsonMediaTypeFormatter());
         }
     }
 }

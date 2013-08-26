@@ -44,23 +44,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Parameters\Application\ApplicationCreateParameter.cs" />
-    <Compile Include="Parameters\SetPasswordParameter.cs" />
-    <Compile Include="Parameters\SetPasswordAfterRequestParameter.cs" />
-    <Compile Include="Models\ApiKey.cs" />
-    <Compile Include="Models\ApiToken.cs" />
-    <Compile Include="Models\Applicant.cs" />
-    <Compile Include="Parameters\ApplicantCreateParameter.cs" />
+    <Compile Include="Parameters\Application\ApplicantSetPasswordParameter.cs" />
+    <Compile Include="Parameters\Application\ApplicantSetPasswordAfterRequestParameter.cs" />
+    <Compile Include="Parameters\ApiKeyParameter.cs" />
+    <Compile Include="Parameters\CustomFieldUpdateParameter.cs" />
+    <Compile Include="Responses\ApiTokenResponse.cs" />
+    <Compile Include="Responses\Applicant\ApplicantDocumentResponse.cs" />
+    <Compile Include="Responses\Applicant\ApplicantResponse.cs" />
+    <Compile Include="Parameters\Applicant\ApplicantCreateParameter.cs" />
     <Compile Include="Responses\ApplicantSetPasswordResponse.cs" />
-    <Compile Include="Parameters\ApplicantUpdateParameter.cs" />
-    <Compile Include="Models\CustomField.cs" />
+    <Compile Include="Parameters\Applicant\ApplicantUpdateParameter.cs" />
+    <Compile Include="Responses\CustomFieldResponse.cs" />
     <Compile Include="Responses\Application\ApplicationCreateResponse.cs" />
-    <Compile Include="Responses\JobSalaryImageResponse.cs" />
-    <Compile Include="Models\Job.cs" />
-    <Compile Include="Responses\JobsResponse.cs" />
-    <Compile Include="Parameters\CustomFieldCreateUpdateParameter.cs" />
-    <Compile Include="Models\DocumentContent.cs" />
-    <Compile Include="Models\Mandator.cs" />
-    <Compile Include="Models\PortalSettings.cs" />
+    <Compile Include="Responses\Job\JobSalaryImageResponse.cs" />
+    <Compile Include="Responses\Job\JobResponse.cs" />
+    <Compile Include="Responses\Job\JobsResponse.cs" />
+    <Compile Include="Parameters\CustomFieldCreateParameter.cs" />
+    <Compile Include="Parameters\Applicant\ApplicantDocumentParameter.cs" />
+    <Compile Include="Responses\Mandator\MandatorResponse.cs" />
+    <Compile Include="Responses\Mandator\PortalSettingsResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

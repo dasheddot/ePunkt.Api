@@ -1,4 +1,4 @@
-﻿using ePunkt.Api.Models;
+﻿using ePunkt.Api.Responses;
 using ePunkt.Utilities;
 using System;
 using System.Collections.Generic;
@@ -11,17 +11,17 @@ namespace ePunkt.Portal
 {
     public class SyndicationService
     {
-        private readonly Mandator _mandator;
+        private readonly MandatorResponse _mandatorResponse;
         private readonly UrlBuilderService _urlBuilder;
 
 
-        public SyndicationService(Mandator mandator, UrlBuilderService urlBuilder)
+        public SyndicationService(MandatorResponse mandatorResponse, UrlBuilderService urlBuilder)
         {
             _urlBuilder = urlBuilder;
-            _mandator = mandator;
+            _mandatorResponse = mandatorResponse;
         }
 
-        public XElement BuildXml(IEnumerable<Job> jobs, Uri requestUri, string referrer, bool formatIsHtml)
+        public XElement BuildXml(IEnumerable<JobResponse> jobs, Uri requestUri, string referrer, bool formatIsHtml)
         {
             var xml = new XElement("jobs");
             var jobsCount = 0;
@@ -38,7 +38,7 @@ namespace ePunkt.Portal
                 jobXml.Add(new XElement("requirements", new XCData(job.Block2 ?? "")));
                 jobXml.Add(new XElement("additionalText", new XCData(job.Block3 ?? "")));
 
-                if (_mandator.Settings.EnableFourthJobBlockInXmlFeed)
+                if (_mandatorResponse.PortalSettings.EnableFourthJobBlockInXmlFeed)
                     jobXml.Add(new XElement("footer", new XCData(job.Block4 ?? "")));
 
                 jobXml.Add(new XElement("responsibleUser", job.UserFullName));
@@ -52,7 +52,7 @@ namespace ePunkt.Portal
                 jobXml.Add(new XElement("applyUrl", _urlBuilder.GetAbsoluteSignUpUrl(job.Id, requestUri, referrer)));
                 jobXml.Add(new XElement("content", new XCData(BuildContent(job, requestUri, referrer, formatIsHtml))));
 
-                if (_mandator.Settings.EnableExtendedXml)
+                if (_mandatorResponse.PortalSettings.EnableExtendedXml)
                 {
                     jobXml.Add(new XElement("dateOfCreation", job.CreationDate));
                     jobXml.Add(new XElement("dateOfUpdate", job.UpdateDate));
@@ -81,7 +81,7 @@ namespace ePunkt.Portal
                     jobXml.Add(new XElement(XmlUtility.EnsureValidTagName(customField.InternalName ?? Guid.NewGuid().ToString()), new XAttribute("name", customField.Name), value));
                 }
 
-                if (_mandator.Settings.EnableJobTagsInXmlFeed)
+                if (_mandatorResponse.PortalSettings.EnableJobTagsInXmlFeed)
                 {
                     foreach (var tag in job.Tags)
                         jobXml.Add(new XElement("tag", tag));
@@ -95,11 +95,11 @@ namespace ePunkt.Portal
             return xml;
         }
 
-        public SyndicationFeed BuildFeed(IEnumerable<Job> jobs, Uri requestUri, string referrer, bool formatIsHtml)
+        public SyndicationFeed BuildFeed(IEnumerable<JobResponse> jobs, Uri requestUri, string referrer, bool formatIsHtml)
         {
             var feed = new SyndicationFeed
                 {
-                    Title = new TextSyndicationContent(_mandator.Name)
+                    Title = new TextSyndicationContent(_mandatorResponse.Name)
                 };
             var items = new List<SyndicationItem>();
 
@@ -123,24 +123,24 @@ namespace ePunkt.Portal
             return feed;
         }
 
-        public string BuildContent(Job job, Uri requestUri, string referrer, bool formatIsHtml)
+        public string BuildContent(JobResponse jobResponse, Uri requestUri, string referrer, bool formatIsHtml)
         {
             var result = "";
             if (formatIsHtml)
             {
-                var fixUrlsService = new FixJobAdUrlsService(_mandator);
-                result = fixUrlsService.ReplaceUrlsWithCurrent(job.Html, requestUri);
-                result = fixUrlsService.InjectReferrer(result, job.Id, referrer);
+                var fixUrlsService = new FixJobAdUrlsService(_mandatorResponse);
+                result = fixUrlsService.ReplaceUrlsWithCurrent(jobResponse.Html, requestUri);
+                result = fixUrlsService.InjectReferrer(result, jobResponse.Id, referrer);
             }
             else
-                result += "<p>" + job.CompanyDescription + "</p>" +
-                          "<p><b>" + job.Title + "</b><br />" +
-                          job.SubTitle + "<br />" +
-                          job.Location + "</p>" +
-                          "<p>" + job.Block1 + "</p>" +
-                          "<p>" + job.Block2 + "</p>" +
-                          "<p>" + job.Block3 + "</p>" +
-                          "<p><a href=\"" + _urlBuilder.GetAbsolutJobUrl(job.Id, requestUri, referrer) + "\">" + _urlBuilder.GetAbsolutJobUrl(job.Id, requestUri, referrer) + "</a></p>";
+                result += "<p>" + jobResponse.CompanyDescription + "</p>" +
+                          "<p><b>" + jobResponse.Title + "</b><br />" +
+                          jobResponse.SubTitle + "<br />" +
+                          jobResponse.Location + "</p>" +
+                          "<p>" + jobResponse.Block1 + "</p>" +
+                          "<p>" + jobResponse.Block2 + "</p>" +
+                          "<p>" + jobResponse.Block3 + "</p>" +
+                          "<p><a href=\"" + _urlBuilder.GetAbsolutJobUrl(jobResponse.Id, requestUri, referrer) + "\">" + _urlBuilder.GetAbsolutJobUrl(jobResponse.Id, requestUri, referrer) + "</a></p>";
 
             return result;
         }

@@ -1,7 +1,7 @@
-﻿@using ePunkt.Api.Models
+﻿@using ePunkt.Api.Responses
 @using ePunkt.Utilities
 @model ePunkt.Portal.Models.Jobs.IndexViewModel
-@helper RenderRegionRecursive(IEnumerable<Region> regions)
+@helper RenderRegionRecursive(IEnumerable<RegionResponse> regions)
 {
     foreach (var region in regions)
     {

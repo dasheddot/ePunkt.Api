@@ -2,9 +2,9 @@
 
 namespace ePunkt.Api.Parameters
 {
-    public class SetPasswordAfterRequestParameter
+    public class ApplicantSetPasswordAfterRequestParameter
     {
-        public SetPasswordAfterRequestParameter(string email, string code, string newPassword, Uri url)
+        public ApplicantSetPasswordAfterRequestParameter(string email, string code, string newPassword, Uri url)
         {
             Email = email;
             Code = code;
