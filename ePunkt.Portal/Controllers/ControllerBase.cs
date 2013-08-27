@@ -22,7 +22,7 @@ namespace ePunkt.Portal.Controllers
 
         protected async Task<MandatorResponse> GetMandator()
         {
-            var mandator = await ApiClient.SendAndReadAsyncCached<MandatorResponse>(new MandatorRequest(Request.Url));
+            var mandator = await new MandatorRequest(Request.Url).LoadResult(ApiClient);
             new CombinePortalAndCustomSettingsService().UpdatePortalSettingsWithCustomSettings(mandator.PortalSettings, Settings);
             return mandator;
         }
@@ -34,7 +34,7 @@ namespace ePunkt.Portal.Controllers
 
             try
             {
-                return await ApiClient.SendAndReadAsync<ApplicantResponse>(new ApplicantRequest(GetApplicantId()));
+                return await new ApplicantRequest(GetApplicantId()).LoadResult(ApiClient);
             }
             catch
             {

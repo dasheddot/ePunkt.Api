@@ -1,6 +1,5 @@
 ﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
-using ePunkt.Api.Responses;
 using ePunkt.Portal.Models.ApplicantFiles;
 using ePunkt.Utilities;
 using System.Threading.Tasks;
@@ -66,7 +65,7 @@ namespace ePunkt.Portal.Controllers
             var applicant = await GetApplicant();
             if (applicant != null)
             {
-                var response = await ApiClient.SendAndReadAsync<ApplicantDocumentResponse>(new ApplicantDocumentGetRequest(applicant.Id, name, type));
+                var response = await new ApplicantDocumentGetRequest(applicant.Id, name, type).LoadResult(ApiClient);
                 return new FileContentResult(response.Content, MimeMapping.GetMimeMapping(response.Name + "." + response.FileExtension))
                     {
                         FileDownloadName = response.Name + "." + response.FileExtension
@@ -81,7 +80,7 @@ namespace ePunkt.Portal.Controllers
         {
             var applicant = await GetApplicant();
             if (applicant != null)
-                await ApiClient.SendAndReadAsync<string>(new ApplicantDocumentDeleteRequest(applicant.Id, name, type));
+                await new ApplicantDocumentDeleteRequest(applicant.Id, name, type).LoadResult(ApiClient);
             return RedirectToAction("Index");
         }
     }

@@ -2,9 +2,9 @@
 using System.Net.Http;
 using System.Net.Http.Formatting;
 
-namespace ePunkt.Api.Client
+namespace ePunkt.Api.Client.Requests
 {
-    public class PutJsonHttpRequestMessage : HttpRequestMessage
+    public class PutJsonHttpRequestMessage<T> : HttpRequestMessage<T> where T : class
     {
         public PutJsonHttpRequestMessage(string url, object param)
             : base(HttpMethod.Put, url)

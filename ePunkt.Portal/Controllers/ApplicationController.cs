@@ -34,7 +34,7 @@ namespace ePunkt.Portal.Controllers
                 {
                     RefreshApplicationWhenIfItAlreadyExists = ignoreDuplicate.HasValue && ignoreDuplicate.Value
                 };
-            var result = await ApiClient.SendAndReadAsync<ApplicationCreateResponse>(new CreateApplicationRequest(parameter));
+            var result = await new CreateApplicationRequest(parameter).LoadResult(ApiClient);
 
             if (result.Errors.Any(x => x == ApplicationCreateResponse.Error.JobDoesNotExist || x == ApplicationCreateResponse.Error.ApplicantDoesNotExist))
                 return RedirectToAction("Index", "Jobs");

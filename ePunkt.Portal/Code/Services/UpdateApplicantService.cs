@@ -22,9 +22,10 @@ namespace ePunkt.Portal
                     Street = model.Street,
                     TitleBeforeName = model.TitleBeforeName,
                     TitleAfterName = model.TitleAfterName,
-                    ZipCode = model.ZipCode
+                    ZipCode = model.ZipCode,
+                    Email = model.Email
                 };
-            return await apiClient.SendAndReadAsync<ApplicantResponse>(new ApplicantRequest(applicantResponse.Id, updateParameter));
+            return await new ApplicantRequest(applicantResponse.Id, updateParameter).LoadResult(apiClient);
         }
     }
 }

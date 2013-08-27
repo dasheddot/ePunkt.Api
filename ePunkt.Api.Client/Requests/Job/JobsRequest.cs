@@ -1,9 +1,10 @@
 ﻿using System.Globalization;
 using System.Net.Http;
+using ePunkt.Api.Responses;
 
 namespace ePunkt.Api.Client.Requests
 {
-    public class JobsRequest : CachedHttpRequestMessage
+    public class JobsRequest : CachedHttpRequestMessage<JobsResponse>
     {
         private readonly string _channel;
         private readonly CultureInfo _culture;

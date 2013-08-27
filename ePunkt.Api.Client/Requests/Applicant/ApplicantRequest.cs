@@ -1,10 +1,11 @@
-﻿using System.Net.Http;
+﻿using ePunkt.Api.Parameters;
+using ePunkt.Api.Responses;
+using System.Net.Http;
 using System.Net.Http.Formatting;
-using ePunkt.Api.Parameters;
 
 namespace ePunkt.Api.Client.Requests
 {
-    public class ApplicantRequest : HttpRequestMessage
+    public class ApplicantRequest : HttpRequestMessage<ApplicantResponse>
     {
 
         public ApplicantRequest(string usernameOrEmail, string password)

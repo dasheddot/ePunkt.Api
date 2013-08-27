@@ -5,9 +5,7 @@ using ePunkt.Api.Responses;
 using ePunkt.SocialConnector;
 using JetBrains.Annotations;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace ePunkt.Portal
@@ -24,7 +22,7 @@ namespace ePunkt.Portal
             //check if the email is not in use already
             if (!mandatorResponse.PortalSettings.AllowDuplicateEmail)
             {
-                var applicantsWithThisEmail = await apiClient.SendAndReadAsync<IEnumerable<ApplicantResponse>>(new ApplicantsRequest(email));
+                var applicantsWithThisEmail = await new ApplicantsRequest(email).LoadResult(apiClient);
                 return applicantsWithThisEmail.Any();
             }
             return false;
@@ -38,7 +36,7 @@ namespace ePunkt.Portal
             ApplicantResponse applicant;
             try
             {
-                applicant = loggedInApplicantResponse ?? await apiClient.SendAndReadAsync<ApplicantResponse>(new ApplicantRequest(profile.Id, thirdParty));
+                applicant = loggedInApplicantResponse ?? await new ApplicantRequest(profile.Id, thirdParty).LoadResult(apiClient);
             }
             catch
             {
@@ -67,14 +65,14 @@ namespace ePunkt.Portal
                         LastName = profile.LastName,
                         Gender = gender
                     };
-                applicant = await apiClient.SendAndReadAsync<ApplicantResponse>(new ApplicantRequest(parameter));
+                applicant = await new ApplicantRequest(parameter).LoadResult(apiClient);
             }
 
             //now link the profile
             var linkRequest = thirdParty == ThirdParty.Xing
                                   ? new LinkXingRequest(applicant.Id, profile.Id, profile.Url)
-                                  : (HttpRequestMessage)new LinkLinkedInRequest(applicant.Id, profile.Id, profile.Url);
-            applicant = await apiClient.SendAndReadAsync<ApplicantResponse>(linkRequest);
+                                  : (HttpRequestMessage<ApplicantResponse>)new LinkLinkedInRequest(applicant.Id, profile.Id, profile.Url);
+            applicant = await linkRequest.LoadResult(apiClient);
 
             return applicant;
         }

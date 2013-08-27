@@ -48,7 +48,7 @@ namespace ePunkt.Portal
                         Name = Path.GetFileNameWithoutExtension(file.FileName),
                         Type = type
                     };
-                await apiClient.SendAndReadAsync<string>(new ApplicantDocumentPostRequest(applicantResponse.Id, document));
+                await new ApplicantDocumentPostRequest(applicantResponse.Id, document).LoadResult(apiClient);
             }
         }
 

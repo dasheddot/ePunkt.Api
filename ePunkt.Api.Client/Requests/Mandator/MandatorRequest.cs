@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Net.Http;
+using ePunkt.Api.Responses;
 
 namespace ePunkt.Api.Client.Requests
 {
-    public class MandatorRequest : CachedHttpRequestMessage
+    public class MandatorRequest : CachedHttpRequestMessage<MandatorResponse>
     {
         private readonly Uri _currentUri;
 

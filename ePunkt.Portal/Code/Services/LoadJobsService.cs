@@ -17,17 +17,17 @@ namespace ePunkt.Portal
 
         public async Task<JobsResponse> LoadJobsForChannel(string channel)
         {
-            return await _client.SendAndReadAsyncCached<JobsResponse>(new JobsRequest(channel));
+            return await new JobsRequest(channel).LoadResult(_client);
         }
 
         public async Task<JobsResponse> LoadJobsForCurrentPortal(Uri requestUri, MandatorResponse mandatorResponse)
         {
-            return await _client.SendAndReadAsyncCached<JobsResponse>(new JobsRequest(string.Empty));
+            return await new JobsRequest(string.Empty).LoadResult(_client);
         }
 
         public async Task<JobResponse> LoadSingleJob(int jobId)
         {
-            return await _client.SendAndReadAsyncCached<JobResponse>(new JobRequest(jobId));
+            return await new JobRequest(jobId).LoadResult(_client);
         }
     }
 }

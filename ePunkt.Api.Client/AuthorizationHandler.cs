@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using HttpRequestMessage = System.Net.Http.HttpRequestMessage;
 
 namespace ePunkt.Api.Client
 {

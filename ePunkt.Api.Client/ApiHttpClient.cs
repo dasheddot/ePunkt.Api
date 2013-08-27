@@ -1,14 +1,13 @@
-﻿using System.Net;
-using System.Runtime.Serialization;
-using ePunkt.Api.Client.Requests;
+﻿using ePunkt.Api.Client.Requests;
 using ePunkt.Api.Parameters;
 using JetBrains.Annotations;
-using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
+using System.Net;
 using System.Net.Http;
 using System.Runtime.Caching;
 using System.Threading.Tasks;
+using HttpRequestMessage = System.Net.Http.HttpRequestMessage;
 
 namespace ePunkt.Api.Client
 {
@@ -26,7 +25,7 @@ namespace ePunkt.Api.Client
             BaseAddress = baseAddress;
         }
 
-        public async Task<T> SendAndReadAsync<T>(HttpRequestMessage requestMessage, bool runTimer = true) where T : class
+        internal async Task<T> SendAndReadAsync<T>(HttpRequestMessage requestMessage, bool runTimer = true) where T : class
         {
             if (runTimer)
             {
@@ -59,7 +58,7 @@ namespace ePunkt.Api.Client
             return result;
         }
 
-        public async Task<T> SendAndReadAsyncCached<T>(CachedHttpRequestMessage requestMessage, TimeSpan cacheDuration) where T : class
+        internal async Task<T> SendAndReadAsyncCached<T>(CachedHttpRequestMessage<T> requestMessage, TimeSpan cacheDuration) where T : class
         {
             _watch.Reset();
             _watch.Start();
@@ -79,9 +78,9 @@ namespace ePunkt.Api.Client
             return result;
         }
 
-        public async Task<T> SendAndReadAsyncCached<T>(CachedHttpRequestMessage requestMessage) where T : class
+        internal async Task<T> SendAndReadAsyncCached<T>(CachedHttpRequestMessage<T> requestMessage) where T : class
         {
-            return await SendAndReadAsyncCached<T>(requestMessage, TimeSpan.FromSeconds(CacheDurationInSeconds));
+            return await SendAndReadAsyncCached(requestMessage, TimeSpan.FromSeconds(CacheDurationInSeconds));
         }
 
         public long ElapsedMillisecondsInLastCall { get; private set; }

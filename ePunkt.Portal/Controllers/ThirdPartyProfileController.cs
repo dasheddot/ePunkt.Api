@@ -66,14 +66,14 @@ namespace ePunkt.Portal.Controllers
         [Authorize]
         public async Task<ActionResult> UnlinkXing()
         {
-            await ApiClient.SendAndReadAsync<ApplicantResponse>(new UnlinkXingRequest(GetApplicantId()));
+            await new UnlinkXingRequest(GetApplicantId()).LoadResult(ApiClient);
             return RedirectToAction("Index");
         }
 
         [Authorize]
         public async Task<ActionResult> UnlinkLinkedIn()
         {
-            await ApiClient.SendAndReadAsync<ApplicantResponse>(new UnlinkLinkedInRequest(GetApplicantId()));
+            await new UnlinkLinkedInRequest(GetApplicantId()).LoadResult(ApiClient);
             return RedirectToAction("Index");
         }
 

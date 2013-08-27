@@ -57,7 +57,7 @@
   <ItemGroup>
     <Compile Include="ApiHttpClient.cs" />
     <Compile Include="AuthorizationHandler.cs" />
-    <Compile Include="PostJsonHttpRequestMessage.cs" />
+    <Compile Include="Requests\PostJsonHttpRequestMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\Account\ConfirmRequestPasswordRequest.cs" />
     <Compile Include="Requests\Account\SetPasswordRequest.cs" />
@@ -69,7 +69,8 @@
     <Compile Include="Requests\Applicant\ApplicantDocumentPostRequest.cs" />
     <Compile Include="Requests\Application\ApplicationsRequest.cs" />
     <Compile Include="Requests\Application\CreateApplicationRequest.cs" />
-    <Compile Include="PutJsonHttpRequestMessage.cs" />
+    <Compile Include="Requests\PutJsonHttpRequestMessage.cs" />
+    <Compile Include="Requests\HttpRequestMessage.cs" />
     <Compile Include="Requests\Job\JobRequest.cs" />
     <Compile Include="Requests\ThirdPartyProfile\UnlinkLinkedInRequest.cs" />
     <Compile Include="Requests\ThirdPartyProfile\UnlinkXingRequest.cs" />

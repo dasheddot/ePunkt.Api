@@ -3,7 +3,6 @@ using ePunkt.Api.Client.Requests;
 using ePunkt.Api.Parameters;
 using ePunkt.Api.Responses;
 using ePunkt.Portal.Models.Account;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,7 +40,16 @@ namespace ePunkt.Portal.Controllers
         {
             if (ModelState.IsValid)
             {
-                var applicant = await ApiClient.SendAndReadAsync<ApplicantResponse>(new ApplicantRequest(model.Username, model.Password));
+                ApplicantResponse applicant;
+                try
+                {
+                    applicant = await new ApplicantRequest(model.Username, model.Password).LoadResult(ApiClient);
+                }
+                catch (NotFoundException)
+                {
+                    applicant = null;
+                }
+
                 if (applicant != null)
                 {
                     FormsAuthentication.SetAuthCookie(applicant.Id.ToString(CultureInfo.InvariantCulture), false);
@@ -106,7 +114,7 @@ namespace ePunkt.Portal.Controllers
                 //check if the email is not in use already
                 if (!mandator.PortalSettings.AllowDuplicateEmail)
                 {
-                    var applicantsWithThisEmail = await ApiClient.SendAndReadAsync<IEnumerable<ApplicantResponse>>(new ApplicantsRequest(model.Email));
+                    var applicantsWithThisEmail = await new ApplicantsRequest(model.Email).LoadResult(ApiClient);
                     if (applicantsWithThisEmail.Any())
                         return RedirectToAction("EmailAlreadyInUse", "Account", new { job, email = model.Email });
                 }
@@ -119,7 +127,7 @@ namespace ePunkt.Portal.Controllers
                     LastName = model.LastName,
                     Gender = model.Gender
                 };
-                var applicant = await ApiClient.SendAndReadAsync<ApplicantResponse>(new ApplicantRequest(createParameter));
+                var applicant = await new ApplicantRequest(createParameter).LoadResult(ApiClient);
 
                 //update the personal information
                 applicant = await _updateApplicantService.UpdatePersonalInformation(ApiClient, applicant, model);
@@ -184,7 +192,7 @@ namespace ePunkt.Portal.Controllers
             if (ModelState.IsValid)
             {
                 var requestParam = new ApplicantSetPasswordParameter(model.OldPassword, model.NewPassword, Request.Url);
-                var result = await ApiClient.SendAndReadAsync<ApplicantSetPasswordResponse>(new SetPasswordRequest(GetApplicantId(), requestParam));
+                var result = await new SetPasswordRequest(GetApplicantId(), requestParam).LoadResult(ApiClient);
                 if (result.Errors != null)
                     foreach (var error in result.Errors)
                         ModelState.AddModelError("password1", @"Error-" + error);
@@ -216,7 +224,7 @@ namespace ePunkt.Portal.Controllers
             {
                 try
                 {
-                    await ApiClient.SendAndReadAsync<string>(new RequestPasswordRequest(model.Email, Request.Url));
+                    await new RequestPasswordRequest(model.Email, Request.Url).LoadResult(ApiClient);
                 }
                 catch (NotFoundException)
                 {
@@ -232,7 +240,7 @@ namespace ePunkt.Portal.Controllers
             //check if the code really works, to display an early error message if not
             try
             {
-                await ApiClient.SendAndReadAsync<ApplicantResponse>(new ConfirmRequestPasswordRequest(email, code));
+                await new ConfirmRequestPasswordRequest(email, code).LoadResult(ApiClient);
             }
             catch
             {
@@ -252,7 +260,7 @@ namespace ePunkt.Portal.Controllers
             if (ModelState.IsValid)
             {
                 var requestParam = new ApplicantSetPasswordAfterRequestParameter(model.Email, model.Code, model.NewPassword, Request.Url);
-                var result = await ApiClient.SendAndReadAsync<ApplicantSetPasswordResponse>(new SetPasswordRequest(requestParam));
+                var result = await new SetPasswordRequest(requestParam).LoadResult(ApiClient);
                 if (result.Errors != null)
                     foreach (var error in result.Errors)
                         ModelState.AddModelError("NewPassword", @"Error-" + error);

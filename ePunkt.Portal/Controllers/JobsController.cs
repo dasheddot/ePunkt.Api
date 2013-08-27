@@ -103,7 +103,7 @@ namespace ePunkt.Portal.Controllers
         {
             try
             {
-                var response = await ApiClient.SendAndReadAsync<JobSalaryImageResponse>(new JobSalaryImageRequest(id));
+                var response = await new JobSalaryImageRequest(id).LoadResult(ApiClient);
                 if (response != null && response.Image != null)
                     return new FileContentResult(Convert.FromBase64String(response.Image), MimeMapping.GetMimeMapping("JobSalaryImage" + id + ".jpg"));
             }
