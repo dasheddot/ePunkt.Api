@@ -214,7 +214,14 @@ namespace ePunkt.Portal.Controllers
         {
             if (ModelState.IsValid)
             {
-                await ApiClient.SendAndReadAsync<string>(new RequestPasswordRequest(model.Email, Request.Url));
+                try
+                {
+                    await ApiClient.SendAndReadAsync<string>(new RequestPasswordRequest(model.Email, Request.Url));
+                }
+                catch (NotFoundException)
+                {
+                    //do nothing here. When the request fails, we still want to show the success message (to avoid user enumeration security problem)
+                }
                 return View("RequestPasswordStep1Success");
             }
             return View(model);
@@ -223,9 +230,14 @@ namespace ePunkt.Portal.Controllers
         public async Task<ActionResult> RequestPasswordStep2(string email, string code)
         {
             //check if the code really works, to display an early error message if not
-            var applicant = await ApiClient.SendAndReadAsync<ApplicantResponse>(new ConfirmRequestPasswordRequest(email, code));
-            if (applicant == null || applicant.Id <= 0)
+            try
+            {
+                await ApiClient.SendAndReadAsync<ApplicantResponse>(new ConfirmRequestPasswordRequest(email, code));
+            }
+            catch
+            {
                 ModelState.AddModelError("", @"Error-InvalidCode");
+            }
 
             return View("RequestPasswordStep2", new RequestPasswordStep2ViewModel { Code = code, Email = email });
         }

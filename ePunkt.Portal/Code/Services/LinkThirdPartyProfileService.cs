@@ -35,11 +35,19 @@ namespace ePunkt.Portal
             if (profile == null)
                 throw new ArgumentNullException("profile");
 
-            var applicant = loggedInApplicantResponse ?? await apiClient.SendAndReadAsync<ApplicantResponse>(new ApplicantRequest(profile.Id, thirdParty));
+            ApplicantResponse applicant;
+            try
+            {
+                applicant = loggedInApplicantResponse ?? await apiClient.SendAndReadAsync<ApplicantResponse>(new ApplicantRequest(profile.Id, thirdParty));
+            }
+            catch
+            {
+                applicant = null;
+            }
 
             //we don't have an applicant that is logged in or has a matching profile
             //so, lets create a new applicant
-            if (applicant == null || applicant.Id <= 0)
+            if (applicant == null)
             {
                 //this should never happen, because we catch this case earlier, before calling this method
                 //this is just to make absolutely sure ;)
@@ -65,7 +73,7 @@ namespace ePunkt.Portal
             //now link the profile
             var linkRequest = thirdParty == ThirdParty.Xing
                                   ? new LinkXingRequest(applicant.Id, profile.Id, profile.Url)
-                                  : (HttpRequestMessage) new LinkLinkedInRequest(applicant.Id, profile.Id, profile.Url);
+                                  : (HttpRequestMessage)new LinkLinkedInRequest(applicant.Id, profile.Id, profile.Url);
             applicant = await apiClient.SendAndReadAsync<ApplicantResponse>(linkRequest);
 
             return applicant;

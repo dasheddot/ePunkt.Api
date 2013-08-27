@@ -1,4 +1,6 @@
-﻿using ePunkt.Api.Client.Requests;
+﻿using System.Net;
+using System.Runtime.Serialization;
+using ePunkt.Api.Client.Requests;
 using ePunkt.Api.Parameters;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
@@ -31,21 +33,22 @@ namespace ePunkt.Api.Client
                 _watch.Reset();
                 _watch.Start();
             }
-            var request = await SendAsync(requestMessage);
-            LastReceivedContent = await request.Content.ReadAsStringAsync();
 
             T result;
+            var response = await SendAsync(requestMessage).ConfigureAwait(false);
             try
             {
-                result = await request.Content.ReadAsAsync<T>();
+                response.EnsureSuccessStatusCode();
+                LastReceivedContent = await response.Content.ReadAsStringAsync();
+                result = await response.Content.ReadAsAsync<T>();
             }
-            catch (JsonSerializationException)
+            catch (Exception)
             {
-                throw new ApplicationException("Unable to deserialize to type '" + typeof(T).Name + "'. The result was: " + Environment.NewLine + request.Content.ReadAsStringAsync().Result);
-            }
-            catch (JsonReaderException readerException)
-            {
-                throw new ApplicationException("Unable to read result: " + readerException.Message + "." + Environment.NewLine + "The result was: " + request.Content.ReadAsStringAsync().Result);
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                    throw new NotFoundException();
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    throw new UnauthorizedException();
+                throw;
             }
 
             if (runTimer)
@@ -83,5 +86,15 @@ namespace ePunkt.Api.Client
 
         public long ElapsedMillisecondsInLastCall { get; private set; }
         public string LastReceivedContent { get; private set; }
+    }
+
+    public class NotFoundException : Exception
+    {
+        public NotFoundException() : base("Not found (404).") { }
+    }
+
+    public class UnauthorizedException : Exception
+    {
+        public UnauthorizedException() : base("Unauthorized (401).") { }
     }
 }

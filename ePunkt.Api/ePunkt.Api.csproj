@@ -47,6 +47,7 @@
     <Compile Include="Parameters\Application\ApplicantSetPasswordParameter.cs" />
     <Compile Include="Parameters\Application\ApplicantSetPasswordAfterRequestParameter.cs" />
     <Compile Include="Parameters\ApiKeyParameter.cs" />
+    <Compile Include="Parameters\Application\ApplicationUpdateParameter.cs" />
     <Compile Include="Parameters\CustomFieldUpdateParameter.cs" />
     <Compile Include="Responses\ApiTokenResponse.cs" />
     <Compile Include="Responses\Applicant\ApplicantDocumentResponse.cs" />

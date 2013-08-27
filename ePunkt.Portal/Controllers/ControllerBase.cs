@@ -32,10 +32,14 @@ namespace ePunkt.Portal.Controllers
             if (!User.Identity.IsAuthenticated)
                 return null;
 
-            var applicant = await ApiClient.SendAndReadAsync<ApplicantResponse>(new ApplicantRequest(GetApplicantId()));
-            if (applicant == null || applicant.Id <= 0)
+            try
+            {
+                return await ApiClient.SendAndReadAsync<ApplicantResponse>(new ApplicantRequest(GetApplicantId()));
+            }
+            catch
+            {
                 return null;
-            return applicant;
+            }
         }
 
         protected async Task<JobResponse> GetJob(LoadJobsService jobsService, int jobId)
