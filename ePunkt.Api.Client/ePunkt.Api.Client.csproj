@@ -60,6 +60,9 @@
     <Compile Include="Requests\Applicant\ApplicantDocumentsRequests.cs" />
     <Compile Include="Requests\Applicant\ApplicantCvRequests.cs" />
     <Compile Include="Requests\Applicant\ApplicantPhotoRequests.cs" />
+    <Compile Include="Requests\Applicant\ApplicantJobProfileRequests.cs" />
+    <Compile Include="Requests\Applicant\ApplicantJobProfilesRequests.cs" />
+    <Compile Include="Requests\DeleteJsonHttpRequestMessage.cs" />
     <Compile Include="Requests\PostJsonHttpRequestMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\Account\ConfirmRequestPasswordRequest.cs" />

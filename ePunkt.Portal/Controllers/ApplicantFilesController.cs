@@ -27,7 +27,7 @@ namespace ePunkt.Portal.Controllers
                 return RedirectToAction("Logoff", "Account");
 
             var documents = await new ApplicantDocumentsGetRequest(applicant.Id).LoadResult(ApiClient);
-            return View(new IndexViewModel(await GetMandator(), applicant, documents));
+            return View(new IndexViewModel(await GetMandator(), documents));
         }
 
         [HttpPost]
@@ -54,7 +54,7 @@ namespace ePunkt.Portal.Controllers
                         if (!ModelState.IsValid)
                         {
                             var documents = await new ApplicantDocumentsGetRequest(applicant.Id).LoadResult(ApiClient);
-                            return View(new IndexViewModel(await GetMandator(), applicant, documents));
+                            return View(new IndexViewModel(await GetMandator(), documents));
                         }
 
 

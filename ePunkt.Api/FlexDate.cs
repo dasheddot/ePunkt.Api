@@ -1,4 +1,4 @@
-﻿namespace ePunkt.Api.Parameters
+﻿namespace ePunkt.Api
 {
     public class FlexDate
     {

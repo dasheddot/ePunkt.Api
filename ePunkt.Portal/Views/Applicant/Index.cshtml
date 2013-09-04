@@ -12,6 +12,10 @@
         @Html.ActionLink(Html.Loc("Files").ToString(), "Index", "ApplicantFiles")
         <span>@Html.Loc("Placeholder_Percent_Complete", Model.Completeness.Files)</span>
     </p>
+    <p class="@(Model.Completeness.JobProfiles >= 100 ? "complete" : "incomplete")">
+        @Html.ActionLink(Html.Loc("JobProfiles").ToString(), "Index", "ApplicantJobProfiles")
+        <span>@Html.Loc("Placeholder_Percent_Complete", Model.Completeness.JobProfiles)</span>
+    </p>
 </div>
 @using (Html.BeginForm())
 {

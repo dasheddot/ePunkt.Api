@@ -1,5 +1,4 @@
-﻿using ePunkt.Api.Client.Requests;
-using ePunkt.Api.Parameters;
+﻿using ePunkt.Api.Parameters;
 using ePunkt.Api.Responses;
 using System.Net.Http;
 

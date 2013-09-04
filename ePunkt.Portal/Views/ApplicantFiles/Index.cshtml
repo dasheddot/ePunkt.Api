@@ -1,23 +1,18 @@
 ﻿@using ePunkt.Api.Responses
 @model ePunkt.Portal.Models.ApplicantFiles.IndexViewModel
 
-@helper GetTranslatedType(string type)
-{ 
-    @(Model.AvailableDocumentTypes.Any(x => x.Value.Is(type)) ? Model.AvailableDocumentTypes.First(x => x.Value.Is(type)).Text : type)
-}
-
 @{
     var availableTypes = Model.AvailableDocumentTypes.ToList();
+    availableTypes.Insert(0, new SelectListItem
+    {
+        Text = Html.Loc("Photo").ToString(),
+        Value = "Photo"
+    });
     availableTypes.Insert(0, new SelectListItem
         {
             Text = Html.Loc("Cv").ToString(),
             Value = "CV"
         });
-    availableTypes.Insert(1, new SelectListItem
-    {
-        Text = Html.Loc("Photo").ToString(),
-        Value = "Photo"
-    });
 
     var documents = Model.Documents.ToList();
     if (Model.HasPhoto)
@@ -76,7 +71,7 @@
             else
             {
                 <text>
-                @file.Name <span>(@GetTranslatedType(file.Type))</span>
+                @file.Name <span>(@file.Type)</span>
                 </text>
             }
         </div>

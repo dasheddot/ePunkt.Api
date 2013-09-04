@@ -7,9 +7,8 @@ namespace ePunkt.Portal.Models.ApplicantFiles
 {
     public class IndexViewModel
     {
-        public IndexViewModel(MandatorResponse mandatorResponse, ApplicantResponse applicantResponse, IEnumerable<ApplicantDocumentResponse> documents)
+        public IndexViewModel(MandatorResponse mandatorResponse, IEnumerable<ApplicantDocumentResponse> documents)
         {
-            ApplicantResponse = applicantResponse;
             AvailableDocumentTypes = mandatorResponse.ApplicantDocumentTypes.Select(x => new SelectListItem
             {
                 Value = x,
@@ -22,7 +21,6 @@ namespace ePunkt.Portal.Models.ApplicantFiles
             Documents = documentsAsList.Where(x => x.Id > 0).ToList();
         }
 
-        public ApplicantResponse ApplicantResponse { get; set; }
         public bool HasCv { get; set; }
         public bool HasPhoto { get; set; }
         public IEnumerable<ApplicantDocumentResponse> Documents { get; set; } 

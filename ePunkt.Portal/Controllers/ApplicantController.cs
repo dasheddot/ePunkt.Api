@@ -21,7 +21,8 @@ namespace ePunkt.Portal.Controllers
                 return RedirectToAction("Logoff", "Account");
 
             var documents = await new ApplicantDocumentsGetRequest(applicant.Id).LoadResult(ApiClient);
-            return View(new IndexViewModel(applicant, documents));
+            var jobProfiles = await new ApplicantJobProfilesGetRequest(applicant.Id).LoadResult(ApiClient);
+            return View(new IndexViewModel(applicant, documents, jobProfiles));
         }
 
         [HttpPost]

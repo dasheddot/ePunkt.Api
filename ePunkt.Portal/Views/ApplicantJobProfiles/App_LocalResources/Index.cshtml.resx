@@ -117,43 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Active_Description" xml:space="preserve">
-    <value>I want to be notified by e-mail or phone about jobs that could be of interest for me.</value>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
   </data>
-  <data name="Active_Label" xml:space="preserve">
-    <value>I want to receive job offers from HR consultants</value>
+  <data name="Add_Description" xml:space="preserve">
+    <value>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</value>
+  </data>
+  <data name="Add_Title" xml:space="preserve">
+    <value>Add additional job profiles</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>The more information you provide us about yourself, the more suitable job offers we can send you.</value>
+    <value>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</value>
   </data>
-  <data name="Files" xml:space="preserve">
-    <value>File attachments</value>
-  </data>
-  <data name="JobProfiles" xml:space="preserve">
-    <value>Job profiles</value>
-  </data>
-  <data name="MatchingJobs_Description" xml:space="preserve">
-    <value>These e-mails use your job profiles and regions to find jobs that could be of interest for me.</value>
-  </data>
-  <data name="MatchingJobs_Label" xml:space="preserve">
-    <value>I want to receive automatically generated e-mails with job offers that match my applicant profile</value>
-  </data>
-  <data name="Newsletter_Description" xml:space="preserve">
-    <value>These newsletters contain general information about the company.</value>
-  </data>
-  <data name="Newsletter_Label" xml:space="preserve">
-    <value>I want to receive the company newsletter</value>
-  </data>
-  <data name="PersonalInformation" xml:space="preserve">
-    <value>Personal information</value>
-  </data>
-  <data name="Placeholder_Percent_Complete" xml:space="preserve">
-    <value>{0} % complete</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
+  <data name="No_JobProfiles" xml:space="preserve">
+    <value>You don't have any job profiles assigned at the moment.</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>My applicant profile</value>
+    <value>My job profiles</value>
   </data>
 </root>

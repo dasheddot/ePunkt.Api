@@ -1,0 +1,57 @@
+﻿@using ePunkt.Api.Responses
+@model ePunkt.Portal.Models.ApplicantJobProfiles.IndexViewModel
+
+@Html.TranslatedValidationSummary()
+
+<h1>@Html.Loc("Title")</h1>
+<p>@Html.Loc("Description")</p>
+
+
+@if (Model.JobProfiles.Any())
+{
+    <fieldset id="applicantJobProfiles">
+        <legend></legend>
+
+        @foreach (var jobProfile in Model.JobProfiles)
+        {
+            <div class="editor-row">
+                @using (Html.BeginForm("Delete", "ApplicantJobProfiles"))
+                {
+                    <text>
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("name", jobProfile)
+                    <input type="submit" value="@Html.Loc("Delete")" class="in-row" />
+                    </text>
+                }
+                @jobProfile
+            </div>
+        }
+    </fieldset>
+}
+else
+{
+    <p>@Html.Loc("No_JobProfiles")</p>
+}
+
+
+
+<fieldset>
+    <legend>@Html.Loc("Add_Title")</legend>
+
+    <p>
+        @Html.Loc("Add_Description")
+    </p>
+
+    @using (Html.BeginForm())
+    {
+        <text>
+        @Html.AntiForgeryToken()
+        <div class="editor-row">
+            <input type="submit" value="@Html.Loc("Add")" class="in-row" />
+            @Html.DropDownListFor(x => x.SelectedJobProfile, Model.AvailableJobProfiles)
+        </div>
+        </text>
+    }
+
+</fieldset>
+

@@ -5,10 +5,10 @@ namespace ePunkt.Portal.Models.Applicant
 {
     public class IndexViewModel
     {
-        public IndexViewModel(ApplicantResponse applicantResponse, IEnumerable<ApplicantDocumentResponse> documents)
+        public IndexViewModel(ApplicantResponse applicantResponse, IEnumerable<ApplicantDocumentResponse> documents, IEnumerable<string> jobProfiles)
         {
             ApplicantResponse = applicantResponse;
-            Completeness = new ApplicantCompleteness(applicantResponse, documents);
+            Completeness = new ApplicantCompleteness(applicantResponse, documents, jobProfiles);
         }
 
         public ApplicantResponse ApplicantResponse { get; set; }
