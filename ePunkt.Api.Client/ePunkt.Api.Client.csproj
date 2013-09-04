@@ -57,16 +57,17 @@
   <ItemGroup>
     <Compile Include="ApiHttpClient.cs" />
     <Compile Include="AuthorizationHandler.cs" />
+    <Compile Include="Requests\Applicant\ApplicantDocumentsRequests.cs" />
+    <Compile Include="Requests\Applicant\ApplicantCvRequests.cs" />
+    <Compile Include="Requests\Applicant\ApplicantPhotoRequests.cs" />
     <Compile Include="Requests\PostJsonHttpRequestMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\Account\ConfirmRequestPasswordRequest.cs" />
     <Compile Include="Requests\Account\SetPasswordRequest.cs" />
     <Compile Include="Requests\Account\RequestPasswordRequest.cs" />
-    <Compile Include="Requests\Applicant\ApplicantRequest.cs" />
+    <Compile Include="Requests\Applicant\ApplicantRequests.cs" />
     <Compile Include="Requests\Applicant\ApplicantsRequest.cs" />
-    <Compile Include="Requests\Applicant\ApplicantDocumentGetRequest.cs" />
-    <Compile Include="Requests\Applicant\ApplicantDocumentDeleteRequest.cs" />
-    <Compile Include="Requests\Applicant\ApplicantDocumentPostRequest.cs" />
+    <Compile Include="Requests\Applicant\ApplicantDocumentRequests.cs" />
     <Compile Include="Requests\Application\ApplicationsRequest.cs" />
     <Compile Include="Requests\Application\CreateApplicationRequest.cs" />
     <Compile Include="Requests\PutJsonHttpRequestMessage.cs" />

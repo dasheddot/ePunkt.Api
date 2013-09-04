@@ -35,26 +35,28 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ePunkt.Utilities, Version=0.0.0.5, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ePunkt.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ePunkt.Utilities.0.0.5-alpha\lib\net40-Client\ePunkt.Utilities.dll</HintPath>
+      <HintPath>..\packages\ePunkt.Utilities.1.0.0\lib\net40-Client\ePunkt.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parameters\Applicant\ApplicantActivityParameter.cs" />
     <Compile Include="Parameters\Application\ApplicationCreateParameter.cs" />
     <Compile Include="Parameters\Application\ApplicantSetPasswordParameter.cs" />
     <Compile Include="Parameters\Application\ApplicantSetPasswordAfterRequestParameter.cs" />
     <Compile Include="Parameters\ApiKeyParameter.cs" />
     <Compile Include="Parameters\Application\ApplicationUpdateParameter.cs" />
     <Compile Include="Parameters\CustomFieldUpdateParameter.cs" />
+    <Compile Include="FlexDate.cs" />
     <Compile Include="Responses\ApiTokenResponse.cs" />
     <Compile Include="Responses\Applicant\ApplicantDocumentResponse.cs" />
     <Compile Include="Responses\Applicant\ApplicantResponse.cs" />
-    <Compile Include="Parameters\Applicant\ApplicantCreateParameter.cs" />
     <Compile Include="Responses\ApplicantSetPasswordResponse.cs" />
-    <Compile Include="Parameters\Applicant\ApplicantUpdateParameter.cs" />
+    <Compile Include="Parameters\Applicant\ApplicantParameter.cs" />
+    <Compile Include="Responses\Applicant\ApplicantActivityResponse.cs" />
     <Compile Include="Responses\Application\ApplicationResponse.cs" />
     <Compile Include="Responses\CustomFieldResponse.cs" />
     <Compile Include="Responses\Application\ApplicationCreateResponse.cs" />

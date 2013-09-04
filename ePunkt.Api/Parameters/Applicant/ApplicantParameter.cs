@@ -3,13 +3,13 @@ using System;
 
 namespace ePunkt.Api.Parameters
 {
-    public class ApplicantUpdateParameter : ApplicantCreateParameter
+    public class ApplicantParameter
     {
-        public ApplicantUpdateParameter()
+        public ApplicantParameter()
         {
         }
 
-        public ApplicantUpdateParameter(ApplicantResponse applicantResponse)
+        public ApplicantParameter(ApplicantResponse applicantResponse)
         {
             FirstName = applicantResponse.FirstName;
             LastName = applicantResponse.LastName;
@@ -31,6 +31,11 @@ namespace ePunkt.Api.Parameters
             EnableMatchingJobsAutoMail = applicantResponse.EnableMatchingJobsAutoMail;
         }
 
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public bool? Gender { get; set; }
 
         public string TitleBeforeName { get; set; }
         public string TitleAfterName { get; set; }

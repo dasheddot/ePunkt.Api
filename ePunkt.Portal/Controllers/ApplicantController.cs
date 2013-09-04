@@ -19,7 +19,9 @@ namespace ePunkt.Portal.Controllers
             var applicant = await GetApplicant();
             if (applicant == null)
                 return RedirectToAction("Logoff", "Account");
-            return View(new IndexViewModel(applicant));
+
+            var documents = await new ApplicantDocumentsGetRequest(applicant.Id).LoadResult(ApiClient);
+            return View(new IndexViewModel(applicant, documents));
         }
 
         [HttpPost]
@@ -35,7 +37,7 @@ namespace ePunkt.Portal.Controllers
                     applicant.EnableNewsletter = newsletter.Value;
                 if (matchingJobs.HasValue)
                     applicant.EnableMatchingJobsAutoMail = matchingJobs.Value;
-                await new ApplicantRequest(applicant.Id, applicant).LoadResult(ApiClient);
+                await new ApplicantPostRequest(applicant.Id, applicant).LoadResult(ApiClient);
             }
 
             return RedirectToAction("Index");

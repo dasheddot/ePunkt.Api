@@ -1,5 +1,6 @@
 ﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
+using ePunkt.Api.Parameters;
 using ePunkt.Api.Responses;
 using ePunkt.Utilities;
 using System.IO;
@@ -41,14 +42,40 @@ namespace ePunkt.Portal
         {
             using (var reader = new BinaryReader(file.InputStream))
             {
-                var document = new ApplicantDocumentResponse
+                var document = new ApplicantDocumentParameter
                     {
                         Content = reader.ReadBytes(file.ContentLength),
                         FileExtension = (Path.GetExtension(file.FileName) ?? "").Trim('.'),
                         Name = Path.GetFileNameWithoutExtension(file.FileName),
                         Type = type
                     };
-                await new ApplicantDocumentPostRequest(applicantResponse.Id, document).LoadResult(apiClient);
+                await new ApplicantDocumentPutRequest(applicantResponse.Id, document).LoadResult(apiClient);
+            }
+        }
+
+        public async Task AddCv(ApiHttpClient apiClient, ApplicantResponse applicantResponse, HttpPostedFileBase file)
+        {
+            using (var reader = new BinaryReader(file.InputStream))
+            {
+                var document = new ApplicantDocumentParameter
+                {
+                    Content = reader.ReadBytes(file.ContentLength),
+                    FileExtension = (Path.GetExtension(file.FileName) ?? "").Trim('.')
+                };
+                await new ApplicantCvPostRequest(applicantResponse.Id, document).LoadResult(apiClient);
+            }
+        }
+
+        public async Task AddPhoto(ApiHttpClient apiClient, ApplicantResponse applicantResponse, HttpPostedFileBase file)
+        {
+            using (var reader = new BinaryReader(file.InputStream))
+            {
+                var document = new ApplicantDocumentParameter
+                {
+                    Content = reader.ReadBytes(file.ContentLength),
+                    FileExtension = (Path.GetExtension(file.FileName) ?? "").Trim('.')
+                };
+                await new ApplicantPhotoPostRequest(applicantResponse.Id, document).LoadResult(apiClient);
             }
         }
 

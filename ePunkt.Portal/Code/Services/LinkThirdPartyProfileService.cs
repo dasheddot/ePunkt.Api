@@ -36,7 +36,7 @@ namespace ePunkt.Portal
             ApplicantResponse applicant;
             try
             {
-                applicant = loggedInApplicantResponse ?? await new ApplicantRequest(profile.Id, thirdParty).LoadResult(apiClient);
+                applicant = loggedInApplicantResponse ?? await new ApplicantGetRequest(profile.Id, thirdParty).LoadResult(apiClient);
             }
             catch
             {
@@ -58,14 +58,14 @@ namespace ePunkt.Portal
                 else if (profile.Gender == Gender.Male)
                     gender = true;
 
-                var parameter = new ApplicantCreateParameter
+                var parameter = new ApplicantParameter
                     {
                         Email = profile.Email,
                         FirstName = profile.FirstName,
                         LastName = profile.LastName,
                         Gender = gender
                     };
-                applicant = await new ApplicantRequest(parameter).LoadResult(apiClient);
+                applicant = await new ApplicantPutRequest(parameter).LoadResult(apiClient);
             }
 
             //now link the profile

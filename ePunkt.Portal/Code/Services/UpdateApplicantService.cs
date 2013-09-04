@@ -12,7 +12,7 @@ namespace ePunkt.Portal
         public async Task<ApplicantResponse> UpdatePersonalInformation(ApiHttpClient apiClient, ApplicantResponse applicantResponse, PersonalInformationViewModel model)
         {
             //set the remaining applicant data by updating it
-            var updateParameter = new ApplicantUpdateParameter(applicantResponse)
+            var updateParameter = new ApplicantParameter(applicantResponse)
                 {
                     BirthDate = model.BirthDate,
                     City = model.City,
@@ -25,7 +25,7 @@ namespace ePunkt.Portal
                     ZipCode = model.ZipCode,
                     Email = model.Email
                 };
-            return await new ApplicantRequest(applicantResponse.Id, updateParameter).LoadResult(apiClient);
+            return await new ApplicantPostRequest(applicantResponse.Id, updateParameter).LoadResult(apiClient);
         }
     }
 }

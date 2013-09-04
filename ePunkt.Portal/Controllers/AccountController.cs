@@ -43,7 +43,7 @@ namespace ePunkt.Portal.Controllers
                 ApplicantResponse applicant;
                 try
                 {
-                    applicant = await new ApplicantRequest(model.Username, model.Password).LoadResult(ApiClient);
+                    applicant = await new ApplicantGetRequest(model.Username, model.Password).LoadResult(ApiClient);
                 }
                 catch (NotFoundException)
                 {
@@ -120,23 +120,23 @@ namespace ePunkt.Portal.Controllers
                 }
 
                 //create the applicant
-                var createParameter = new ApplicantCreateParameter
+                var createParameter = new ApplicantParameter
                 {
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Gender = model.Gender
                 };
-                var applicant = await new ApplicantRequest(createParameter).LoadResult(ApiClient);
+                var applicant = await new ApplicantPutRequest(createParameter).LoadResult(ApiClient);
 
                 //update the personal information
                 applicant = await _updateApplicantService.UpdatePersonalInformation(ApiClient, applicant, model);
 
                 //save the documents
                 if (model.Cv != null)
-                    await _updateApplicantFileService.AddFile(ApiClient, applicant, model.Cv, "Cv");
+                    await _updateApplicantFileService.AddCv(ApiClient, applicant, model.Cv);
                 if (model.Photo != null)
-                    await _updateApplicantFileService.AddFile(ApiClient, applicant, model.Photo, "Photo");
+                    await _updateApplicantFileService.AddPhoto(ApiClient, applicant, model.Photo);
                 if (model.Documents != null)
                 {
                     var index = 0;

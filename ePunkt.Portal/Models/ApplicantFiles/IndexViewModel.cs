@@ -1,23 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using ePunkt.Api.Responses;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using ePunkt.Api.Responses;
 
 namespace ePunkt.Portal.Models.ApplicantFiles
 {
     public class IndexViewModel
     {
-        public IndexViewModel(MandatorResponse mandatorResponse, ApplicantResponse applicantResponse)
+        public IndexViewModel(MandatorResponse mandatorResponse, ApplicantResponse applicantResponse, IEnumerable<ApplicantDocumentResponse> documents)
         {
             ApplicantResponse = applicantResponse;
             AvailableDocumentTypes = mandatorResponse.ApplicantDocumentTypes.Select(x => new SelectListItem
-                {
-                    Value = x,
-                    Text = Translations.TlT(mandatorResponse, x)
-                });
+            {
+                Value = x,
+                Text = Translations.TlT(mandatorResponse, x)
+            });
+
+            var documentsAsList = documents.ToList();
+            HasCv = documentsAsList.Any(x => x.Id == -1);
+            HasPhoto = documentsAsList.Any(x => x.Id == -2);
+            Documents = documentsAsList.Where(x => x.Id > 0).ToList();
         }
 
         public ApplicantResponse ApplicantResponse { get; set; }
+        public bool HasCv { get; set; }
+        public bool HasPhoto { get; set; }
+        public IEnumerable<ApplicantDocumentResponse> Documents { get; set; } 
         public IEnumerable<SelectListItem> AvailableDocumentTypes { get; set; }
     }
 }

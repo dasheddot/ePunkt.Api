@@ -1,16 +1,18 @@
 ﻿using ePunkt.Api.Responses;
 using ePunkt.Utilities;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ePunkt.Portal.Models
 {
     public class ApplicantCompleteness
     {
-        public ApplicantCompleteness(ApplicantResponse applicantResponse)
+        public ApplicantCompleteness(ApplicantResponse applicantResponse, IEnumerable<ApplicantDocumentResponse> documents)
         {
             CalculatePersonalInformation(applicantResponse);
-            CalculateFiles(applicantResponse);
+            CalculateFiles(documents);
         }
+
 
         private void CalculatePersonalInformation(ApplicantResponse applicantResponse)
         {
@@ -26,11 +28,12 @@ namespace ePunkt.Portal.Models
             PersonalInformation -= applicantResponse.City.IsNoE() ? 5 : 0;
         }
 
-        private void CalculateFiles(ApplicantResponse applicantResponse)
+        private void CalculateFiles(IEnumerable<ApplicantDocumentResponse> documents)
         {
             Files = 100;
-            Files -= !applicantResponse.Documents.Any(x => x.Name.Is("Cv")) ? 75 : 0;
-            Files -= !applicantResponse.Documents.Any(x => x.Name.Is("Photo")) ? 25 : 0;
+            var documentsAsList = documents.ToList();
+            Files -= documentsAsList.All(x => x.Id != -1) ? 75 : 0; // the CV
+            Files -= documentsAsList.Any(x => x.Id == -2) ? 0 : 25; // the photo
         }
 
         public int PersonalInformation { get; set; }

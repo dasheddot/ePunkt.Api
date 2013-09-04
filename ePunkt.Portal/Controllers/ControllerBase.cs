@@ -34,7 +34,7 @@ namespace ePunkt.Portal.Controllers
 
             try
             {
-                return await new ApplicantRequest(GetApplicantId()).LoadResult(ApiClient);
+                return await new ApplicantGetRequest(GetApplicantId()).LoadResult(ApiClient);
             }
             catch
             {

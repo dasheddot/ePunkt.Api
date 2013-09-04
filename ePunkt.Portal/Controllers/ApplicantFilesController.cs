@@ -1,5 +1,6 @@
 ﻿using ePunkt.Api.Client;
 using ePunkt.Api.Client.Requests;
+using ePunkt.Api.Responses;
 using ePunkt.Portal.Models.ApplicantFiles;
 using ePunkt.Utilities;
 using System.Threading.Tasks;
@@ -24,7 +25,9 @@ namespace ePunkt.Portal.Controllers
             var applicant = await GetApplicant();
             if (applicant == null)
                 return RedirectToAction("Logoff", "Account");
-            return View(new IndexViewModel(await GetMandator(), applicant));
+
+            var documents = await new ApplicantDocumentsGetRequest(applicant.Id).LoadResult(ApiClient);
+            return View(new IndexViewModel(await GetMandator(), applicant, documents));
         }
 
         [HttpPost]
@@ -49,9 +52,18 @@ namespace ePunkt.Portal.Controllers
                                 ModelState.AddModelError("Documents", @"Error-Documents");
 
                         if (!ModelState.IsValid)
-                            return View(new IndexViewModel(await GetMandator(), applicant));
+                        {
+                            var documents = await new ApplicantDocumentsGetRequest(applicant.Id).LoadResult(ApiClient);
+                            return View(new IndexViewModel(await GetMandator(), applicant, documents));
+                        }
 
-                        await _updateApplicantFileService.AddFile(ApiClient, applicant, file, type);
+
+                        if (type.Is("CV"))
+                            await _updateApplicantFileService.AddCv(ApiClient, applicant, file);
+                        else if (type.Is("Photo"))
+                            await _updateApplicantFileService.AddPhoto(ApiClient, applicant, file);
+                        else
+                            await _updateApplicantFileService.AddFile(ApiClient, applicant, file, type);
                     }
                 }
             }
@@ -60,12 +72,19 @@ namespace ePunkt.Portal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Download(string name, string type)
+        public async Task<ActionResult> Download(int id)
         {
             var applicant = await GetApplicant();
             if (applicant != null)
             {
-                var response = await new ApplicantDocumentGetRequest(applicant.Id, name, type).LoadResult(ApiClient);
+                ApplicantDocumentResponse response;
+                if (id == -1)
+                    response = await new ApplicantCvGetRequest(applicant.Id).LoadResult(ApiClient);
+                else if (id == -2)
+                    response = await new ApplicantPhotoGetRequest(applicant.Id).LoadResult(ApiClient);
+                else
+                    response = await new ApplicantDocumentGetRequest(id).LoadResult(ApiClient);
+
                 return new FileContentResult(response.Content, MimeMapping.GetMimeMapping(response.Name + "." + response.FileExtension))
                     {
                         FileDownloadName = response.Name + "." + response.FileExtension
@@ -76,11 +95,18 @@ namespace ePunkt.Portal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(string name, string type)
+        public async Task<ActionResult> Delete(int id)
         {
             var applicant = await GetApplicant();
             if (applicant != null)
-                await new ApplicantDocumentDeleteRequest(applicant.Id, name, type).LoadResult(ApiClient);
+            {
+                if (id == -1)
+                    await new ApplicantCvDeleteRequest(applicant.Id).LoadResult(ApiClient);
+                else if (id == -2)
+                    await new ApplicantPhotoDeleteRequest(applicant.Id).LoadResult(ApiClient);
+                else
+                    await new ApplicantDocumentDeleteRequest(id).LoadResult(ApiClient);
+            }
             return RedirectToAction("Index");
         }
     }

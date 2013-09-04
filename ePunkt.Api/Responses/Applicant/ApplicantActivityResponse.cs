@@ -2,7 +2,7 @@
 
 namespace ePunkt.Api.Responses
 {
-    public class ApplicantDocumentResponse : ApplicantDocumentParameter
+    public class ApplicantActivityResponse : ApplicantActivityParameter
     {
         public int Id { get; set; }
     }
