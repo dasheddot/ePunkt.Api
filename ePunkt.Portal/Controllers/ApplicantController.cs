@@ -22,7 +22,8 @@ namespace ePunkt.Portal.Controllers
 
             var documents = await new ApplicantDocumentsGetRequest(applicant.Id).LoadResult(ApiClient);
             var jobProfiles = await new ApplicantJobProfilesGetRequest(applicant.Id).LoadResult(ApiClient);
-            return View(new IndexViewModel(applicant, documents, jobProfiles));
+            var activities = await new ApplicantActivitiesGetRequest(applicant.Id).LoadResult(ApiClient);
+            return View(new IndexViewModel(applicant, documents, jobProfiles, activities));
         }
 
         [HttpPost]

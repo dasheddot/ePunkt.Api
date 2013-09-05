@@ -194,6 +194,7 @@
     <Compile Include="Controllers\ApplicantPersonalInformationController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\ApplicantJobProfilesController.cs" />
+    <Compile Include="Controllers\ApplicantActivitiesController.cs" />
     <Compile Include="Controllers\ThirdPartyProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
@@ -206,6 +207,8 @@
     <Compile Include="Models\Account\RequestPasswordStep1ViewModel.cs" />
     <Compile Include="Models\Account\EmailAlreadyInUseViewModel.cs" />
     <Compile Include="Models\Account\IndexViewModel.cs" />
+    <Compile Include="Models\ApplicantActivities\EditViewModel.cs" />
+    <Compile Include="Models\ApplicantActivities\IndexViewModel.cs" />
     <Compile Include="Models\ApplicantCompleteness.cs" />
     <Compile Include="Models\ApplicantFiles\IndexViewModel.cs" />
     <Compile Include="Models\ApplicantJobProfiles\IndexViewModel.cs" />
@@ -348,6 +351,8 @@
     <Content Include="Views\Shared\PersonalInformation.cshtml" />
     <Content Include="Views\Applications\Index.cshtml" />
     <Content Include="Views\ApplicantJobProfiles\Index.cshtml" />
+    <Content Include="Views\ApplicantActivities\Index.cshtml" />
+    <Content Include="Views\ApplicantActivities\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -445,6 +450,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ApplicantJobProfiles\App_LocalResources\Index.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicantActivities\App_LocalResources\Index.cshtml.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

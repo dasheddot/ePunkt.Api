@@ -7,11 +7,12 @@ namespace ePunkt.Portal.Models
 {
     public class ApplicantCompleteness
     {
-        public ApplicantCompleteness(ApplicantResponse applicantResponse, IEnumerable<ApplicantDocumentResponse> documents, IEnumerable<string> jobProfiles)
+        public ApplicantCompleteness(ApplicantResponse applicantResponse, IEnumerable<ApplicantDocumentResponse> documents, IEnumerable<string> jobProfiles, IEnumerable<ApplicantActivityResponse> activities)
         {
             CalculatePersonalInformation(applicantResponse);
             CalculateFiles(documents);
             CalculateJobProfiles(jobProfiles);
+            CalculateActivities(activities);
         }
 
 
@@ -44,8 +45,16 @@ namespace ePunkt.Portal.Models
                 JobProfiles = 0;
         }
 
+        private void CalculateActivities(IEnumerable<ApplicantActivityResponse> activities)
+        {
+            Activities = 100;
+            if (!activities.Any())
+                Activities = 0;
+        }
+
         public int PersonalInformation { get; set; }
         public int Files { get; set; }
         public int JobProfiles { get; set; }
+        public int Activities { get; set; }
     }
 }

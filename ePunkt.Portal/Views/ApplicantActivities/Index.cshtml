@@ -1,0 +1,42 @@
+﻿@using System.Globalization
+@model ePunkt.Portal.Models.ApplicantActivities.IndexViewModel
+
+@Html.TranslatedValidationSummary()
+
+<h1>@Html.Loc("Title")</h1>
+<p>@Html.Loc("Description")</p>
+
+@if (Model.Activities.Any())
+{
+    <fieldset id="applicantJobProfiles">
+        <legend></legend>
+
+        @foreach (var activity in Model.Activities)
+        {
+            <div class="editor-row">
+                @using (Html.BeginForm("Delete", "ApplicantActivities"))
+                {
+                    <text>
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("id", activity.Id.ToString(CultureInfo.InvariantCulture))
+                    <input type="submit" value="@Html.Loc("Delete")" class="in-row" />
+                    </text>
+                }
+
+                <a href="@Url.Action("Edit", new { activity.Id })">@Html.Loc("Edit")</a>
+
+                @activity.Name
+            </div>
+        }
+    </fieldset>
+}
+else
+{
+    <p>@Html.Loc("No_Activities")</p>
+}
+
+<p>
+    <a href="@Url.Action("Create")">@Html.Loc("Add")</a>
+</p>
+
+

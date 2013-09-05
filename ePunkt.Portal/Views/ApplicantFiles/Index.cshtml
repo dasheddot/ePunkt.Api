@@ -3,6 +3,8 @@
 
 @{
     var availableTypes = Model.AvailableDocumentTypes.ToList();
+    var documents = Model.Documents.ToList();
+    
     availableTypes.Insert(0, new SelectListItem
     {
         Text = Html.Loc("Photo").ToString(),
@@ -14,7 +16,6 @@
             Value = "CV"
         });
 
-    var documents = Model.Documents.ToList();
     if (Model.HasPhoto)
     {
         documents.Insert(0, new ApplicantDocumentResponse
