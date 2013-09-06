@@ -1,45 +1,64 @@
 ﻿@model ePunkt.Portal.Models.Account.IndexViewModel
+<div class="loginPage">
 
-@Html.TranslatedValidationSummary()
+    @Html.TranslatedValidationSummary()
 
-<div id="loginWithThirdPartyAccount">
-    <h1>@Html.Loc("ThirdPartyAccount_Title")</h1>
-    <ul>
-        <li><a href="@Url.Action("Xing", "ThirdPartyProfile", new { job = Model.JobId })">
-            <img src="~/Content/Xing.png" alt="@Html.Loc("Alt_Xing")" title="@Html.Loc("Alt_Xing")" id="xing"/></a></li>
-        <li><a href="@Url.Action("LinkedIn", "ThirdPartyProfile", new { job = Model.JobId })">
-            <img src="~/Content/LinkedIn.png" alt="@Html.Loc("Alt_LinkedIn")" title="@Html.Loc("Alt_LinkedIn")" id="linkedIn"/></a></li>
-    </ul>
-    <p>
-        @Html.Loc("ThirdPartyAccount_Text")
-    </p>
-</div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h1>@Html.Loc("ThirdPartyAccount_Title")</h1>
+            <p>
+                @Html.Loc("ThirdPartyAccount_Description1")
+            </p>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="xingButton">
+                        <a href="@Url.Action("Xing", "ThirdPartyProfile", new { job = Model.JobId })" class="btn btn-default">
+                            <img src="~/Content/Xing.png" alt="@Html.Loc("Alt_Xing")" title="@Html.Loc("Alt_Xing")" id="xing"/></a>
+                    </div>
 
-<div id="loginWithCredentials">
-    <h1>@Html.Loc("Credentials_Title")</h1>
-
-    @using (Html.BeginForm(new { job = Model.JobId }))
-    {
-        @Html.AntiForgeryToken()
-
-        <fieldset>
-            <legend></legend>
-            <div class="editor-row">
-                @Html.LabelFor(x => x.Username, @Html.Loc("Email_Label").ToString())
-                @Html.TextBoxFor(x => x.Username, new { required = "required", type = "email", placeholder = Html.Loc("Email_Placeholder").ToString() })
+                </div>
+                <div class="col-xs-6">
+                    <div class="linkedinButton">
+                        <a href="@Url.Action("LinkedIn", "ThirdPartyProfile", new { job = Model.JobId })" class="btn btn-default">
+                            <img src="~/Content/LinkedIn.png" alt="@Html.Loc("Alt_LinkedIn")" title="@Html.Loc("Alt_LinkedIn")" id="linkedIn"/></a>
+                    </div>
+                </div>
             </div>
-            <div class="editor-row">
-                @Html.LabelFor(x => x.Password, @Html.Loc("Password_Label").ToString())
-                @Html.PasswordFor(x => x.Password, new { required = "required" })
-            </div>
-        </fieldset>
-        <p>
-            <input type="submit" value="@Html.Loc("LoginButton_Label")" />
-        </p>
-    }
-    <p>@Html.Loc("Credentials_Text")</p>
-    <p>@Html.ActionLink(Html.Loc("CreateProfile_Link").ToString(), "Register", "Account", new { job = Model.JobId }, null)</p>
-    <p>@Html.ActionLink(Html.Loc("ForgotPassword_Link").ToString(), "RequestPasswordStep1", "Account", new { job = Model.JobId }, null)</p>
+            <p>
+                @Html.Loc("ThirdPartyAccount_Description2")
+            </p>
+        </div>
+        <div class="col-sm-6">
+            <h1>@Html.Loc("Credentials_Title")</h1>
+
+            <p>@Html.Loc("Credentials_Description1")</p>
+
+            <form method="POST" action="@Url.Action("Login", new { job = Model.JobId })" role="form" class="form-horizontal loginForm">
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Username, @Html.Loc("Email_Label").ToString(), new { @class = "control-label col-xs-4" })
+                    @Html.TextBoxFor(x => x.Username, new { required = "required", type = "email", placeholder = Html.Loc("Email_Placeholder").ToString(), @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Password, @Html.Loc("Password_Label").ToString(), new { @class = "control-label col-xs-4" })
+                    @Html.PasswordFor(x => x.Password, new { required = "required", type = "email", placeholder = Html.Loc("Email_Placeholder").ToString(), @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-4"></div>
+                    <button type="submit" class="btn btn-primary">@Html.Loc("LoginButton_Label")</button>
+                </div>
+            </form>
+
+            <p>@Html.Loc("Credentials_Description2")</p>
+            <p><a href="@Url.Action("Register", "Account", new { job = Model.JobId })" class="btn btn-default">@Html.Loc("CreateProfile_Link")</a></p>
+            <p><a href="@Url.Action("RequestPasswordStep1", "Account", new { job = Model.JobId })" class="btn btn-default">@Html.Loc("ForgotPassword_Link")</a></p>
+            <p>@Html.Loc("Credentials_Description3")</p>
+        </div>
+
+    </div>
 </div>
 
 @section scripts

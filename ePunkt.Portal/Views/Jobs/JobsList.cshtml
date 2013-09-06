@@ -3,26 +3,26 @@
 {
     <text>
     @if (Model.Jobs.Any())
-     {
-         <table style="width: 100%;" class="jobsList">
-             <tr>
-                 <th>@Html.Loc("JobTitle")</th>
-                 @if (Model.DisplayJobLocation)
-                 {
-                     <th>@Html.Loc("Location")</th>
-                 }
-                 @if (Model.DisplayJobDate)
-                 {
-                     <th>@Html.Loc("Date")</th>
-                 }
-             </tr>
-             @foreach (var job in Model.Jobs)
-             {
-                 <tr>
-                     <td>
-                         <div class="jobTitle">@Html.ActionLink(job.Title, "Job", "Jobs", new {id = job.Id}, null)</div>
-                         @job.SubTitle
-                     </td>
+    {
+        <table class="jobsList table table-striped">
+            <tr>
+                <th>@Html.Loc("JobTitle")</th>
+                @if (Model.DisplayJobLocation)
+                {
+                    <th>@Html.Loc("Location")</th>
+                }
+                @if (Model.DisplayJobDate)
+                {
+                    <th>@Html.Loc("Date")</th>
+                }
+            </tr>
+            @foreach (var job in Model.Jobs)
+            {
+                <tr>
+                    <td>
+                        <div class="jobTitle">@Html.ActionLink(job.Title, "Job", "Jobs", new { id = job.Id }, null)</div>
+                        @job.SubTitle
+                    </td>
                     @if (Model.DisplayJobLocation)
                     {
                         <td>@job.Location</td>
@@ -31,18 +31,18 @@
                     {
                         <td>@job.Date</td>
                     }
-                 </tr>
+                </tr>
 
-             }
-         </table>
-     }
-     else if (Model.TotalJobsCount <= 0)
-     {
-         <p>@Html.Loc("No_Jobs_Available")</p>
-     }
-     else
-     {
-         <p>@Html.Loc("No_Jobs_Found")</p>
-     }
+            }
+        </table>
+    }
+    else if (Model.TotalJobsCount <= 0)
+    {
+        <p>@Html.Loc("No_Jobs_Available")</p>
+    }
+    else
+    {
+        <p>@Html.Loc("No_Jobs_Found")</p>
+    }
     </text>
 }

@@ -1,10 +1,14 @@
 ﻿@model ePunkt.Portal.Models.Jobs.JobViewModel
 
-<div>
-    @Html.Raw(Model.Html)
-</div>
+<div class="jobPage">
+    
+    <div class="jobAdContainer">
+        @Html.Raw(Model.Html)
+    </div>
 
-@if (Model.DisplayBackLink)
-{
-    <a href="javascript:history.back();" id="backToJobsLink">@Html.Loc("Back")</a>
-}
+    @if (Model.DisplayBackLink)
+    {
+        <a href="javascript:history.back();" class="btn btn-default backToJobsLink">@Html.Loc("Back")</a>
+    }
+
+</div>

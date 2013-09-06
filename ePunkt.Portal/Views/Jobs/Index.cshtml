@@ -1,19 +1,35 @@
 ﻿@model ePunkt.Portal.Models.Jobs.IndexViewModel
 
-<h1>@Html.Loc("Title")</h1>
+<div class="jobsPage">
 
-<p>@Html.Loc("Introduction", Model.TotalJobsCount.ToString("N0"))</p>
+    <h1>@Html.Loc("Title")</h1>
 
-@if (Model.DisplayRegionFilter && !Model.MoveFilterToBottom)
+    <p>@Html.Loc("Description1", Model.TotalJobsCount.ToString("N0"))</p>
+
+    @if (Model.DisplayRegionFilter && !Model.MoveFilterToBottom)
+    {
+        <text>
+        @Html.Partial("JobsFilter")
+        </text>
+    }
+
+    <p>@Html.Loc("Description2", Model.TotalJobsCount.ToString("N0"))</p>
+
+    @Html.Partial("JobsList")
+
+    <p>@Html.Loc("Description3", Model.TotalJobsCount.ToString("N0"))</p>
+
+    @if (Model.DisplayRegionFilter && Model.MoveFilterToBottom)
+    {
+        <text>
+        @Html.Partial("JobsFilter")
+        </text>
+    }
+
+    <p>@Html.Loc("Description4", Model.TotalJobsCount.ToString("N0"))</p>
+
+</div>
+@section scripts
 {
-    <text>
-    @Html.Partial("JobsFilter")
-    </text>
-}
-@Html.Partial("JobsList")
-@if (Model.DisplayRegionFilter && Model.MoveFilterToBottom)
-{
-    <text>
-    @Html.Partial("JobsFilter")
-    </text>
+    @Html.Partial("JobsFilterScripts")
 }

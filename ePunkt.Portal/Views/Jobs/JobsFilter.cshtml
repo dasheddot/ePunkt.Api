@@ -1,6 +1,7 @@
 ﻿@using ePunkt.Api.Responses
 @using ePunkt.Utilities
 @model ePunkt.Portal.Models.Jobs.IndexViewModel
+
 @helper RenderRegionRecursive(IEnumerable<RegionResponse> regions)
 {
     foreach (var region in regions)
@@ -32,146 +33,83 @@
     }
     }
 
-    @using (Html.BeginForm())
-    {
-        <table style="width: 100%;" class="jobsFilter">
-            @if (Model.DisplayRegionFilter)
-            {
-                <tr>
-                    <th>@Html.Loc("Regions")</th>
-                    <td id="regionsText">@regionsText</td>
-                    <td>
-                        <input type="button" value="@Html.Loc("Edit")" id="regionsButton" /></td>
-                </tr>
-            }
-            @if (Model.DisplayJobProfileFilter)
-            {
-                <tr>
-                    <th>@Html.Loc("JobProfiles")</th>
-                    <td id="jobProfilesText">@jobProfilesText</td>
-                    <td>
-                        <input type="button" value="@Html.Loc("Edit")" id="jobProfilesButton" /></td>
-                </tr>
-            }
-            <tr>
-                <th>
-                    @Html.Loc("SearchPhrase")
-                </th>
-                <td>
-                    <input type="text" placeholder="@Html.Loc("Filter_Hint")" name="filter" value="@Model.FilteredText" />
-                </td>
-                <td>
-                    <input type="submit" value="@Html.Loc("Search")" id="submitJobsFilter" /></td>
-            </tr>
-        </table>
-
-        <div id="regionsDialog" style="display: none;" title="@Html.Loc("Regions_DialogTitle")">
-            <p>@Html.Loc("Regions_DialogText")</p>
-
-            <div style="height: 300px; overflow: auto;">
-                @RenderRegionRecursive(Model.AvailableRegions)
+    <form method="POST" action="@Url.Action("Index")" role="form" id="jobsFilter" class="form-horizontal jobsFilterForm">
+        @if (Model.DisplayRegionFilter)
+        {
+            <div class="form-group">
+                <label for="regionsText" class="control-label col-xs-2">@Html.Loc("Regions")</label>
+                <div class=" col-xs-8">
+                    <input type="text" disabled="disabled" id="regionsText" name="regionsText" value="@regionsText" class="form-control" />
+                </div>
+                <a id="regionsButton" data-toggle="modal" href="#regionsModal" class="btn btn-default col-xs-2">@Html.Loc("Edit")</a>
             </div>
-        </div>
-            
-        <div id="jobProfilesDialog" style="display: none;" title="@Html.Loc("JobProfiles_DialogTitle")">
-            <p>@Html.Loc("JobProfiles_DialogText")</p>
+        }
 
-            <div style="height: 300px; overflow: auto;">
-                @foreach (var jobProfile in Model.AvailableJobProfiles)
-                {
-                    <div>
-                        <input type="checkbox" name="@jobProfile" id="@jobProfile" value="true" checked="@(Model.FilteredJobProfiles.Contains(jobProfile) ? "checked" : null)" /><label for="@jobProfile">@jobProfile</label>
+        @if (Model.DisplayJobProfileFilter)
+        {
+            <div class="form-group">
+                <label for="jobProfilesText" class="control-label col-xs-2">@Html.Loc("JobProfiles")</label>
+                <div class=" col-xs-8">
+                    <input type="text" disabled="disabled" id="jobProfilesText" name="jobProfilesText" value="@jobProfilesText" class="form-control" />
+                </div>
+                <a id="jobProfilesButton" data-toggle="modal" href="#jobProfilesModal" class="btn btn-default col-xs-2">@Html.Loc("Edit")</a>
+            </div>
+        }
+
+        <div class="form-group">
+            <label for="filter" class="control-label col-xs-2">@Html.Loc("SearchPhrase")</label>
+            <div class=" col-xs-8">
+                <input type="text" id="filter" name="filter" value="@Model.FilteredText" placeholder="@Html.Loc("Filter_Hint")" class="form-control" />
+            </div>
+            <button type="submit" id="submitFilter" class="btn btn-primary col-xs-2">@Html.Loc("Search")</button>
+        </div>
+
+        <div id="regionsModal" role="dialog" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">@Html.Loc("Regions_DialogTitle")</h4>
                     </div>
-                }
+                    <div class="modal-body">
+                        <p>@Html.Loc("Regions_DialogText")</p>
+                        <div>
+                            @RenderRegionRecursive(Model.AvailableRegions)
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="removeRegions" class="btn btn-warning">@Html.Loc("Remove_Filter")</button>
+                        <button type="button" id="submitRegions" class="btn btn-primary">@Html.Loc("Search")</button>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        
-        <script>
-            $(document).ready(function () {
-                var form = $(".jobsFilter").closest("form");
 
-                function showRegionsDialog() {
-                    $("#regionsDialog").dialog({
-                        modal: true,
-                        width: 500,
-                        close: function () {
-                            $(this).hide().appendTo(form).dialog("destroy");
-                        },
-                        buttons: [{
-                            text: "@Html.Loc("Remove_Filter")",
-                            click: function () {
-                                $(this).find("input[type=checkbox]").attr("checked", false);
-                                $(this).dialog("close");
-                                form.submit();
-                            }
-                        },
+        <div id="jobProfilesModal" role="dialog" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">@Html.Loc("JobProfiles_DialogTitle")</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>@Html.Loc("JobProfiles_DialogText")</p>
+                        <div>
+                            @foreach (var jobProfile in Model.AvailableJobProfiles)
                             {
-                                text: "@Html.Loc("Search")",
-                                click: function () {
-                                    $(this).dialog("close");
-                                    form.submit();
-                                }
-                            }]
-                    });
-                }
-
-                function showJobProfilesDialog() {
-                    $("#jobProfilesDialog").dialog({
-                        modal: true,
-                        width: 500,
-                        close: function () {
-                            $(this).hide().appendTo(form).dialog("destroy");
-                        },
-                        buttons: [{
-                            text: "@Html.Loc("Remove_Filter")",
-                            click: function () {
-                                $(this).find("input[type=checkbox]").attr("checked", false);
-                                $(this).dialog("close");
-                                form.submit();
+                                <div>
+                                    <input type="checkbox" name="@jobProfile" id="@jobProfile" value="true" checked="@(Model.FilteredJobProfiles.Contains(jobProfile) ? "checked" : null)" /><label for="@jobProfile">@jobProfile</label>
+                                </div>
                             }
-                        },
-                            {
-                                text: "@Html.Loc("Search")",
-                                click: function () {
-                                    $(this).dialog("close");
-                                    form.submit();
-                                }
-                            }]
-                    });
-                }
-
-                $("#regionsButton").click(function () {
-                    showRegionsDialog();
-                });
-                $("#regionsText").click(function () {
-                    showRegionsDialog();
-                });
-
-                $("#jobProfilesButton").click(function () {
-                    showJobProfilesDialog();
-                });
-                $("#jobProfilesText").click(function () {
-                    showJobProfilesDialog();
-                });
-
-                $("#regionsDialog input[type=checkbox]").change(function() {
-                    var isChecked = $(this).is(":checked");
-
-                    //select all children
-                    var childDiv = $(this).next().next();
-                    var childCheckboxes = childDiv.find("input[type=checkbox]");
-                    childCheckboxes.prop("checked", isChecked);
-
-                    //de-select parent
-                    if (!isChecked) {
-                        var parentCheckbox = $(this).parent().parent().prev().prev();
-                        parentCheckbox.prop("checked", false);
-                    }
-                });
-            });
-        </script> 
-    }
-
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="removeJobProfiles" class="btn btn-warning">@Html.Loc("Remove_Filter")</button>
+                        <button type="button" id="submitJobProfiles" class="btn btn-primary">@Html.Loc("Search")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
     </text>
 }

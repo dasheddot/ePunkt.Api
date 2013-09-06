@@ -16,7 +16,7 @@ namespace ePunkt.Portal.Models.ApplicantActivities
             {
                 new SelectListItem
                 {
-                    Text = "-",
+                    Text = @"-",
                     Value = "0"
                 }
             };
@@ -32,7 +32,7 @@ namespace ePunkt.Portal.Models.ApplicantActivities
             {
                 new SelectListItem
                 {
-                    Text = "-",
+                    Text = @"-",
                     Value = "0"
                 }
             };
@@ -48,7 +48,7 @@ namespace ePunkt.Portal.Models.ApplicantActivities
             {
                 new SelectListItem
                 {
-                    Text = "-",
+                    Text = @"-",
                     Value = "0"
                 }
             };

@@ -126,8 +126,14 @@
   <data name="CreateProfile_Link" xml:space="preserve">
     <value>Create a new applicant profile</value>
   </data>
-  <data name="Credentials_Text" xml:space="preserve">
+  <data name="Credentials_Description1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Credentials_Description2" xml:space="preserve">
     <value>If you don't want to use any third party account connected to your applicant profile, you can log in your e-mail address and applicant profile passsword. If you don't have an applicant profile yet, click the link below to create one.</value>
+  </data>
+  <data name="Credentials_Description3" xml:space="preserve">
+    <value />
   </data>
   <data name="Credentials_Title" xml:space="preserve">
     <value>Or log in with your password</value>
@@ -150,7 +156,10 @@
   <data name="Password_Label" xml:space="preserve">
     <value>Your password:</value>
   </data>
-  <data name="ThirdPartyAccount_Text" xml:space="preserve">
+  <data name="ThirdPartyAccount_Description1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ThirdPartyAccount_Description2" xml:space="preserve">
     <value>If you already have an applicant profile and it is linked to one of these services, we will immediately log you in.&lt;br /&gt;&lt;br /&gt;If you don't have an applicant profile yet, we will use the information provided by the service to pre-fill your applicant profile and get you started faster with your application. After your initial application, we will never use or store any data from these services without your knowledge or explicit agreement.</value>
   </data>
   <data name="ThirdPartyAccount_Title" xml:space="preserve">

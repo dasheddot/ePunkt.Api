@@ -1,0 +1,38 @@
+﻿<script>
+    $(document).ready(function () {
+        var form = $("#jobsFilter");
+
+        $("#removeRegions").click(function () {
+            $("#regionsModal").find("input[type=checkbox]").attr("checked", false);
+            form.submit();
+        });
+
+        $("#submitRegions").click(function () {
+            form.submit();
+        });
+
+        $("#removeJobProfiles").click(function () {
+            $("#jobProfilesModal").find("input[type=checkbox]").attr("checked", false);
+            form.submit();
+        });
+
+        $("#submitJobProfiles").click(function () {
+            form.submit();
+        });
+
+        $("#regionsModal input[type=checkbox]").change(function () {
+            var isChecked = $(this).is(":checked");
+
+            //select all children
+            var childDiv = $(this).next().next();
+            var childCheckboxes = childDiv.find("input[type=checkbox]");
+            childCheckboxes.prop("checked", isChecked);
+
+            //de-select parent
+            if (!isChecked) {
+                var parentCheckbox = $(this).parent().parent().prev().prev();
+                parentCheckbox.prop("checked", false);
+            }
+        });
+    });
+</script>

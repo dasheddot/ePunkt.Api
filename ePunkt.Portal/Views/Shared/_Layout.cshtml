@@ -1,38 +1,29 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
     @using (Html.SwitchLocSource("~/Views/Shared/_Layout.cshtml"))
     {
         <title>@(ViewBag.PageTitle ?? Html.Loc("PageTitle"))</title>
     }
-    @Styles.Render("~/Content/themes/base/css")
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/content/css")
 </head>
 <body>
-    @Scripts.Render("~/bundles/jquery")
+    @Html.Partial("GlobalHeader")
+    
+    @Html.Partial("Header")
 
-    <header>
-        @Html.Partial("GlobalHeader")
-    </header>
-
-    <div id="container">
-        @Html.Partial("ContainerHeader")
-        <div id="content">
-            @Html.Partial("ContentHeader")
-            @RenderBody()
-            @Html.Partial("ContentFooter")
-        </div>
-        @Html.Partial("ContainerFooter")
+    <div class="container">
+        @Html.Partial("ContentHeader")
+        @RenderBody()
+        @Html.Partial("ContentFooter")
     </div>
 
-    <footer>
-        @Html.Partial("GlobalFooter")
-    </footer>
+    @Html.Partial("Footer")
 
-    @Scripts.Render("~/bundles/jqueryui")
+    @Html.Partial("GlobalFooter")
+
+    @Scripts.Render("~/bundles/js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
