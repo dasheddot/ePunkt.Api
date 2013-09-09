@@ -43,7 +43,7 @@
 
                 <div class="form-group">
                     @Html.LabelFor(x => x.Password, @Html.Loc("Password_Label").ToString(), new { @class = "control-label col-xs-4" })
-                    @Html.PasswordFor(x => x.Password, new { required = "required", type = "email", placeholder = Html.Loc("Email_Placeholder").ToString(), @class = "form-control" })
+                    @Html.PasswordFor(x => x.Password, new { required = "required", placeholder = Html.Loc("Password_Placeholder").ToString(), @class = "form-control" })
                 </div>
 
                 <div class="form-group">

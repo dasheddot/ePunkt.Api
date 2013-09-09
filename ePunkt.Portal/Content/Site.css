@@ -16,5 +16,13 @@
         .loginPage .linkedinButton a { height: 75px; padding-top: 17px; width: 180px; text-align: center; }
     .loginPage p:nth-child(4) { margin-top: 20px; }
     .loginPage .loginForm .form-control { width: 200px; }
+.changePasswordPage .form-control { width: 200px; }
+.registerPage .form-control { width: 200px; }
+.requestPasswordStep1Page .form-control { width: 200px; }
+.requestPasswordStep2Page .form-control { width: 200px; }
+.applicantPage .applicantCompleteness .row { margin-bottom: 5px; }
+.applicantPage .applicantCompleteness .row div+div { padding-top: 7px; }
+.applicantPage .applicantCompleteness a { width: 100%; text-align: left; }
+
 
 /* ReSharper restore DeclarationIsEmpty */

@@ -1,5 +1,7 @@
 ﻿@model ePunkt.Portal.Models.Account.EmailAlreadyInUseViewModel
 
-<h1>@Html.Loc("Title", Model.Email)</h1>
-<p>@Html.Loc("Text", Model.Email)</p>
-<p>@Html.ActionLink(Html.Loc("Login_Link").ToString(), "Login", "Account", new { job = Model.JobId }, null)</p>
+<div class="emailAlreadyInUsePage">
+    <h1>@Html.Loc("Title", Model.Email)</h1>
+    <p>@Html.Loc("Text", Model.Email)</p>
+    <p>@Html.ActionLink(Html.Loc("Login_Link").ToString(), "Login", "Account", new { job = Model.JobId }, new { @class = "btn btn-primary" })</p>
+</div>

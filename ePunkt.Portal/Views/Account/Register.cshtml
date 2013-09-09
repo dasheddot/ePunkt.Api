@@ -1,52 +1,51 @@
 ﻿@model ePunkt.Portal.Models.Account.RegisterViewModel
+<div class="registerPage">
 
-@Html.TranslatedValidationSummary("~/Views/Shared/PersonalInformation.cshtml")
+    @Html.TranslatedValidationSummary("~/Views/Shared/PersonalInformation.cshtml")
 
-<h1>@Html.Loc("Title")</h1>
-<p>@Html.Loc("Description", Url.Action("Login", "Account", new { job = Model.JobId }))</p>
+    <h1>@Html.Loc("Title")</h1>
+    <p>@Html.Loc("Description1", Url.Action("Login", "Account", new { job = Model.JobId }))</p>
 
-@using (Html.BeginForm("Register", "Account", new { job = Model.JobId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
+    <form method="POST" action="@Url.Action("Register", new { job = Model.JobId })" enctype="multipart/form-data" role="form" class="form-horizontal registerForm">
 
-    <fieldset>
-        <legend>@Html.Loc("PersonalInformation")</legend>
+        @Html.AntiForgeryToken()
+
+        <h2>@Html.Loc("PersonalInformation")</h2>
         @Html.Partial("PersonalInformation")
-    </fieldset>
- 
-    <fieldset>
-        <legend>
-            @Html.Loc("Documents")
-        </legend>
-        <div class="editor-row">
-            @Html.LabelFor(x => x.Cv, @Html.Loc("Cv").ToString())
-            <input type="file" name="cv" />
+
+        <h2>@Html.Loc("Documents")</h2>
+        <div class="form-group">
+            @Html.LabelFor(x => x.Cv, @Html.Loc("Cv").ToString(), new { @class = "control-label col-xs-2" })
+            <input type="file" name="cv" class="form-control col-xs-2" />
         </div>
 
-        <div class="editor-row">
-            @Html.LabelFor(x => x.Photo, @Html.Loc("Photo").ToString())
-            <input type="file" name="photo" />
+        <div class="form-group">
+            @Html.LabelFor(x => x.Photo, @Html.Loc("Photo").ToString(), new { @class = "control-label col-xs-2" })
+            <input type="file" name="photo" class="form-control col-xs-2" />
         </div>
 
-        <div class="editor-row" id="documentsTemplateRow">
-            @Html.LabelFor(x => x.DocumentTypes[0], @Html.Loc("Document").ToString())
-            <input type="file" name="documents" />
-            @Html.DropDownListFor(x => x.DocumentTypes[0], Model.AvailableDocumentTypes)
+        <div class="form-group" id="documentsTemplateRow">
+            @Html.LabelFor(x => x.DocumentTypes[0], @Html.Loc("Document").ToString(), new { @class = "control-label col-xs-2" })
+            <input type="file" name="documents" class="form-control col-xs-2" />
+            @Html.DropDownListFor(x => x.DocumentTypes[0], Model.AvailableDocumentTypes, new { @class = "form-control col-xs-2" })
         </div>
 
         <div id="documentsRows"></div>
 
-        <div class="editor-row">
-            <a href="#documentsRows" id="addDocumentButton">@Html.Loc("MoreDocuments")</a>
+        <div class="form-group">
+            <a href="#documentsRows" id="addDocumentButton" class="btn btn-default">@Html.Loc("MoreDocuments")</a>
         </div>
 
-    </fieldset>
-               
-    <p>
-        <input type="submit" value="@Html.Loc("Save")" />
-    </p>
-}
+        <p>@Html.Loc("Description2", Url.Action("Login", "Account", new { job = Model.JobId }))</p>
 
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">@Html.Loc("Save")</button>
+        </div>
+    </form>
+
+    <p>@Html.Loc("Description3", Url.Action("Login", "Account", new { job = Model.JobId }))</p>
+
+</div>
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
@@ -54,12 +53,12 @@
         $(document).ready(function () {
             $("#addDocumentButton").click(function () {
                 var templateHtml = $("#documentsTemplateRow").html();
-                var documentsCount = $("#documentsRows .editor-row").length;
+                var documentsCount = $("#documentsRows .form-group").length;
 
                 templateHtml = templateHtml.replace(/_0_/g, "_" + (documentsCount + 1) + "_");
                 templateHtml = templateHtml.replace(/[0]/g, (documentsCount + 1));
-                
-                $("#documentsRows").append("<div class=\"editor-row\">" + templateHtml + "</div>");
+
+                $("#documentsRows").append("<div class=\"form-group\">" + templateHtml + "</div>");
 
             });
         });

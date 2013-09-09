@@ -126,8 +126,14 @@
   <data name="Activities" xml:space="preserve">
     <value>Additional activities, hobbies, special interests, ...</value>
   </data>
-  <data name="Description" xml:space="preserve">
+  <data name="Description1" xml:space="preserve">
     <value>The more information you provide us about yourself, the more suitable job offers we can send you.</value>
+  </data>
+  <data name="Description2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Description3" xml:space="preserve">
+    <value />
   </data>
   <data name="Files" xml:space="preserve">
     <value>File attachments</value>

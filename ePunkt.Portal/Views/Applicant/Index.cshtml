@@ -1,42 +1,79 @@
-﻿@model ePunkt.Portal.Models.Applicant.IndexViewModel
+﻿@using System.Runtime.InteropServices
+@model ePunkt.Portal.Models.Applicant.IndexViewModel
 
-<h1>@Html.Loc("Title")</h1>
-<p>@Html.Loc("Description")</p>
+<div class="applicantPage">
+    <h1>@Html.Loc("Title")</h1>
+    <p>@Html.Loc("Description1")</p>
 
-<div id="applicantCompleteness">
-    <p class="@(Model.Completeness.PersonalInformation >= 100 ? "complete" : "incomplete")">
-        @Html.ActionLink(Html.Loc("PersonalInformation").ToString(), "Index", "ApplicantPersonalInformation")
-        <span>@Html.Loc("Placeholder_Percent_Complete", Model.Completeness.PersonalInformation)</span>
-    </p>
-    <p class="@(Model.Completeness.Files >= 100 ? "complete" : "incomplete")">
-        @Html.ActionLink(Html.Loc("Files").ToString(), "Index", "ApplicantFiles")
-        <span>@Html.Loc("Placeholder_Percent_Complete", Model.Completeness.Files)</span>
-    </p>
-    <p class="@(Model.Completeness.JobProfiles >= 100 ? "complete" : "incomplete")">
-        @Html.ActionLink(Html.Loc("JobProfiles").ToString(), "Index", "ApplicantJobProfiles")
-        <span>@Html.Loc("Placeholder_Percent_Complete", Model.Completeness.JobProfiles)</span>
-    </p>
-    <p class="@(Model.Completeness.Activities >= 100 ? "complete" : "incomplete")">
-        @Html.ActionLink(Html.Loc("Activities").ToString(), "Index", "ApplicantActivities")
-        <span>@Html.Loc("Placeholder_Percent_Complete", Model.Completeness.Activities)</span>
-    </p>
-</div>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <div id="applicantAdditionalSettings">
-        <p>
-            @Html.CheckBox("active", Model.ApplicantResponse.IsActive)@Html.Label("active", Html.Loc("Active_Label").ToString())
-            <span>@Html.Loc("Active_Description")</span>
-        </p>
-        <p>
-            @Html.CheckBox("matchingJobs", Model.ApplicantResponse.EnableMatchingJobsAutoMail)@Html.Label("matchingJobs", Html.Loc("MatchingJobs_Label").ToString())
-            <span>@Html.Loc("MatchingJobs_Description")</span>
-        </p>
-        <p>
-            @Html.CheckBox("newsletter", Model.ApplicantResponse.EnableNewsletter)@Html.Label("newsletter", Html.Loc("Newsletter_Label").ToString())
-            <span>@Html.Loc("Newsletter_Description")</span>
-        </p>
-        <input type="submit" value="@Html.Loc("Save")" />
+    <div class="applicantCompleteness">
+        <div class="row @(Model.Completeness.PersonalInformation >= 100 ? "text-warning" : "text-success")">
+            <div class="col-sm-6">
+                @Html.ActionLink(Html.Loc("PersonalInformation").ToString(), "Index", "ApplicantPersonalInformation", new { @class = "btn " + (Model.Completeness.PersonalInformation >= 100 ? "btn-default" : "btn-warning") })
+            </div>
+            <div class="col-sm-6">
+                @Html.Loc("Placeholder_Percent_Complete", Model.Completeness.PersonalInformation)
+            </div>
+        </div>
+
+        <div class="row @(Model.Completeness.Files >= 100 ? "text-warning" : "text-success")">
+            <div class="col-sm-6">
+                @Html.ActionLink(Html.Loc("Files").ToString(), "Index", "ApplicantFiles", new { @class = "btn input-sm " + (Model.Completeness.Files >= 100 ? "btn-default" : "btn-warning") })
+            </div>
+            <div class="col-sm-6">
+                @Html.Loc("Placeholder_Percent_Complete", Model.Completeness.Files)
+            </div>
+        </div>
+
+        <div class="row @(Model.Completeness.JobProfiles >= 100 ? "text-warning" : "text-success")">
+            <div class="col-sm-6">
+                @Html.ActionLink(Html.Loc("JobProfiles").ToString(), "Index", "ApplicantJobProfiles", new { @class = "btn " + (Model.Completeness.JobProfiles >= 100 ? "btn-default" : "btn-warning") })
+            </div>
+            <div class="col-sm-6">
+                @Html.Loc("Placeholder_Percent_Complete", Model.Completeness.JobProfiles)
+            </div>
+        </div>
+
+        <div class="row @(Model.Completeness.Activities >= 100 ? "text-warning" : "text-success")">
+            <div class="col-sm-6">
+                @Html.ActionLink(Html.Loc("Activities").ToString(), "Index", "ApplicantActivities", new { @class = "btn " + (Model.Completeness.Activities >= 100 ? "btn-default" : "btn-warning") })
+            </div>
+            <div class="col-sm-6">
+                @Html.Loc("Placeholder_Percent_Complete", Model.Completeness.Activities)
+            </div>
+        </div>
     </div>
-}
+
+    <p>@Html.Loc("Description2")</p>
+
+    <form method="POST" action="@Url.Action("Index")" role="form" class="form-horizontal">
+        @Html.AntiForgeryToken()
+
+        <div class="checkbox">
+            <label>
+                @Html.CheckBox("active", Model.ApplicantResponse.IsActive)
+                @Html.Loc("Active_Label")
+            </label>
+            <span class="help-block">@Html.Loc("Active_Description", new { @class = "control-label" })</span>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                @Html.CheckBox("matchingJobs", Model.ApplicantResponse.EnableMatchingJobsAutoMail)
+                @Html.Loc("MatchingJobs_Label")
+            </label>
+            <span class="help-block">@Html.Loc("MatchingJobs_Description")</span>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                @Html.CheckBox("newsletter", Model.ApplicantResponse.EnableNewsletter)
+                @Html.Loc("Newsletter_Label")
+            </label>
+            <span class="help-block">@Html.Loc("Newsletter_Description")</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">@Html.Loc("Save")</button>
+    </form>
+
+    <p>@Html.Loc("Description3")</p>
+</div>

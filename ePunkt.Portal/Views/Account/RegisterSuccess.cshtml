@@ -1,5 +1,6 @@
-﻿
-<h1>@Html.Loc("Title")</h1>
-<p>@Html.Loc("Text")</p>
-<p>@Html.ActionLink(Html.Loc("GoToProfile").ToString(), "Index", "Applicant")</p>
-<p>@Html.ActionLink(Html.Loc("GoToJobs").ToString(), "Index", "Applicant")</p>
+﻿<div class="registerSuccessPage">
+    <h1>@Html.Loc("Title")</h1>
+    <p>@Html.Loc("Text")</p>
+    <p>@Html.ActionLink(Html.Loc("GoToProfile").ToString(), "Index", "Applicant", null, new { @class = "btn btn-primary" })</p>
+    <p>@Html.ActionLink(Html.Loc("GoToJobs").ToString(), "Index", "Jobs", null, new { @class = "btn btn-default" })</p>
+</div>

@@ -1,78 +1,80 @@
 ﻿@model ePunkt.Portal.Models.Shared.PersonalInformationViewModel
 
-@using (Html.SwitchLocSource("~/Views/Shared/PersonalInformation.cshtml"))
-{
-    <text>
-    @{
-    var genders = new List<SelectListItem>
+<div class="personalInformationPartial">
+    @using (Html.SwitchLocSource("~/Views/Shared/PersonalInformation.cshtml"))
+    {
+        <text>
+        @{
+        var genders = new List<SelectListItem>
             {
                 new SelectListItem {Text = Html.Loc("Mrs.").ToString(), Value = "False"},
                 new SelectListItem {Text = Html.Loc("Mr.").ToString(), Value = "True"}
             };
-    if (Model.AllowEmptyGender)
-    {
-        genders.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
+        if (Model.AllowEmptyGender)
+        {
+            genders.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
+        }
+
+        var titlesBeforeName = Model.AvailableTitlesBeforeName.ToList();
+        titlesBeforeName.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
+        var titlesAfterName = Model.AvailableTitlesAfterName.ToList();
+        titlesAfterName.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
+        var countries = Model.AvailableCountries.ToList();
+        countries.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
+        var nationalities = Model.AvailableNationalities.ToList();
+        nationalities.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Gender, Html.Loc("Gender").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.DropDownListFor(x => x.Gender, genders, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.TitleBeforeName, Html.Loc("Titles").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.DropDownListFor(x => x.TitleBeforeName, titlesBeforeName, new { @class = "form-control col-xs-2" }) @Html.DropDownListFor(x => x.TitleAfterName, titlesAfterName, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.FirstName, Html.Loc("FirstName").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.LastName, Html.Loc("LastName").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.TextBoxFor(x => x.LastName, new { required = "required", @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Email, Html.Loc("Email").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.TextBoxFor(x => x.Email, new { required = "required", type = "email", @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.Phone, Html.Loc("Phone").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.TextBoxFor(x => x.Phone, new { required = "required", type = "tel", @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.BirthDate, Html.Loc("Birthdate").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.TextBoxFor(x => x.BirthDate, "{0:yyyy-MM-dd}", new { required = "required", type = "date", @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Street, Html.Loc("Street").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.TextBoxFor(x => x.Street, new { required = "required", @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.ZipCode, Html.Loc("ZipCodeAndCity").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.TextBoxFor(x => x.ZipCode, new { required = "required", @class = "form-control col-xs-2" }) @Html.TextBoxFor(x => x.City, new { required = "required", @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Country, Html.Loc("Country").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.DropDownListFor(x => x.Country, countries, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.Nationality, Html.Loc("Nationality").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.DropDownListFor(x => x.Nationality, nationalities, new { @class = "form-control" })
+        </div>
+
+        </text>
     }
-
-    var titlesBeforeName = Model.AvailableTitlesBeforeName.ToList();
-    titlesBeforeName.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
-    var titlesAfterName = Model.AvailableTitlesAfterName.ToList();
-    titlesAfterName.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
-    var countries = Model.AvailableCountries.ToList();
-    countries.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
-    var nationalities = Model.AvailableNationalities.ToList();
-    nationalities.Insert(0, new SelectListItem { Text = Html.Loc("EmptySelection").ToString(), Value = "" });
-    }
-
-    <div class="editor-row">
-        @Html.LabelFor(x => x.Gender, Html.Loc("Gender").ToString())
-        @Html.DropDownListFor(x => x.Gender, genders, new { @class = "smaller" })
-    </div>
-    <div class="editor-row">
-        @Html.LabelFor(x => x.TitleBeforeName, Html.Loc("Titles").ToString())
-        @Html.DropDownListFor(x => x.TitleBeforeName, titlesBeforeName, new { @class = "smaller" }) @Html.DropDownListFor(x => x.TitleAfterName, titlesAfterName, new { @class = "smaller" })
-    </div>
-
-    <div class="editor-row">
-        @Html.LabelFor(x => x.FirstName, Html.Loc("FirstName").ToString())
-        @Html.TextBoxFor(x => x.FirstName, new { })
-    </div>
-    <div class="editor-row">
-        @Html.LabelFor(x => x.LastName, Html.Loc("LastName").ToString())
-        @Html.TextBoxFor(x => x.LastName, new { required = "required" })
-    </div>
-
-    <div class="editor-row">
-        @Html.LabelFor(x => x.Email, Html.Loc("Email").ToString())
-        @Html.TextBoxFor(x => x.Email, new { required = "required", type = "email" })
-    </div>
-    <div class="editor-row">
-        @Html.LabelFor(x => x.Phone, Html.Loc("Phone").ToString())
-        @Html.TextBoxFor(x => x.Phone, new { required = "required", type = "tel" })
-    </div>
-
-    <div class="editor-row">
-        @Html.LabelFor(x => x.BirthDate, Html.Loc("Birthdate").ToString())
-        @Html.TextBoxFor(x => x.BirthDate, "{0:yyyy-MM-dd}", new { required = "required", type = "date" })
-    </div>
-
-    <div class="editor-row">
-        @Html.LabelFor(x => x.Street, Html.Loc("Street").ToString())
-        @Html.TextBoxFor(x => x.Street, new { required = "required" })
-    </div>
-    <div class="editor-row">
-        @Html.LabelFor(x => x.ZipCode, Html.Loc("ZipCodeAndCity").ToString())
-        @Html.TextBoxFor(x => x.ZipCode, new { @class = "smaller", required = "required" }) @Html.TextBoxFor(x => x.City, new { required = "required" })
-    </div>
-
-    <div class="editor-row">
-        @Html.LabelFor(x => x.Country, Html.Loc("Country").ToString())
-        @Html.DropDownListFor(x => x.Country, countries)
-    </div>
-    <div class="editor-row">
-        @Html.LabelFor(x => x.Nationality, Html.Loc("Nationality").ToString())
-        @Html.DropDownListFor(x => x.Nationality, nationalities)
-    </div>
-
-    </text>
-}
+</div>
