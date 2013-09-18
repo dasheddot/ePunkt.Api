@@ -126,8 +126,17 @@
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="Description" xml:space="preserve">
+  <data name="Description1" xml:space="preserve">
     <value>You can attach files like your CV or certifications to your applicant profile.</value>
+  </data>
+  <data name="Description2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Description3" xml:space="preserve">
+    <value>You can upload additional files here. Please note that you can only attach one CV and one photo at a time to your applicant profile.</value>
+  </data>
+  <data name="Description4" xml:space="preserve">
+    <value />
   </data>
   <data name="Download" xml:space="preserve">
     <value>Download</value>
@@ -152,9 +161,6 @@
   </data>
   <data name="Upload" xml:space="preserve">
     <value>Attach file to applicant profile</value>
-  </data>
-  <data name="Upload_Description" xml:space="preserve">
-    <value>You can upload additional files here. Please note that you can only attach one CV and one photo at a time to your applicant profile.</value>
   </data>
   <data name="Upload_Title" xml:space="preserve">
     <value>Upload additional documents</value>

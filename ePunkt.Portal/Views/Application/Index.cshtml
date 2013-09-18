@@ -1,15 +1,17 @@
 ﻿@model ePunkt.Portal.Models.Application.IndexViewModel
 
-@Html.TranslatedValidationSummary()
+<div class="applicationPage">
+    @Html.TranslatedValidationSummary().MakeAlertDanger()
 
-<h1>@Html.Loc("Title")</h1>
-<p>@Html.Loc("Description")</p>
+    <h1>@Html.Loc("Title")</h1>
+    <p>@Html.Loc("Description1")</p>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <div>
+    <form method="post" role="form">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">@Html.Loc("Save")</button>
+        </div>
+    </form>
 
-        <input type="submit" value="@Html.Loc("Save")" />
-    </div>
-}
+    <p>@Html.Loc("Description2")</p>
+</div>

@@ -1,12 +1,15 @@
 ﻿@model ePunkt.Portal.Models.Application.RefreshViewModel
 
-<h1>@Html.Loc("Title")</h1>
-<p>@Html.Loc("Description")</p>
+<div class="refreshApplicationPage">
 
-<p>
-    @Html.ActionLink(Html.Loc("GoToProfile").ToString(), "Index", "Applicant")
-</p>
+    <h1>@Html.Loc("Title")</h1>
+    <p>@Html.Loc("Description")</p>
 
-<p>
-    @Html.ActionLink(Html.Loc("Continue").ToString(), "Index", "Application", new { ignoreDuplicate = true, job = Model.JobId }, null)
-</p>
+    <p>
+        @Html.ActionLink(Html.Loc("GoToProfile").ToString(), "Index", "Applicant", new { @class = "btn btn-primary" })
+    </p>
+
+    <p>
+        @Html.ActionLink(Html.Loc("Continue").ToString(), "Index", "Application", new { ignoreDuplicate = true, job = Model.JobId }, new { @class = "btn btn-default" })
+    </p>
+</div>

@@ -1,106 +1,106 @@
 ﻿@using ePunkt.Api.Responses
 @model ePunkt.Portal.Models.ApplicantFiles.IndexViewModel
+<div class="applicantFilesPage">
+    @{
+        var availableTypes = Model.AvailableDocumentTypes.ToList();
+        var documents = Model.Documents.ToList();
 
-@{
-    var availableTypes = Model.AvailableDocumentTypes.ToList();
-    var documents = Model.Documents.ToList();
-    
-    availableTypes.Insert(0, new SelectListItem
-    {
-        Text = Html.Loc("Photo").ToString(),
-        Value = "Photo"
-    });
-    availableTypes.Insert(0, new SelectListItem
+        availableTypes.Insert(0, new SelectListItem
         {
-            Text = Html.Loc("Cv").ToString(),
-            Value = "CV"
+            Text = Html.Loc("Photo").ToString(),
+            Value = "Photo"
         });
+        availableTypes.Insert(0, new SelectListItem
+            {
+                Text = Html.Loc("Cv").ToString(),
+                Value = "CV"
+            });
 
-    if (Model.HasPhoto)
-    {
-        documents.Insert(0, new ApplicantDocumentResponse
+        if (Model.HasPhoto)
         {
-            Id = -2,
-            Name = Html.Loc("Photo").ToString()
-        });
-    }
-    if (Model.HasCv)
-    {
-        documents.Insert(0, new ApplicantDocumentResponse
+            documents.Insert(0, new ApplicantDocumentResponse
+            {
+                Id = -2,
+                Name = Html.Loc("Photo").ToString()
+            });
+        }
+        if (Model.HasCv)
         {
-            Id = -1,
-            Name = Html.Loc("Cv").ToString()
-        });
+            documents.Insert(0, new ApplicantDocumentResponse
+            {
+                Id = -1,
+                Name = Html.Loc("Cv").ToString()
+            });
+        }
     }
-}
 
-@Html.TranslatedValidationSummary()
+    @Html.TranslatedValidationSummary().MakeAlertDanger()
 
-<h1>@Html.Loc("Title")</h1>
-<p>@Html.Loc("Description")</p>
+    <h1>@Html.Loc("Title")</h1>
+    <p>@Html.Loc("Description1")</p>
+
+    <div id="applicantFiles">
+        @foreach (var file in documents)
+        {       
+            <div class="row">
+                <div class="col-sm-10">
+                    @if (file.Id < 0)
+                    {
+                        <text>
+                        @file.Name
+                        </text>
+                    }
+                    else
+                    {
+                        <text>
+                        @file.Name <span>(@file.Type)</span>
+                        </text>
+                    }
+                </div>
+
+                <div class="col-sm-1">
+                    @using (Html.BeginForm("Download", "ApplicantFiles"))
+                    {
+                        <text>
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("id", file.Id)
+                        <button type="submit" class="btn btn-default btn-xs">@Html.Loc("Download")</button>
+                        </text>
+                    }
+                </div>
+
+                <div class="col-sm-1">
+                    @using (Html.BeginForm("Delete", "ApplicantFiles"))
+                    {
+                        <text>
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("id", file.Id)
+                        <button type="submit" class="btn btn-danger btn-xs">@Html.Loc("Delete")</button>
+                        </text>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+    <p>@Html.Loc("Description2")</p>
 
 
-<fieldset id="applicantFiles">
-    <legend></legend>
+    <h2>@Html.Loc("Upload_Title")</h2>
+    <p>@Html.Loc("Description3")</p>
 
-    @foreach (var file in documents)
-    {       
-        <div class="editor-row">
-            @using (Html.BeginForm("Download", "ApplicantFiles"))
-            {
-                <text>
-                @Html.AntiForgeryToken()
-                @Html.Hidden("id", file.Id)
-                <input type="submit" value="@Html.Loc("Download")" class="in-row" />
-                </text>
-            }
-
-            @using (Html.BeginForm("Delete", "ApplicantFiles"))
-            {
-                <text>
-                @Html.AntiForgeryToken()
-                @Html.Hidden("id", file.Id)
-                <input type="submit" value="@Html.Loc("Delete")" class="in-row" />
-                </text>
-            }
-            @if (file.Id < 0)
-            {
-                <text>
-                @file.Name
-                </text>
-            }
-            else
-            {
-                <text>
-                @file.Name <span>(@file.Type)</span>
-                </text>
-            }
-        </div>
-    }
-</fieldset>
-
-
-
-
-<fieldset>
-    <legend>@Html.Loc("Upload_Title")</legend>
-
-    <p>
-        @Html.Loc("Upload_Description")
-    </p>
-
-    @using (Html.BeginForm("Index", "ApplicantFiles", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <text>
+    <form role="form" method="post" enctype="multipart/form-data">
         @Html.AntiForgeryToken()
-        <div class="editor-row">
-            <input type="submit" value="@Html.Loc("Upload")" class="in-row" />
-            <label for="upload">@Html.Loc("Choose_File")</label>
-            <input type="file" name="upload" id="upload" />
-            @Html.DropDownList("type", availableTypes, new { @class = "smaller" })
+        <div class="form-group">
+            <label for="upload" class="control-label">@Html.Loc("Choose_File")</label>
+            <input type="file" name="upload" id="upload" class="form-control" />
+            @Html.DropDownList("type", availableTypes, new { @class = "form-control" })
         </div>
-        </text>
-    }
 
-</fieldset>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">@Html.Loc("Upload")</button>
+        </div>
+    </form>
+
+    <p>@Html.Loc("Description4")</p>
+</div>
 

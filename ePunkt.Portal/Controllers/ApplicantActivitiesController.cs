@@ -21,7 +21,7 @@ namespace ePunkt.Portal.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var activities = await new ApplicantActivitiesGetRequest(GetApplicantId()).LoadResult(ApiClient);
+            var activities =  await new ApplicantActivitiesGetRequest(GetApplicantId()).LoadResult(ApiClient);
             var viewModel = new IndexViewModel().Fill(activities);
             return View(viewModel);
         }

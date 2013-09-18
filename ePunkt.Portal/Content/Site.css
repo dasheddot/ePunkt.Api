@@ -1,28 +1,49 @@
 ﻿body { padding-top: 60px; }
 
+div.row + div.row { margin-top: 15px; }
+
 /* ReSharper disable DeclarationIsEmpty */
 
 .jobsPage { }
     .jobsPage .jobsList { }
         .jobsPage .jobsList .jobTitle { }
-        .jobsPage .jobsList .jobsFilterForm { }
+    .jobsPage .jobsFilter { }
 .jobPage { }
     .jobPage .jobAdContainer { }
     .jobPage .backToJobsLink { }
+
+.changePasswordPage { }
+.changePasswordSuccessPage { }
+.requestPasswordStep1Page { }
+.requestPasswordStep1SuccessPage { }
+.requestPasswordStep2Page { }
+.requestPasswordStep2SuccessPage { }
+
+.registerPage { }
+.registerSuccessPage { }
+.applicationPage { }
+.refreshApplicationPage { }
+.jobIsClosedPage { }
+.emailAlreadyInUsePage { }
+
 .loginPage { }
     .loginPage .xingButton { text-align: center; }
         .loginPage .xingButton a { height: 75px; width: 180px; text-align: center; }
     .loginPage .linkedinButton { text-align: center; }
         .loginPage .linkedinButton a { height: 75px; padding-top: 17px; width: 180px; text-align: center; }
     .loginPage p:nth-child(4) { margin-top: 20px; }
-    .loginPage .loginForm .form-control { width: 200px; }
-.changePasswordPage .form-control { width: 200px; }
-.registerPage .form-control { width: 200px; }
-.requestPasswordStep1Page .form-control { width: 200px; }
-.requestPasswordStep2Page .form-control { width: 200px; }
-.applicantPage .applicantCompleteness .row { margin-bottom: 5px; }
-.applicantPage .applicantCompleteness .row div+div { padding-top: 7px; }
-.applicantPage .applicantCompleteness a { width: 100%; text-align: left; }
+.thirdPartyErrorPage { }
 
+.applicantPage .applicantCompleteness .row div + div { padding-top: 5px; }
+.applicantPage .applicantCompleteness a { width: 100%; text-align: left; }
+.applicantApplicationsPage { }
+.applicantPersonalInformationPage { }
+.applicantFilesPage { }
+.applicantJobProfilesPage { }
+    .applicantJobProfilesPage .applicantActivitiesPage { }
+.applicantActivitiesEditPage { }
+.applicantThirdPartyPage { }
+
+.personalInformationPartial { }
 
 /* ReSharper restore DeclarationIsEmpty */

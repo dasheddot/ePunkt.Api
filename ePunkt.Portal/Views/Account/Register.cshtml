@@ -6,7 +6,7 @@
     <h1>@Html.Loc("Title")</h1>
     <p>@Html.Loc("Description1", Url.Action("Login", "Account", new { job = Model.JobId }))</p>
 
-    <form method="POST" action="@Url.Action("Register", new { job = Model.JobId })" enctype="multipart/form-data" role="form" class="form-horizontal registerForm">
+    <form method="POST" action="@Url.Action("Register", new { job = Model.JobId })" enctype="multipart/form-data" role="form">
 
         @Html.AntiForgeryToken()
 
@@ -15,19 +15,19 @@
 
         <h2>@Html.Loc("Documents")</h2>
         <div class="form-group">
-            @Html.LabelFor(x => x.Cv, @Html.Loc("Cv").ToString(), new { @class = "control-label col-xs-2" })
-            <input type="file" name="cv" class="form-control col-xs-2" />
+            @Html.LabelFor(x => x.Cv, @Html.Loc("Cv").ToString(), new { @class = "control-label" })
+            <input type="file" name="cv" class="form-control" />
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Photo, @Html.Loc("Photo").ToString(), new { @class = "control-label col-xs-2" })
-            <input type="file" name="photo" class="form-control col-xs-2" />
+            @Html.LabelFor(x => x.Photo, @Html.Loc("Photo").ToString(), new { @class = "control-label" })
+            <input type="file" name="photo" class="form-control" />
         </div>
 
         <div class="form-group" id="documentsTemplateRow">
-            @Html.LabelFor(x => x.DocumentTypes[0], @Html.Loc("Document").ToString(), new { @class = "control-label col-xs-2" })
-            <input type="file" name="documents" class="form-control col-xs-2" />
-            @Html.DropDownListFor(x => x.DocumentTypes[0], Model.AvailableDocumentTypes, new { @class = "form-control col-xs-2" })
+            @Html.LabelFor(x => x.DocumentTypes[0], @Html.Loc("Document").ToString(), new { @class = "control-label" })
+            <input type="file" name="documents" class="form-control" />
+            @Html.DropDownListFor(x => x.DocumentTypes[0], Model.AvailableDocumentTypes, new { @class = "form-control" })
         </div>
 
         <div id="documentsRows"></div>

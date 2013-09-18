@@ -1,43 +1,44 @@
 ﻿@model ePunkt.Portal.Models.ApplicantActivities.EditViewModel
+<div class="applicantActivitiesEditPage">
 
-@Html.TranslatedValidationSummary()
+    <h1>@Html.Loc("Title")</h1>
+    <p>@Html.Loc("Description1")</p>
 
-@using (Html.BeginForm())
-{   
-    @Html.AntiForgeryToken()
-    
-    @Html.HiddenFor(x => x.Id)
+    @Html.TranslatedValidationSummary().MakeAlertDanger()
 
-    <fieldset>
-        <legend></legend>
+    <form method="Post" role="form">
+        @Html.AntiForgeryToken()
 
-        <div class="editor-row">
-            @Html.LabelFor(m => m.Name, Html.Loc("Name").ToString())
-            @Html.TextBoxFor(m => m.Name)
+        @Html.HiddenFor(x => x.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name, Html.Loc("Name").ToString(), new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.Name, new { required = "required", @class = "form-control" })
         </div>
 
-        <div class="editor-row">
-            @Html.LabelFor(m => m.StartYear, Html.Loc("Start").ToString())
-            @Html.DropDownListFor(m => m.StartDay, Model.AvailableDays)
-            @Html.DropDownListFor(m => m.StartMonth, Model.AvailableMonths)
-            @Html.DropDownListFor(m => m.StartYear, Model.AvailableYears)
+        <div class="form-group">
+            @Html.LabelFor(m => m.StartYear, Html.Loc("Start").ToString(), new { @class = "control-label" })
+            @Html.DropDownListFor(m => m.StartDay, Model.AvailableDays, new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.StartMonth, Model.AvailableMonths, new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.StartYear, Model.AvailableYears, new { @class = "form-control" })
         </div>
 
-        <div class="editor-row">
-            @Html.LabelFor(m => m.EndYear, Html.Loc("End").ToString())
-            @Html.DropDownListFor(m => m.EndDay, Model.AvailableDays)
-            @Html.DropDownListFor(m => m.EndMonth, Model.AvailableMonths)
-            @Html.DropDownListFor(m => m.EndYear, Model.AvailableYears)
+        <div class="form-group">
+            @Html.LabelFor(m => m.EndYear, Html.Loc("End").ToString(), new { @class = "control-label" })
+            @Html.DropDownListFor(m => m.EndDay, Model.AvailableDays, new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.EndMonth, Model.AvailableMonths, new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.EndYear, Model.AvailableYears, new { @class = "form-control" })
         </div>
 
         <p>
-            <input type="submit" value="@Html.Loc("Save")" />
+            <button type="submit" class="btn btn-primary">@Html.Loc("Save")</button>
         </p>
-    </fieldset>
-}
+    </form>
 
-<div>
-    @Html.ActionLink(Html.Loc("Back").ToString(), "Index")
+
+    @Html.ActionLink(Html.Loc("Back").ToString(), "Index", null, new { @class = "btn btn-default" })
+
+    <p>@Html.Loc("Description2")</p>
 </div>
 
 @section Scripts {

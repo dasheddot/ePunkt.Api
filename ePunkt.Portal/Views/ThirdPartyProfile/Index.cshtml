@@ -1,50 +1,60 @@
 ﻿@model ePunkt.Portal.Models.ThirdPartyProfile.IndexViewModel
 
-<h1>@Html.Loc("Title")</h1>
-<p>@Html.Loc("Text")</p>
-<table id="linkThirdPartyProfilesTable">
-    <tr>
-        <td>
-            <img src="~/Content/Xing.png" alt="@Html.Loc("Alt_Xing")" class="@(Model.IsXingLinked ? null : "grayed")" /></td>
-        <td>@if (Model.IsXingLinked)
+<div class="applicantThirdPartyPage">
+    <h1>@Html.Loc("Title")</h1>
+    <p>@Html.Loc("Description1")</p>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="~/Content/Xing.png" alt="@Html.Loc("Alt_Xing")" class="@(Model.IsXingLinked ? null : "grayed")" />
+        </div>
+        <div class="col-sm-4">
+            @if (Model.IsXingLinked)
             {
-            <a href="@Model.XingUrl">@Html.Loc("Go_to_Xing")</a>
-            }</td>
-        <td>
+                <a href="@Model.XingUrl" class="btn btn-default">@Html.Loc("Go_to_Xing")</a>
+            }
+        </div>
+        <div class="col-sm-4">
             @if (Model.IsXingLinked)
             {
                 <text>
-                @Html.ActionLink(Html.Loc("Unlink_Xing").ToString(), "UnlinkXing")
+                @Html.ActionLink(Html.Loc("Unlink_Xing").ToString(), "UnlinkXing", null, new { @class = "btn btn-danger" })
                 </text>
             }
             else
             {
                 <text>
-                @Html.ActionLink(Html.Loc("Link_Xing").ToString(), "Xing")
+                @Html.ActionLink(Html.Loc("Link_Xing").ToString(), "Xing", null, new { @class = "btn btn-primary" })
                 </text>
             }
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <img src="~/Content/LinkedIn.png" alt="@Html.Loc("Alt_LinkedIn")" class="@(Model.IsLinkedInLinked ? null : "grayed")" /></td>
-        <td>@if (Model.IsLinkedInLinked)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="~/Content/LinkedIn.png" alt="@Html.Loc("Alt_LinkedIn")" class="@(Model.IsLinkedInLinked ? null : "grayed")" />
+        </div>
+        <div class="col-sm-4">
+            @if (Model.IsLinkedInLinked)
             {
-            <a href="@Model.LinkedInUrl">@Html.Loc("Go_to_LinkedIn")</a>
-            }</td>
-        <td>
+                <a href="@Model.LinkedInUrl" class="btn btn-default">@Html.Loc("Go_to_LinkedIn")</a>
+            }
+        </div>
+        <div class="col-sm-4">
             @if (Model.IsLinkedInLinked)
             {
                 <text>
-                @Html.ActionLink(Html.Loc("Unlink_LinkedIn").ToString(), "UnlinkLinkedIn")
+                @Html.ActionLink(Html.Loc("Unlink_LinkedIn").ToString(), "UnlinkLinkedIn", null, new { @class = "btn btn-danger" })
                 </text>
             }
             else
             {
                 <text>
-                @Html.ActionLink(Html.Loc("Link_LinkedIn").ToString(), "LinkedIn")
+                @Html.ActionLink(Html.Loc("Link_LinkedIn").ToString(), "LinkedIn", null, new { @class = "btn btn-primary" })
                 </text>
             }
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+
+    <p>@Html.Loc("Description2")</p>
+</div>

@@ -123,6 +123,12 @@
   <data name="Alt_Xing" xml:space="preserve">
     <value>XING</value>
   </data>
+  <data name="Description1" xml:space="preserve">
+    <value>This enables you to log in to your applicant profile with these third party accounts, without having to remember your applicant profile password. This is not only convenient for you, but also increases the security and confidentiality of your applicant profile. We will never use or store any data from these third party accounts without your knowledge or explicit agreement!</value>
+  </data>
+  <data name="Description2" xml:space="preserve">
+    <value />
+  </data>
   <data name="Go_To_LinkedIn" xml:space="preserve">
     <value>Open connected LinkedIn profile</value>
   </data>
@@ -135,13 +141,10 @@
   <data name="Link_Xing" xml:space="preserve">
     <value>Link your XING account to your applicant profile</value>
   </data>
-  <data name="Text" xml:space="preserve">
-    <value>This enables you to log in to your applicant profile with these third party accounts, without having to remember your applicant profile password. This is not only convenient for you, but also increases the security and confidentiality of your applicant profile. We will never use or store any data from these third party accounts without your knowledge or explicit agreement!</value>
-  </data>
   <data name="Title" xml:space="preserve">
     <value>Link your applicant profile to third party accounts</value>
   </data>
-  <data name="Unlink_LinkeDIn" xml:space="preserve">
+  <data name="Unlink_LinkedIn" xml:space="preserve">
     <value>Remove your LinkedIn account from your applicant profile</value>
   </data>
   <data name="Unlink_Xing" xml:space="preserve">

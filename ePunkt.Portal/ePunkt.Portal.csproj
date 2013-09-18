@@ -63,10 +63,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ePunkt.SocialConnector.0.1.0-alpha\lib\net45\ePunkt.SocialConnector.dll</HintPath>
     </Reference>
-    <Reference Include="ePunkt.Utilities, Version=0.0.0.5, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ePunkt.Utilities.0.0.5-alpha\lib\net40-Client\ePunkt.Utilities.dll</HintPath>
-    </Reference>
     <Reference Include="JetBrains.Annotations, Version=6.1.0.0, Culture=neutral, PublicKeyToken=3f033448d4bb5376, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\JetBrains.Annotations.7.0\lib\net45\JetBrains.Annotations.dll</HintPath>
@@ -168,6 +164,7 @@
     <Compile Include="Code\ActionResults\AtomActionResult.cs" />
     <Compile Include="Code\ActionResults\RssActionResult.cs" />
     <Compile Include="Code\ActionResults\XmlActionResult.cs" />
+    <Compile Include="Code\ExtensionMethods\MvcHtmlStringExtensionMethods.cs" />
     <Compile Include="Code\InMemoryTokenManager.cs" />
     <Compile Include="Code\Services\UpdateApplicantFileService.cs" />
     <Compile Include="Code\Services\LinkThirdPartyProfileService.cs" />

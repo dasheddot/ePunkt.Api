@@ -1,23 +1,23 @@
 ﻿@model ePunkt.Portal.Models.Shared.PersonalInformationViewModel
 
-@Html.TranslatedValidationSummary("~/Views/Shared/PersonalInformation.cshtml")
+<div class="applicantPersonalInformationPage">
+    @Html.TranslatedValidationSummary("~/Views/Shared/PersonalInformation.cshtml")
 
-<h1>@Html.Loc("Title")</h1>
-<p>@Html.Loc("Description")</p>
+    <h1>@Html.Loc("Title")</h1>
+    <p>@Html.Loc("Description1")</p>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <fieldset>
-        <legend></legend>
+    <form method="post" role="form">
+        @Html.AntiForgeryToken()
+
         @Html.Partial("PersonalInformation")
-    </fieldset>
-    
-    <p>
-        <input type="submit" value="@Html.Loc("Save")"/>
-    </p>
-}
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">@Html.Loc("Save")</button>
+        </div>
+    </form>
+
+    <p>@Html.Loc("Description2")</p>
+</div>
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")

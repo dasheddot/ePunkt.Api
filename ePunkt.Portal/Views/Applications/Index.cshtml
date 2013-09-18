@@ -1,23 +1,31 @@
 ﻿@model ePunkt.Portal.Models.Applications.IndexViewModel
 
-<h1>@Html.Loc("Title")</h1>
-<p>@Html.Loc("Description")</p>
+<div class="applicantApplicationsPage">
 
-@foreach (var application in Model.Applications)
-{
-    <div>
-        @if (application.JobIsPublished)
-        {
-            <b>@Html.ActionLink(application.Job, "Job", "Jobs", new { id = application.JobId }, null)</b>
-        }
-        else
-        {
-            <b>@application.Job</b>
-        } (@application.Status)
-    </div>
-}
+    <h1>@Html.Loc("Title")</h1>
+    <p>@Html.Loc("Description1")</p>
 
-@if (!Model.Applications.Any())
-{
-    <p>@Html.Loc("No_Applications_Visible")</p>
-}
+    @foreach (var application in Model.Applications)
+    {
+        <div class="row">
+            <div class="col-sm-12">
+                @if (application.JobIsPublished)
+                {
+                    <b>@Html.ActionLink(application.Job, "Job", "Jobs", new { id = application.JobId }, null)</b>
+                }
+                else
+                {
+                    <b>@application.Job</b>
+                } (@application.Status)
+            </div>
+        </div>
+    }
+
+    @if (!Model.Applications.Any())
+    {
+        <p>@Html.Loc("No_Applications_Visible")</p>
+    }
+
+    <p>@Html.Loc("Description2")</p>
+
+</div>

@@ -33,12 +33,12 @@
     }
     }
 
-    <form method="POST" action="@Url.Action("Index")" role="form" id="jobsFilter" class="form-horizontal jobsFilterForm">
+    <form method="POST" role="form" class="jobsFilter">
         @if (Model.DisplayRegionFilter)
         {
             <div class="form-group">
                 <label for="regionsText" class="control-label col-xs-2">@Html.Loc("Regions")</label>
-                <div class=" col-xs-8">
+                <div class="col-xs-8">
                     <input type="text" disabled="disabled" id="regionsText" name="regionsText" value="@regionsText" class="form-control" />
                 </div>
                 <a id="regionsButton" data-toggle="modal" href="#regionsModal" class="btn btn-default col-xs-2">@Html.Loc("Edit")</a>
@@ -49,7 +49,7 @@
         {
             <div class="form-group">
                 <label for="jobProfilesText" class="control-label col-xs-2">@Html.Loc("JobProfiles")</label>
-                <div class=" col-xs-8">
+                <div class="col-xs-8">
                     <input type="text" disabled="disabled" id="jobProfilesText" name="jobProfilesText" value="@jobProfilesText" class="form-control" />
                 </div>
                 <a id="jobProfilesButton" data-toggle="modal" href="#jobProfilesModal" class="btn btn-default col-xs-2">@Html.Loc("Edit")</a>
@@ -58,7 +58,7 @@
 
         <div class="form-group">
             <label for="filter" class="control-label col-xs-2">@Html.Loc("SearchPhrase")</label>
-            <div class=" col-xs-8">
+            <div class="col-xs-8">
                 <input type="text" id="filter" name="filter" value="@Model.FilteredText" placeholder="@Html.Loc("Filter_Hint")" class="form-control" />
             </div>
             <button type="submit" id="submitFilter" class="btn btn-primary col-xs-2">@Html.Loc("Search")</button>

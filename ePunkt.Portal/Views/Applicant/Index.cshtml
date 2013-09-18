@@ -1,5 +1,4 @@
-﻿@using System.Runtime.InteropServices
-@model ePunkt.Portal.Models.Applicant.IndexViewModel
+﻿@model ePunkt.Portal.Models.Applicant.IndexViewModel
 
 <div class="applicantPage">
     <h1>@Html.Loc("Title")</h1>
@@ -8,7 +7,7 @@
     <div class="applicantCompleteness">
         <div class="row @(Model.Completeness.PersonalInformation >= 100 ? "text-warning" : "text-success")">
             <div class="col-sm-6">
-                @Html.ActionLink(Html.Loc("PersonalInformation").ToString(), "Index", "ApplicantPersonalInformation", new { @class = "btn " + (Model.Completeness.PersonalInformation >= 100 ? "btn-default" : "btn-warning") })
+                @Html.ActionLink(Html.Loc("PersonalInformation").ToString(), "Index", "ApplicantPersonalInformation", null, new { @class = "btn btn-sm " + (Model.Completeness.PersonalInformation >= 100 ? "btn-default" : "btn-warning") })
             </div>
             <div class="col-sm-6">
                 @Html.Loc("Placeholder_Percent_Complete", Model.Completeness.PersonalInformation)
@@ -17,7 +16,7 @@
 
         <div class="row @(Model.Completeness.Files >= 100 ? "text-warning" : "text-success")">
             <div class="col-sm-6">
-                @Html.ActionLink(Html.Loc("Files").ToString(), "Index", "ApplicantFiles", new { @class = "btn input-sm " + (Model.Completeness.Files >= 100 ? "btn-default" : "btn-warning") })
+                @Html.ActionLink(Html.Loc("Files").ToString(), "Index", "ApplicantFiles", null, new { @class = "btn btn-sm " + (Model.Completeness.Files >= 100 ? "btn-default" : "btn-warning") })
             </div>
             <div class="col-sm-6">
                 @Html.Loc("Placeholder_Percent_Complete", Model.Completeness.Files)
@@ -26,7 +25,7 @@
 
         <div class="row @(Model.Completeness.JobProfiles >= 100 ? "text-warning" : "text-success")">
             <div class="col-sm-6">
-                @Html.ActionLink(Html.Loc("JobProfiles").ToString(), "Index", "ApplicantJobProfiles", new { @class = "btn " + (Model.Completeness.JobProfiles >= 100 ? "btn-default" : "btn-warning") })
+                @Html.ActionLink(Html.Loc("JobProfiles").ToString(), "Index", "ApplicantJobProfiles", null, new { @class = "btn btn-sm " + (Model.Completeness.JobProfiles >= 100 ? "btn-default" : "btn-warning") })
             </div>
             <div class="col-sm-6">
                 @Html.Loc("Placeholder_Percent_Complete", Model.Completeness.JobProfiles)
@@ -35,7 +34,7 @@
 
         <div class="row @(Model.Completeness.Activities >= 100 ? "text-warning" : "text-success")">
             <div class="col-sm-6">
-                @Html.ActionLink(Html.Loc("Activities").ToString(), "Index", "ApplicantActivities", new { @class = "btn " + (Model.Completeness.Activities >= 100 ? "btn-default" : "btn-warning") })
+                @Html.ActionLink(Html.Loc("Activities").ToString(), "Index", "ApplicantActivities", null, new { @class = "btn btn-sm " + (Model.Completeness.Activities >= 100 ? "btn-default" : "btn-warning") })
             </div>
             <div class="col-sm-6">
                 @Html.Loc("Placeholder_Percent_Complete", Model.Completeness.Activities)
@@ -45,7 +44,7 @@
 
     <p>@Html.Loc("Description2")</p>
 
-    <form method="POST" action="@Url.Action("Index")" role="form" class="form-horizontal">
+    <form method="POST" action="@Url.Action("Index")" role="form">
         @Html.AntiForgeryToken()
 
         <div class="checkbox">

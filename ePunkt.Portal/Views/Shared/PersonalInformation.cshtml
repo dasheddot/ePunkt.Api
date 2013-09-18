@@ -26,52 +26,52 @@
         }
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Gender, Html.Loc("Gender").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.LabelFor(x => x.Gender, Html.Loc("Gender").ToString(), new { @class = "control-label" })
             @Html.DropDownListFor(x => x.Gender, genders, new { @class = "form-control" })
         </div>
         <div class="form-group">
-            @Html.LabelFor(x => x.TitleBeforeName, Html.Loc("Titles").ToString(), new { @class = "control-label col-xs-2" })
-            @Html.DropDownListFor(x => x.TitleBeforeName, titlesBeforeName, new { @class = "form-control col-xs-2" }) @Html.DropDownListFor(x => x.TitleAfterName, titlesAfterName, new { @class = "form-control" })
+            @Html.LabelFor(x => x.TitleBeforeName, Html.Loc("Titles").ToString(), new { @class = "control-label" })
+            @Html.DropDownListFor(x => x.TitleBeforeName, titlesBeforeName, new { @class = "form-control" }) @Html.DropDownListFor(x => x.TitleAfterName, titlesAfterName, new { @class = "form-control" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.FirstName, Html.Loc("FirstName").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.LabelFor(x => x.FirstName, Html.Loc("FirstName").ToString(), new { @class = "control-label" })
             @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
         </div>
         <div class="form-group">
-            @Html.LabelFor(x => x.LastName, Html.Loc("LastName").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.LabelFor(x => x.LastName, Html.Loc("LastName").ToString(), new { @class = "control-label" })
             @Html.TextBoxFor(x => x.LastName, new { required = "required", @class = "form-control" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Email, Html.Loc("Email").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.LabelFor(x => x.Email, Html.Loc("Email").ToString(), new { @class = "control-label" })
             @Html.TextBoxFor(x => x.Email, new { required = "required", type = "email", @class = "form-control" })
         </div>
         <div class="form-group">
-            @Html.LabelFor(x => x.Phone, Html.Loc("Phone").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.LabelFor(x => x.Phone, Html.Loc("Phone").ToString(), new { @class = "control-label" })
             @Html.TextBoxFor(x => x.Phone, new { required = "required", type = "tel", @class = "form-control" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.BirthDate, Html.Loc("Birthdate").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.LabelFor(x => x.BirthDate, Html.Loc("Birthdate").ToString(), new { @class = "control-label" })
             @Html.TextBoxFor(x => x.BirthDate, "{0:yyyy-MM-dd}", new { required = "required", type = "date", @class = "form-control" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Street, Html.Loc("Street").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.LabelFor(x => x.Street, Html.Loc("Street").ToString(), new { @class = "control-label" })
             @Html.TextBoxFor(x => x.Street, new { required = "required", @class = "form-control" })
         </div>
         <div class="form-group">
-            @Html.LabelFor(x => x.ZipCode, Html.Loc("ZipCodeAndCity").ToString(), new { @class = "control-label col-xs-2" })
-            @Html.TextBoxFor(x => x.ZipCode, new { required = "required", @class = "form-control col-xs-2" }) @Html.TextBoxFor(x => x.City, new { required = "required", @class = "form-control" })
+            @Html.LabelFor(x => x.ZipCode, Html.Loc("ZipCodeAndCity").ToString(), new { @class = "control-label" })
+            @Html.TextBoxFor(x => x.ZipCode, new { required = "required", @class = "form-control" }) @Html.TextBoxFor(x => x.City, new { required = "required", @class = "form-control" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Country, Html.Loc("Country").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.LabelFor(x => x.Country, Html.Loc("Country").ToString(), new { @class = "control-label" })
             @Html.DropDownListFor(x => x.Country, countries, new { @class = "form-control" })
         </div>
         <div class="form-group">
-            @Html.LabelFor(x => x.Nationality, Html.Loc("Nationality").ToString(), new { @class = "control-label col-xs-2" })
+            @Html.LabelFor(x => x.Nationality, Html.Loc("Nationality").ToString(), new { @class = "control-label" })
             @Html.DropDownListFor(x => x.Nationality, nationalities, new { @class = "form-control" })
         </div>
 
