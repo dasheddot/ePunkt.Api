@@ -6,7 +6,7 @@
     <p>@Html.Loc("Description")</p>
 
     <p>
-        @Html.ActionLink(Html.Loc("GoToProfile").ToString(), "Index", "Applicant", new { @class = "btn btn-primary" })
+        @Html.ActionLink(Html.Loc("GoToProfile").ToString(), "Index", "Applicant", new { job = Model.JobId }, new { @class = "btn btn-primary" })
     </p>
 
     <p>
