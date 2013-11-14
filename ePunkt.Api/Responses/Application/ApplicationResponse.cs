@@ -20,7 +20,14 @@ namespace ePunkt.Api.Responses
             public string NameForApplicant { get; set; }
             public string NameForContact { get; set; }
             public bool IsVisibleToApplicant { get; set; }
-            public bool IsVisibleToContact { get; set; }
+            public ContactSharing ContactSharing { get; set; }
         }
+    }
+
+    public enum ContactSharing
+    {
+        None,
+        Visible,
+        VisibleAndExecuteWorkflow,
     }
 }
