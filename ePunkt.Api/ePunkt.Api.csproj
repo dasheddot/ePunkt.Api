@@ -57,6 +57,7 @@
     <Compile Include="Responses\ApplicantSetPasswordResponse.cs" />
     <Compile Include="Parameters\Applicant\ApplicantParameter.cs" />
     <Compile Include="Responses\Applicant\ApplicantActivityResponse.cs" />
+    <Compile Include="Responses\Application\ApplicationActivityAvailability.cs" />
     <Compile Include="Responses\Application\ApplicationResponse.cs" />
     <Compile Include="Responses\CustomFieldResponse.cs" />
     <Compile Include="Responses\Application\ApplicationCreateResponse.cs" />
